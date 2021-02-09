@@ -99,12 +99,12 @@ En el directorio del proyecto, se pueden correr los siguiente comandos:
 La aplicacion de React se ejecutara en modo de desarrollador
 Abrir [http://localhost:3000](http://localhost:3000) para verlo en el navegador
 
-La pagina se refrescara si se creando y guardan los cambios del codigo.
-Los errores se veran en la consola del navegador y desde donde se lanzo `npm start`.
+La pagina se refrescara automáticamente si se crean o guardan cambios en el codigo.
+Los errores se veran en la consola del navegador y desde donde se lanzo `yarn start`.
 
 ##### `yarn test`
 
-Lanzar el corredor de testeo in modo interactivo *watch*.
+Lanzar el sitio en modo testing interactivo *watch*.
 
 ##### `yarn build`
 
