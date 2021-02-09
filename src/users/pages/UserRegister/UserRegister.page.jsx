@@ -2,10 +2,10 @@ import React from 'react';
 
 import UserFormRegister from '../../components/UserFormRegister/UserFormRegister.component';
 
-const UserRegister = () => {
+const UserRegister = ( ) => {
   return (
     <div>
-      <h1>Pagina de Registro</h1>
+      <h1>User Register Page</h1>
       <hr/>
       <h1>Crear una Cuenta</h1>
       <hr/>

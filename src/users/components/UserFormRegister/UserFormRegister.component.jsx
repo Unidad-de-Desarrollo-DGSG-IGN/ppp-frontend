@@ -44,6 +44,11 @@ const UserFormRegister = ( ) => {
         required: {
           value : true,
           message : "El Correo electrónico es requisito"
+        },
+        pattern: {
+          // value: /S+@S+.S+/,
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: "El correo electrónico debe ser valido"
         }
       }
     },
