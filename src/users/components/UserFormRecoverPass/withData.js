@@ -3,7 +3,7 @@ const withData = ( parameters ) => ( Component ) => {
   const forms = [
     {
       label: "Correo electrónico",
-      type: "email",
+      type: "text",
       placeholder: "Correo electrónico",
       name: "email",
       validation: { 
