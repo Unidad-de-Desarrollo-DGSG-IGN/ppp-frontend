@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 import withData from './withData';
 import './UserFormLogin.style.css';
+import { startLogin } from '../../actions/auth';
 
 const parameters = null;
 
 const UserFormLogin = ( { forms } ) => {
+  const dispatch = useDispatch();
+
   const { register, handleSubmit, errors } = useForm( );
   const [ buttonSumitDisable, setButtonSumitDisable ] = useState( false );
 
-  const handleForm = (  ) => {
-    console.log('Usuario logueado!!!');
+  const handleForm = ( { email, password } ) => {
+    dispatch( startLogin( email, password ) );
   }
 
   return (

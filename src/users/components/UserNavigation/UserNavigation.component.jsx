@@ -8,19 +8,19 @@ const UserNavigation = ( ) => {
       <h1>Navegador Usuario</h1>
 
       <div>
-        <NavLink to='/login'>
+        <NavLink to='/auth/login'>
           Ya tiene una cuenta? Acceda
         </NavLink>
       </div>
 
       <div>
-        <NavLink to='/recoverPassword'>
+        <NavLink to='/auth/recoverPassword'>
           ¿Olvidó su contraseña?
         </NavLink>
       </div>
 
       <div>
-      <NavLink to='/register'>
+      <NavLink to='/auth/register'>
         Crear una cuenta
       </NavLink>
       </div>

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { startRegister } from '../../actions/auth';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 
 import './UserFormRegister.style.css';
 
 const UserFormRegister = ( ) => {
+  const dispatch = useDispatch();
+
   const { register, handleSubmit, errors, watch } = useForm( );
   const [ buttonSumitDisable, setButtonSumitDisable ] = useState( false );
   // const [serverResponse, setServerResponse] = useState( false );
@@ -15,7 +19,7 @@ const UserFormRegister = ( ) => {
       label: "Nombre",
       type: "text",
       placeholder: "Nombre",
-      name: "nombre",
+      name: "name",
       validation: { 
         required: {
           value : true,
@@ -27,7 +31,7 @@ const UserFormRegister = ( ) => {
       label: "Apellido",
       type: "text",
       placeholder: "Apellido",
-      name: "apellido",
+      name: "surname",
       validation: { 
         required: {
           value : true,
@@ -86,22 +90,13 @@ const UserFormRegister = ( ) => {
       uuid : uuidv4(),
     };
     
-    const dataJson = JSON.stringify( data );
-    // Enviar al Server
-    // Obtener y manejar la respuesta del Server
-    console.log(dataJson);
-
-    fetch( `https://jsonplaceholder.typicode.com/posts`, {
-      method: 'POST',
-      body: dataJson,
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-      .then( resp => resp.json() )
-      .then( dataResp => console.log("Respuesta servidor: ",dataResp) )
-      .catch()
-
+    console.log(data);
+    
+    if ( data.password !== data.repassword ) {
+      return console.log('Las contraseñas deben de ser iguales');
+    }
+    
+    dispatch( startRegister( data.email, data.password, data.name, data.surname ) );
     setButtonSumitDisable( false );
   }
   
