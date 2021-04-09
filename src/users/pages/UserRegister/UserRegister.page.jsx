@@ -4,7 +4,7 @@ import UserFormRegister from '../../components/UserFormRegister/UserFormRegister
 
 const UserRegister = ( ) => {
   return (
-    <div>
+    <div className='form' >
       <h1>Crear una Cuenta</h1>
       <hr/>
       <UserFormRegister />

@@ -3,24 +3,23 @@ import { NavLink } from 'react-router-dom';
 
 const UserNavigation = ( ) => {
   return (
-    <div>
+    <div className='nav--user'>
       <hr/>
-      <h1>Navegador Usuario</h1>
 
       <div>
-        <NavLink to='/auth/login'>
+        <NavLink to='/auth/login' activeClassName='link--active' className='navlink'>
           Ya tiene una cuenta? Acceda
         </NavLink>
       </div>
 
       <div>
-        <NavLink to='/auth/recoverPassword'>
+        <NavLink to='/auth/recoverPassword' activeClassName='link--active' className='navlink'>
           ¿Olvidó su contraseña?
         </NavLink>
       </div>
 
       <div>
-      <NavLink to='/auth/register'>
+      <NavLink to='/auth/register' activeClassName='link--active' className='navlink'>
         Crear una cuenta
       </NavLink>
       </div>

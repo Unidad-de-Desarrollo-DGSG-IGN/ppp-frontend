@@ -7,7 +7,11 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
   console.log(url)
 
   if ( method === 'GET' ) {
-    return fetch( url );
+    return fetch( url,{
+      'mode': 'cors',
+      'headers': {
+          'Access-Control-Allow-Origin': '*',
+      } } );
   } else {
     return fetch( url, {
       method,

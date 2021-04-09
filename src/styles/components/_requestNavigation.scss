@@ -1,0 +1,11 @@
+.nav--request {
+  height: 100vh;
+
+  background-color: blue;
+  grid-row: 1 / -1;
+  grid-column: nav-start / nav-end;
+
+  background-color: #008dc9;
+  background-image: linear-gradient(180deg, #008dc9 10%, #224abe 100%);
+  background-size: cover;
+}

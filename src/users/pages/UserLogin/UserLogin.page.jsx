@@ -6,7 +6,7 @@ import './UserLogin.page.style.css';
 const UserLogin = ( ) => {
 
   return (
-    <div>
+    <div className='form'>
       <h1>Bienvenido</h1>
       <hr/>
       <UserFormLogin />

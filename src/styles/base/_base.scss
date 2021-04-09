@@ -1,0 +1,67 @@
+// COLORS
+$color-primary: #008dc9;
+$color-secondary: #224abe;
+$color-terciary: #4e73df;
+$color-grey--dark: #222;
+$color-grey--light: #d1d3e2;
+
+$color-text-1: #3a3b45;
+$color-button: #006d9b;
+
+// FONTS
+$font-primary: sans-serif;
+
+// GLOBAL SETTINGS
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 10px/16px = 62.5% -> 1 rem = 10 px 
+}
+
+
+body {
+  font-family: $font-primary;
+  color: $color-grey--dark;
+}
+
+
+.btn {
+  margin-left: 3rem;
+  
+  border-radius: 10rem;
+  padding: .7rem 1.5rem;
+  color: #fff;
+  border: .1rem solid $color-button;
+  background-color: $color-button;
+  text-decoration: none;
+  
+  &:hover {
+    background-color: darken( $color-primary, 5%);
+  }
+
+  &--white {
+    color: $color-button;
+    border: .1rem solid $color-grey--light;
+    background-color: #fff;
+    
+    &:hover {
+      background-color: darken( #fff, 5%);
+    }
+  }
+}
+
+
+hr {
+  background-color:rgba(0, 0, 0, 0.1);
+  border: none;
+  height: .1rem;
+  margin: 2rem 0;
+}

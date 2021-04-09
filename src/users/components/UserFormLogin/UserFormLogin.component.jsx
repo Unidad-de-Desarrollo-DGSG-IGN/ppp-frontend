@@ -13,7 +13,7 @@ const UserFormLogin = ( { forms } ) => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, errors } = useForm( );
-  const [ buttonSumitDisable, setButtonSumitDisable ] = useState( false );
+  const [ buttonSumitDisable ] = useState( false );
 
   const handleForm = ( { email, password } ) => {
     dispatch( startLogin( email, password ) );
@@ -38,7 +38,7 @@ const UserFormLogin = ( { forms } ) => {
           ) 
         }
 
-        <button type="submit" disabled={ buttonSumitDisable }>Acceder</button>
+        <button className='btn' type="submit" disabled={ buttonSumitDisable }>Acceder</button>
       </form>
     </div>
   )

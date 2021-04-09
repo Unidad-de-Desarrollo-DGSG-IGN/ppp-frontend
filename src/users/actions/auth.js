@@ -1,4 +1,4 @@
-import { fetchSinToken, fetchConToken } from "../../helpers/fetch";
+import { fetchSinToken } from "../../helpers/fetch";
 import { types } from "../../types/types";
 
 
@@ -18,7 +18,7 @@ export const startLogin = ( email, password ) => {
 
     if( body.ok ) {
       localStorage.setItem('token', body.token );
-      localStorage.setItem('token-init-date', new Date().getTime() );
+      localStorage.setItem('user', body.uid );
 
       dispatch( login({
         uid: body.uid,
@@ -69,19 +69,39 @@ const checkingFinish = () => ({ type: types.authCheckingFinish });
 export const startChecking = () => {
   return async(dispatch) => {
 
-    const resp = await fetchConToken( 'auth/renew' );
-    const body = await resp.json();
+    // const resp = await fetchConToken( 'auth/renew' );
+    // const body = await resp.json();
+    console.log('chequeando!')
+    try{
+      let token = localStorage.getItem('token');
+      console.log('token: ', token)
+      let user = localStorage.getItem('user');
+      console.log('usuario: ', user)
 
-    if( body.ok ) {
-      localStorage.setItem('token', body.token );
-      localStorage.setItem('token-init-date', new Date().getTime() );
-
-      dispatch( login({
-        uid: body.uid,
-        name: body.name
-      }) )
-    } else {
-      dispatch( checkingFinish() );
+      if( token && user ){
+        console.log('Logueado');
+        dispatch( login({
+          uid: new Date().getDate(),
+          name: user
+        }) )
+      }else{
+        console.log('Sali de aca, no estas logueado');
+        dispatch( checkingFinish() );
+      }
+    }catch{
+      console.log('Error')
     }
+
+    // if( body.ok ) {
+    //   localStorage.setItem('token', body.token );
+    //   localStorage.setItem('token-init-date', new Date().getTime() );
+
+    //   dispatch( login({
+    //     uid: body.uid,
+    //     name: body.name
+    //   }) )
+    // } else {
+    //   dispatch( checkingFinish() );
+    // }
   }
 }

@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { startRegister } from '../../actions/auth';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 
-import './UserFormRegister.style.css';
 
 const UserFormRegister = ( ) => {
   const dispatch = useDispatch();
@@ -117,10 +116,9 @@ const UserFormRegister = ( ) => {
           />
         )}
 
-        <button type="submit" disabled={ buttonSumitDisable }>Registrar</button>
+        <button className='btn' type="submit" disabled={ buttonSumitDisable }>Registrar</button>
       </form>
       
-      <hr/>
       
       {/* { ( !serverResponse && buttonSumitDisable ) && <p>Servidor procesando</p> } */}
       { buttonSumitDisable && <p>Servidor procesando</p> }

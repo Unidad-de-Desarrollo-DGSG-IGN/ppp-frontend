@@ -8,7 +8,7 @@ import UserRegister from '../users/pages/UserRegister/UserRegister.page';
 
 const AuthRouter = ( ) => {
   return (
-    <div>
+    <div className='auth' >
       <Switch>
         <Route exact path='/auth/login'>
           <UserLogin />
@@ -24,7 +24,7 @@ const AuthRouter = ( ) => {
 
         <Redirect to='/auth/login' />
       </Switch>
-
+      
       <UserNavigation />
     </div>
   )

@@ -5,16 +5,17 @@ const UserFormInput = ( { label, type, placeholder, name, validation, register, 
   // console.log(register);
 
   return (
-    <div>
+    <div className='form__row'>
         <label htmlFor={name}>{label}</label>
         <input 
           type= {type} 
           placeholder= {placeholder} 
           name= {name} 
           ref= {register( validation )}
+          className='form--input'
         />
 
-        { errors[name] && <p> {errors[name].message} </p> }
+        { errors[name] && <p className='form__error'> {errors[name].message} </p> }
     </div>
   )
 }

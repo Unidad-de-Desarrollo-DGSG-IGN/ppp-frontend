@@ -1,0 +1,7 @@
+
+.layout--requests {
+
+  display: grid;
+  grid-template-rows: 1fr min-content 1fr;
+  grid-template-columns: [nav-start] 16.66vw  [nav-end requests-start] 1fr [requests-end];
+}
