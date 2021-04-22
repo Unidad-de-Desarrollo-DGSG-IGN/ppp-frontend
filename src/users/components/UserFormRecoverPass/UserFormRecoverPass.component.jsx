@@ -6,10 +6,16 @@ import withData from './withData';
 
 const UserFormRecoverPass = ( { forms } ) => {
   const { register, handleSubmit, errors } = useForm( );
-  const [ buttonSumitDisable ] = useState( false );
+  const [ buttonSumitDisable, setButtonSumitDisable ] = useState( false );
 
-  const handleForm = ( ) => {
-    console.log('Recuperando contraseña!!!');
+  const handleForm = async ( ) => {
+    setButtonSumitDisable( true );
+    // TODO: Usar ACCION requerida
+    await setTimeout( () => {
+      console.log('Recuperando contraseña!!!');
+      setButtonSumitDisable( false );
+    } , 3000 );
+
   }
 
   return (
@@ -31,7 +37,7 @@ const UserFormRecoverPass = ( { forms } ) => {
           ) 
         }
 
-        <button className='btn' type="submit" disabled={ buttonSumitDisable }>Cambiar contraseña</button>
+        <button className={ buttonSumitDisable ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ buttonSumitDisable }>Cambiar contraseña</button>
       </form>
     </div>
   )

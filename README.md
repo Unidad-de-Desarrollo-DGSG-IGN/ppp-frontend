@@ -21,6 +21,18 @@
 
 ## Requerimientos no funcionales
 
+Tecnologias usadas
+
+* React
+* React Hooks
+* React Form Hooks
+* React Table
+* CSS y SASS
+  * CSS Grid
+  * CSS Flexbox
+  * SASS en su forma SCSS
+
+
 
 ---
 

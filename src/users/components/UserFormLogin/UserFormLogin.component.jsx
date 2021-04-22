@@ -6,6 +6,7 @@ import UserFormInput from '../UserFormInput/UserFormInput.component';
 import withData from './withData';
 import './UserFormLogin.style.css';
 import { startLogin } from '../../actions/auth';
+// import { startFormDataLoadingAntenna } from '../../../request/actions/formData';
 
 const parameters = null;
 
@@ -15,8 +16,12 @@ const UserFormLogin = ( { forms } ) => {
   const { register, handleSubmit, errors } = useForm( );
   const [ buttonSumitDisable ] = useState( false );
 
-  const handleForm = ( { email, password } ) => {
-    dispatch( startLogin( email, password ) );
+  const handleForm = async( { email, password } ) => {
+    // setButtonSumitDisable( true );
+    await dispatch( startLogin( email, password ) );
+    // setButtonSumitDisable( false ); // TODO : Revisar tema de optimizacion
+    // TODO : Aca pedir las antenas
+    // dispatch( startFormDataLoadingAntenna( ) );
   }
 
   return (
@@ -38,7 +43,7 @@ const UserFormLogin = ( { forms } ) => {
           ) 
         }
 
-        <button className='btn' type="submit" disabled={ buttonSumitDisable }>Acceder</button>
+        <button className={ buttonSumitDisable ? 'btn btn--disabled' : 'btn'} type="submit" disabled={ buttonSumitDisable }>Acceder</button>
       </form>
     </div>
   )

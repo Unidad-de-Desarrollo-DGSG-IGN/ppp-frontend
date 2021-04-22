@@ -1,7 +1,8 @@
 
 .layout--requests {
+  height: 100vh;
 
   display: grid;
-  grid-template-rows: 1fr min-content 1fr;
-  grid-template-columns: [nav-start] 16.66vw  [nav-end requests-start] 1fr [requests-end];
+  grid-template-rows: 3rem minmax( min-content, auto ) 2fr;
+  grid-template-columns: [nav-start] 14.5vw  [nav-end requests-start] 1fr [requests-end];
 }

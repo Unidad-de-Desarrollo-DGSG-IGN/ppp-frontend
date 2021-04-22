@@ -28,7 +28,8 @@ html {
 
 
 body {
-  font-family: $font-primary;
+  // font-family: $font-primary;
+  font-family: "Nunito";
   color: $color-grey--dark;
 }
 
@@ -39,8 +40,8 @@ body {
   border-radius: 10rem;
   padding: .7rem 1.5rem;
   color: #fff;
-  border: .1rem solid $color-button;
-  background-color: $color-button;
+  border: .1rem solid $color-primary;
+  background-color: $color-primary;
   text-decoration: none;
   
   &:hover {
@@ -56,6 +57,13 @@ body {
       background-color: darken( #fff, 5%);
     }
   }
+  
+  &--disabled {
+    background-color: $color-grey--light;
+    &:hover {
+      background-color: darken( $color-grey--light, 5% );
+    }
+  }
 }
 
 
@@ -64,4 +72,12 @@ hr {
   border: none;
   height: .1rem;
   margin: 2rem 0;
+}
+
+
+h3 {
+  color: #5a5c69;
+  font-size: 2.5rem;
+  font-family: "Nunito";
+  font-weight: 400;
 }

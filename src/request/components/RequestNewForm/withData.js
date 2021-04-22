@@ -32,38 +32,38 @@ const withData = ( parameters ) => ( Component ) => {
         }
       }
     },
-    {
-      label: "Modelo de antena",
-      type: "text",
-      placeholder: 'Nombre de la antena',
-      name: "name_antena",
-      validation: {
-      }
-    },
-    {
-      label: "Tipo de altura de antena",
-      type: "text",
-      placeholder: 'Tipo de altura de antena',
-      name: "tipo_antena",
-      validation: {
-      }
-    },
-    {
-      label: "Altura de antena [m]",
-      type: "text",
-      placeholder: 'Altura [m]',
-      name: "altura_antena",
-      validation: {
-        pattern: {
-          value: /^[0-9]*$/i,
-          message: "No es numerico"
-        },
-        required: {
-          value : true,
-          message : "La altura de la antena es requisito"
-        },
-      }
-    },
+    // {
+    //   label: "Modelo de antena",
+    //   type: "text",
+    //   placeholder: 'Nombre de la antena',
+    //   name: "name_antena",
+    //   validation: {
+    //   }
+    // },
+    // {
+    //   label: "Tipo de altura de antena",
+    //   type: "text",
+    //   placeholder: 'Tipo de altura de antena',
+    //   name: "tipo_antena",
+    //   validation: {
+    //   }
+    // },
+    // {
+    //   label: "Altura de antena [m]",
+    //   type: "text",
+    //   placeholder: 'Altura [m]',
+    //   name: "altura_antena",
+    //   validation: {
+    //     pattern: {
+    //       value: /^[0-9]*$/i,
+    //       message: "No es numerico"
+    //     },
+    //     required: {
+    //       value : true,
+    //       message : "La altura de la antena es requisito"
+    //     },
+    //   }
+    // },
     {
       label: "Acepto que los resultados del procesamiento puedan ser utilizados por el IGN para la evaluación de productos y servicios cartográficos y/o geodésicos.",
       type: "checkbox",

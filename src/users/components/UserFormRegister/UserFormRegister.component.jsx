@@ -82,21 +82,23 @@ const UserFormRegister = ( ) => {
     },
   ]
 
-  const handleForm = ( dataForm ) => {
-    setButtonSumitDisable( prev => !prev );
+  const handleForm = async ( dataForm ) => {
+    setButtonSumitDisable( true );
+    console.log('true');
     const data = {
       ...dataForm,
       uuid : uuidv4(),
     };
     
-    console.log(data);
+    console.log( data ); // TODO: Borrar
     
     if ( data.password !== data.repassword ) {
       return console.log('Las contraseñas deben de ser iguales');
     }
     
-    dispatch( startRegister( data.email, data.password, data.name, data.surname ) );
+    await dispatch( startRegister( data.email, data.password, data.name, data.surname ) );
     setButtonSumitDisable( false );
+    console.log('false');
   }
   
   return (
@@ -116,7 +118,7 @@ const UserFormRegister = ( ) => {
           />
         )}
 
-        <button className='btn' type="submit" disabled={ buttonSumitDisable }>Registrar</button>
+        <button className={ buttonSumitDisable ? 'btn btn--disabled' :'btn'} type="submit" disabled={ buttonSumitDisable }>Registrar</button>
       </form>
       
       

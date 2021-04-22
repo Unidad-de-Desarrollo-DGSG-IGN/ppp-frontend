@@ -10,23 +10,45 @@ const login = ( user ) => ({
 
 export const startLogin = ( email, password ) => {
   return async( dispatch ) => {
+    
+    try{
+      let username = email;
 
-    const resp = await fetchSinToken( 'auth', { email, password }, 'POST' );
-    console.log(resp)
-    const body = await resp.json();
-    console.log(body)
+      const resp = await fetchSinToken( 'auth', { username, password }, 'POST' );
+      console.log( resp )
+      console.log( resp.status )
+      const body = await resp.json();
+      console.log( body )
+  
+      if( body?.status === 'success' ){
+  
+        localStorage.setItem( 'token', body.data.token.access_token );
+        localStorage.setItem( 'user', body.data.user.username );
+  
+        dispatch( login({
+          uid: body.data.user.username, // No es necesario
+          name: body.data.user.username,
+        }) );
+  
+      } else {
+        console.log( 'Error en el login' ); // TODO: modificar el estado temporalmente para msj error
+      }
 
-    if( body.ok ) {
-      localStorage.setItem('token', body.token );
-      localStorage.setItem('user', body.uid );
-
-      dispatch( login({
-        uid: body.uid,
-        name: body.name
-      }) )
-    } else {
-      console.log('Error al loguearse');
+    }catch{
+      console.log( 'Algun error en el pedido' )
     }
+
+    // if( body.ok ) {
+    //   localStorage.setItem('token', body.token );
+    //   localStorage.setItem('user', body.uid );
+
+    //   dispatch( login({
+    //     uid: body.uid,
+    //     name: body.name
+    //   }) )
+    // } else {
+    //   console.log('Error al loguearse');
+    // }
   }
 }
 
@@ -45,19 +67,25 @@ export const startLogout = () => {
 
 export const startRegister = ( email, password, name, surname ) => {
   return async( dispatch ) => {
-    const resp = await fetchSinToken( 'auth/new', { email, password, name, surname }, 'POST' );
-    const body = await resp.json();
-
-    if( body.ok ) {
-      localStorage.setItem('token', body.token );
-      localStorage.setItem('token-init-date', new Date().getTime() );
-
-      dispatch( login({
-        uid: body.uid,
-        name: body.name
-      }) )
-    } else {
-      console.log('Error al registrarse y loguearse');
+    try{
+      const resp = await fetchSinToken( 'users', { email, password, name, surname }, 'POST' );
+      const body = await resp.json();
+  
+      console.log( body );
+  
+      // if( body.ok ) {
+      //   localStorage.setItem('token', body.token );
+      //   localStorage.setItem('token-init-date', new Date().getTime() );
+  
+      //   dispatch( login({
+      //     uid: body.uid,
+      //     name: body.name
+      //   }) )
+      // } else {
+      //   console.log('Error al registrarse y loguearse');
+      // }
+    }catch{
+      console.log('Error al registrar')
     }
   }
 }

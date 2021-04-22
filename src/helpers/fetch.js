@@ -1,5 +1,5 @@
 // const baseUrl = process.env.REACT_APP_API_URL;
-const baseUrl = "http://localhost:4000/api";
+const baseUrl = "http://172.20.201.39/ppp-test";
 
 
 const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
@@ -7,11 +7,14 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
   console.log(url)
 
   if ( method === 'GET' ) {
-    return fetch( url,{
-      'mode': 'cors',
-      'headers': {
-          'Access-Control-Allow-Origin': '*',
-      } } );
+    // return fetch( url,{
+    //   'mode': 'cors',
+    //   'headers': {
+    //       'Access-Control-Allow-Origin': '*',
+    //       // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",//borrar
+    //       // 'Access-Control-Allow-Credentials': true,//borrar
+    //   } } );
+    return fetch( url );
   } else {
     return fetch( url, {
       method,
@@ -32,7 +35,7 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
     return fetch( url, {
       method,
       headers: {
-        'x-token': token
+        'Authorization': `Bearer ${ token }`
       }
     });
   } else {
@@ -40,7 +43,7 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
       method,
       headers: {
         'Content-type': 'application/json',
-        'x-token': token
+        'Authorization': `Bearer ${ token }`
       },
       body: JSON.stringify( data )
     });
@@ -48,7 +51,34 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
 }
 
 
+const fetchFileConToken = ( endpoint, formFile, method = 'GET' ) => {
+  const url = `${ baseUrl }/${ endpoint }`;
+  const token = localStorage.getItem('token') || '';
+
+  if ( method === 'GET' ) {
+    return fetch( url, {
+      method,
+      headers: {
+        'Authorization': `Bearer ${ token }`
+      }
+    });
+  } else {
+    return fetch( url, {
+      method,
+      headers: {
+        // 'Content-type': 'multipart/form-data',
+        // 'Accept': '*/*',
+        // 'Accept-Encoding': 'gzip,deflate,br',
+        'Authorization': `Bearer ${ token }`
+      },
+      body: formFile
+    });
+  }
+}
+
+
 export {
   fetchSinToken,
-  fetchConToken
+  fetchConToken,
+  fetchFileConToken
 }

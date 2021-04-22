@@ -1,0 +1,42 @@
+
+.requests{
+  background-color: #fff; // gradiente gray... aca?
+  padding: 0px 25px;
+
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+.request-header{
+  padding: 30px 0px;
+
+  h3 {
+    padding: 15px 0px;
+  }
+}
+
+
+.request-container{
+  background-color: #fff;
+  border: #e3e6f0 solid 1px;
+  border-radius: 0.5rem;
+  padding: 0px;
+
+  h3 {
+    background-color: #f8f9fc;
+    border-radius: 0.5rem;
+    color: #4e73df;
+    font-size: 1.5rem;
+    padding: 1.6rem 2rem;
+  }
+}
+
+
+.request-footer{
+  margin-top: 5rem;
+  height: 3rem;
+
+  grid-row: 3 / 4;
+  grid-column: 2 / -1;
+}
