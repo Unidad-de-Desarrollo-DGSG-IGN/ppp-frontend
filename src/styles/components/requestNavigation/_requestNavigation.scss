@@ -1,0 +1,29 @@
+
+.nav--request {
+  height: auto;
+  color: $color-white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+
+  grid-column: nav-start / nav-end;
+  grid-row: 1 / 4;
+
+  background-image: linear-gradient( 180deg, $color-primary 10%, $color-secondary 100% );
+  background-size: cover;
+
+  padding: 1.5rem 1.5rem;
+}
+
+
+.nav__options{
+  height: 13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  padding: 2rem 0rem;
+  
+  border-top: $color-lightblue--light solid 0.1rem;
+  border-bottom: $color-lightblue--light solid 0.1rem;
+}
+

@@ -28,20 +28,20 @@ const RequestNavigation = ( ) => {
 
       <div className='nav__options' >
         <div>
-          <NavLink className='navlink' to='/requests/requests'>
+          <NavLink className='navlink navlink--white' to='/requests/requests'>
           {/* <i class="fas fa-fw fa-table"></i> <span>Solicitudes</span> */}
             Solicitudes
           </NavLink>
         </div>
 
         <div>
-          <NavLink className='navlink' to='/requests/request-new'>
+          <NavLink className='navlink navlink--white' to='/requests/request-new'>
             Nuevas solicitud
           </NavLink>
         </div>
 
         <div>
-          <NavLink className='navlink' to='/requests/perfil'>
+          <NavLink className='navlink navlink--white' to='/requests/perfil'>
             Perfil
           </NavLink>
         </div>

@@ -63,7 +63,7 @@ const RequestNewForm = ( { forms } ) => {
   // console.log( antennas.find( antenna => antenna.name === watch("antennaModel") )?.height_types );
 
   return (
-    <div>
+    <div className='request-new__form' >
       <h2>Datos de la BASE para el procesamiento PPP</h2>
 
       <form onSubmit={ handleSubmit( handleForm ) }>

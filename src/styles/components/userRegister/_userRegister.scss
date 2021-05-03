@@ -1,6 +1,7 @@
+
 .form {
   padding:  5rem 5rem 0rem 5rem;
-  background-color: #fff;
+  background-color: $color-white;
   border-radius: 2rem 2rem 0 0;
   font-size: 1.5rem;
 
@@ -19,23 +20,23 @@
 
 
 .form__error {
-  color: red;
+  color: $color-error;
   display: inline-block;
   padding: 0rem 1.5rem;
 }
 
 
 .form--input {
-  background-color: #fff;
+  background-color: $color-white;
   padding: 1rem 1.8rem;
   border-radius: 10rem;
   border: .1rem solid $color-grey--light;
 
   &:focus {
-    color: #6e707e;
-    background-color: #fff;
-    border-color: #bac8f3;
+    color: $color-grey--meidum-2;
+    background-color: $color-white;
+    border-color: $color-lightblue--medium-2;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba( 78, 115, 223, 0.25 );
   }
 }

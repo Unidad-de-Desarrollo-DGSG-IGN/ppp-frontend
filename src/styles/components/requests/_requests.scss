@@ -1,0 +1,44 @@
+
+.requests{
+  background-color: $color-white; // gradiente gray... aca?
+  padding: 0rem 2.5rem;
+
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+.request-header{
+  padding: 3.0rem 0rem;
+
+  h3 {
+    padding: 1.5rem 0rem;
+  }
+}
+
+
+.request-container{
+  background-color: $color-white;
+  border: $color-lightblue--light solid 0.1rem;
+  border-radius: 0.5rem;
+  padding: 0rem;
+
+  h3 {
+    background-color: $color-lightblue--light-2;
+    border-radius: 0.5rem;
+    color: $color-terciary;
+    font-size: 1.5rem;
+    padding: 1.6rem 2rem;
+    border-bottom: 0.1rem solid $color-lightblue--light;
+    font-weight: bold;
+  }
+}
+
+
+.request-footer{
+  margin-top: 5rem;
+  height: 3rem;
+
+  grid-row: 3 / 4;
+  grid-column: 2 / -1;
+}

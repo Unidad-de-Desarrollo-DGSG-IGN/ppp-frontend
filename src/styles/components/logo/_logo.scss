@@ -1,0 +1,15 @@
+.logo-header{
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo{
+    height: 6.5vw;
+  }
+
+  h4 {
+    font-size: 1.8rem;
+  }
+}

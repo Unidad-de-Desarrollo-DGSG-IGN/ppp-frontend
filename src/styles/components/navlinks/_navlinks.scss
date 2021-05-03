@@ -1,0 +1,26 @@
+
+.navlink {
+  color: darken( $color-terciary, 15% );
+  text-decoration: none;
+  font-size: 1.4rem;
+
+
+  &:hover {
+    color: $color-terciary;
+    text-decoration: none;
+  }
+
+  &--white{
+    color: darken( $color-white, 10% );
+
+    &:hover {
+      color: $color-white;
+      text-decoration: none;
+    }
+  }
+}
+
+
+.link--active {
+  display:none;
+}

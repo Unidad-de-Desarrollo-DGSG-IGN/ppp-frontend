@@ -12,6 +12,7 @@
 //     monospace;
 // }
 
+@import './abstracts/abstracts';
 @import './base/base';
-@import './layout/layouts_main';
-@import './components/componentes_main';
+@import './layout/layout';
+@import './components/components';

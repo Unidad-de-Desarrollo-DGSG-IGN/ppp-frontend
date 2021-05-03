@@ -1,5 +1,6 @@
+
 .nav--user {
-  background-color: #fff;
+  background-color: $color-white;
   border-radius: 0 0 2rem 2rem;
   font-size: 1.3rem;
   padding: 2rem 5rem;
@@ -7,15 +8,12 @@
 
   grid-row: 3 / 4;
   grid-column: center-start / center-end;
-
-
 }
 
 
 .navlink {
   color: $color-terciary;
   text-decoration: none;
-
 
   &:hover {
     color: $color-secondary;

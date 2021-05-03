@@ -1,0 +1,50 @@
+
+.request-new{
+  padding: 2rem 2.5rem;
+}
+
+
+.request-new__header{
+  
+  h1 {
+    color: $color-grey--meidum;
+    font-size: 2.5rem;
+    font-weight: 400;
+    padding: 1.5rem 0rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+    // font-weight: 400;
+  }
+}
+
+
+.request-new__form{
+  border: $color-lightblue--light solid 0.1rem;
+  border-radius: 0.5rem;
+
+  h2 {
+    background-color: $color-lightblue--light-2;
+    border-radius: 0.5rem;
+    color: $color-terciary;
+    font-size: 1.5rem;
+    padding: 1.6rem 2rem;
+    border-bottom: 0.1rem solid $color-lightblue--light;
+  }
+
+  label {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  input {
+    font-family: 'Nunito';
+    border-radius: .5rem;
+  }
+
+  select {
+    border-radius: .5rem;
+    border-bottom: 0.1rem solid $color-lightblue--light;
+  }
+}

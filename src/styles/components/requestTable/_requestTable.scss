@@ -3,33 +3,33 @@ table {
   font-size: 1.4rem;
   border-collapse: collapse;
   width: 100%;
-  color: #858796;
+  color: $color-lightblue--medium;
 
 }
 
 table td, table th {
-  border: 1px solid #ddd;
+  border: 0.1rem solid $color-grey--light-2;
   padding: 0.8rem;
 }
 
 // table tr:nth-child(even){background-color: #f2f2f2;}
 
 table tr:hover {
-  background-color: lighten( #e3e6f0, 5% );
+  background-color: lighten( $color-lightblue--light, 5% );
 }
 
 table th, tfoot td {
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
   text-align: left;
-  background-color: #fff;
-  color: #858796;
+  background-color: $color-white;
+  color: $color-lightblue--medium;
 }
 
 
 .table__header{
-  background-color: #fff;
-  color: #858796;
+  background-color: $color-white;
+  color: $color-lightblue--medium;
   font-size: 1.3rem;
   padding: 1.5rem 0rem;
 
@@ -40,8 +40,8 @@ table th, tfoot td {
 
 
 .table__footer{
-  background-color: #fff;
-  color: #858796;
+  background-color: $color-white;
+  color: $color-lightblue--medium;
 }
 
 
