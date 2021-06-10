@@ -1,16 +1,24 @@
 import React from 'react';
-import UserFormRecoverPass from '../../components/UserFormRecoverPass/UserFormRecoverPass.component';
+import PppPresentation from '../../../shared/components/PppPresentation/PppPresentation';
 
-import './UserRecoverPassword.page.style.css';
+import UserFormRecoverPass from '../../components/UserFormRecoverPass/UserFormRecoverPass.component';
+import UserNavigation from '../../components/UserNavigation/UserNavigation.component';
 
 const UserRecoverPassword = ( ) => {
   return (
     <div className='form'>
-      <h1>¿Olvidó su contraseña?</h1>
-      <p>Simplemente ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña.</p>
-      <UserFormRecoverPass />
+      <PppPresentation />
+
+      <div className='user-fields' >
+        <h1>¿Olvidó su contraseña?</h1>
+        <hr />
+        <p>Simplemente ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña.</p>
+        <UserFormRecoverPass />
+
+        <UserNavigation />
+      </div>
     </div>
   )
 }
 
-export default UserRecoverPassword
+export default UserRecoverPassword;

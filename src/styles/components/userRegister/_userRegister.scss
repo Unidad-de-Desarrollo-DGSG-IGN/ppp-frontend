@@ -1,21 +1,45 @@
 
+// TODO : Reordenar estas clases generales
+
 .form {
-  padding:  5rem 5rem 0rem 5rem;
+  border: solid $color-grey--light .1rem;
   background-color: $color-white;
-  border-radius: 2rem 2rem 0 0;
+  border-radius: 1.5rem;
   font-size: 1.5rem;
 
   grid-row: 2 / 3;
   grid-column: center-start / center-end;
+
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 1fr;
+
+  .logo-login {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+
+    background-color: $color-primary;
+    background-image:  linear-gradient( 180deg, $color-primary 10%, $color-secondary 100%);
+    padding: 1.5rem;
+  }
+
+  .user-fields {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
 }
 
 
 .form__row {
-  margin: 1.6rem 1.6rem 1.6rem 1.6rem;
+  margin: 0rem;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
 
   label {
-    padding: 1.5rem;
+    padding: 1.5rem 0rem;
+    font-weight: 600;
   }
+  
 }
 
 
@@ -28,9 +52,12 @@
 
 .form--input {
   background-color: $color-white;
-  padding: 1rem 1.8rem;
-  border-radius: 10rem;
+  padding: .5rem 1.8rem;
+  border-radius: .5rem;
   border: .1rem solid $color-grey--light;
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+  font-family: $font-family-primary;
 
   &:focus {
     color: $color-grey--meidum-2;
@@ -38,5 +65,24 @@
     border-color: $color-lightblue--medium-2;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba( 78, 115, 223, 0.25 );
+  }
+}
+
+
+.form--register {
+
+  // padding: 1.5rem;
+
+  .form__row{
+    width: auto;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: center;
+  }
+
+  .btn {
+    margin: 1.5rem 0rem;
+    width: 100%;
+    font-weight: 700;
   }
 }

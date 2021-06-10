@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+
 import { startRegister } from '../../actions/auth';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
-
 
 const UserFormRegister = ( ) => {
   const dispatch = useDispatch();
@@ -84,26 +84,29 @@ const UserFormRegister = ( ) => {
 
   const handleForm = async ( dataForm ) => {
     setButtonSumitDisable( true );
-    console.log('true');
+    console.log( 'true' );
     const data = {
       ...dataForm,
-      uuid : uuidv4(),
+      uuid : uuidv4( ),
     };
     
     console.log( data ); // TODO: Borrar
     
     if ( data.password !== data.repassword ) {
-      return console.log('Las contraseñas deben de ser iguales');
+      return console.log( 'Las contraseñas deben de ser iguales' );
     }
     
     await dispatch( startRegister( data.email, data.password, data.name, data.surname ) );
     setButtonSumitDisable( false );
-    console.log('false');
+    console.log( 'false' );
   }
   
   return (
     <div>
-      <form onSubmit={ handleSubmit( handleForm ) }>
+      <form
+        className='form--register'
+        onSubmit={ handleSubmit( handleForm ) }
+      >
 
         {forms.map( form => 
           <UserFormInput 
@@ -118,7 +121,13 @@ const UserFormRegister = ( ) => {
           />
         )}
 
-        <button className={ buttonSumitDisable ? 'btn btn--disabled' :'btn'} type="submit" disabled={ buttonSumitDisable }>Registrar</button>
+        <button 
+          className={ buttonSumitDisable ? 'btn btn--disabled' :'btn'} 
+          disabled={ buttonSumitDisable }
+          type="submit" 
+        >
+          Registrar
+        </button>
       </form>
       
       

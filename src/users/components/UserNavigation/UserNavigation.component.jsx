@@ -8,7 +8,7 @@ const UserNavigation = ( ) => {
 
       <div>
         <NavLink to='/auth/login' activeClassName='link--active' className='navlink'>
-          Ya tiene una cuenta? Acceda
+          ¿Ya tiene una cuenta? Acceda
         </NavLink>
       </div>
 
@@ -28,4 +28,4 @@ const UserNavigation = ( ) => {
   )
 }
 
-export default UserNavigation
+export default UserNavigation;

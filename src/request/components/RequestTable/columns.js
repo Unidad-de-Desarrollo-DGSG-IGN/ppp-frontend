@@ -1,5 +1,9 @@
 import { format } from 'date-fns';
+import RequestTableDetail from '../RequestTableDetail/RequestTableDetail';
 import ColumnFilter from './ColumnFilter';
+
+// Tut for components inside the table
+// https://blog.logrocket.com/complete-guide-building-smart-data-table-react/
 
 export const COLUMNS = [
   {
@@ -27,6 +31,7 @@ export const COLUMNS = [
     accessor: 'order_detail',
     disableFilters: true,
     Filter: ColumnFilter,
+    Cell: ( { cell: { value } } ) => <RequestTableDetail data={ value } />
   },
   {
     Header: 'Descarga',

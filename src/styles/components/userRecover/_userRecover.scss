@@ -1,0 +1,31 @@
+
+.form--recover {
+
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  .form__row{
+    width: auto;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+
+    align-items: center;
+
+    input[type='checkbox']{
+      margin-top: 0rem;
+    }
+  }
+
+  .btn {
+    margin: 1.5rem 0rem;
+    width: 100%;
+    font-weight: 700;
+  }
+}
+
+.user-fields {
+  p {
+    margin-bottom: 1rem;
+  }
+}

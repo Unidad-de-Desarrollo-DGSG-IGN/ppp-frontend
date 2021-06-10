@@ -37,7 +37,7 @@ export const startOrdersLoading = ( ) => {
   
       const resList = await fetchConToken( 'orders' );
       const resOrders = await resList.json ();
-      console.log( 'Ordenes : ', resOrders.data.orders );
+      console.log( 'Ordenes Crudos : ', resOrders.data.orders );
       const orders =  await resOrders.data.orders.map( order => ({
         // TODO : Faltan campos de fecha, estado, etc
         date_order: new Date( ).toString(),

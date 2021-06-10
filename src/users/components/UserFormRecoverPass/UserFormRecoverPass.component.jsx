@@ -20,7 +20,10 @@ const UserFormRecoverPass = ( { forms } ) => {
 
   return (
     <div>
-      <form onSubmit={ handleSubmit( handleForm ) }>
+      <form
+        className='form--recover'
+        onSubmit={ handleSubmit( handleForm ) }
+      >
         { forms.map( form => 
             
             <UserFormInput 

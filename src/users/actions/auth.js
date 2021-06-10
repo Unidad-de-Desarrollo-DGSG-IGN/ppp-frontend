@@ -1,5 +1,26 @@
-import { fetchSinToken } from "../../helpers/fetch";
+import { fetchSinToken, fetchConToken } from "../../helpers/fetch";
 import { types } from "../../types/types";
+
+
+const loadingUserInfo = ( userInfo ) => ({
+  type: types.authUserLoadingInfo,
+  payload: userInfo
+});
+
+// TODO
+export const startLoadingUserInfo = ( ) => {
+  return async( dispatch, getState ) => {
+    try{
+      const { uid } = getState().auth;
+      const resp = await fetchConToken( `users/${ uid }` );
+      const body = await resp.json();
+      console.log( 'Respuesta Info User', body.data.user );
+      dispatch( loadingUserInfo( body.data.user ) );
+    }catch( err ){
+      console.log( 'Error de Carga de datos del usuario' );
+    }
+  }
+}
 
 
 const login = ( user ) => ({
@@ -26,7 +47,7 @@ export const startLogin = ( email, password ) => {
         localStorage.setItem( 'user', body.data.user.username );
   
         dispatch( login({
-          uid: body.data.user.username, // No es necesario
+          uid: body.data.user.userId,
           name: body.data.user.username,
         }) );
   
@@ -70,7 +91,8 @@ export const startRegister = ( email, password, name, surname ) => {
     try{
       const resp = await fetchSinToken( 'users', { email, password, name, surname }, 'POST' );
       const body = await resp.json();
-  
+      
+      // TODO : Procesar la informacion para cuando se registra el usuario
       console.log( body );
   
       // if( body.ok ) {

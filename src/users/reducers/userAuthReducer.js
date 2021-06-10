@@ -24,6 +24,12 @@ export const userAuthReducer = ( state = initialState, action ) => {
       return {
         checking: false,
       }
+
+    case types.authUserLoadingInfo:
+      return {
+        ...state,
+        ...action.payload
+      }
   
     default:
       return state;

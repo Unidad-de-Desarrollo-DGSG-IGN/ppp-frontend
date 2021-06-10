@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 import withData from './withData';
 import './UserFormLogin.style.css';
-import { startLogin } from '../../actions/auth';
-// import { startFormDataLoadingAntenna } from '../../../request/actions/formData';
+import { startLoadingUserInfo, startLogin } from '../../actions/auth';
 
 const parameters = null;
 
 const UserFormLogin = ( { forms } ) => {
   const dispatch = useDispatch();
+  // const { uid } = useSelector( state => state.auth );
 
   const { register, handleSubmit, errors } = useForm( );
   const [ buttonSumitDisable ] = useState( false );
@@ -20,13 +20,18 @@ const UserFormLogin = ( { forms } ) => {
     // setButtonSumitDisable( true );
     await dispatch( startLogin( email, password ) );
     // setButtonSumitDisable( false ); // TODO : Revisar tema de optimizacion
-    // TODO : Aca pedir las antenas
+    // TODO : Aca pedir las antenas - O en un useEffect?
     // dispatch( startFormDataLoadingAntenna( ) );
+
+    dispatch( startLoadingUserInfo( ) ); 
   }
 
   return (
     <div>
-      <form onSubmit={ handleSubmit( handleForm ) }>
+      <form
+        className='form--login'
+        onSubmit={ handleSubmit( handleForm ) }
+      >
         { forms.map( form => 
             
             <UserFormInput 
@@ -43,7 +48,7 @@ const UserFormLogin = ( { forms } ) => {
           ) 
         }
 
-        <button className={ buttonSumitDisable ? 'btn btn--disabled' : 'btn'} type="submit" disabled={ buttonSumitDisable }>Acceder</button>
+        <button className={ buttonSumitDisable ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ buttonSumitDisable }>Acceder</button>
       </form>
     </div>
   )

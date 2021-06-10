@@ -20,7 +20,7 @@ const AppRouter = (  ) => {
   }, [dispatch])
 
   if ( checking ) {
-    return (<h5>Espere...</h5>);
+    return (<h5>Espere...</h5>); // TODO : Realizar un componente de espera mejor diseñado
   }
 
   return (

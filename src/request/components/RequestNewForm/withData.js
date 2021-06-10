@@ -64,17 +64,17 @@ const withData = ( parameters ) => ( Component ) => {
     //     },
     //   }
     // },
-    {
-      label: "Acepto que los resultados del procesamiento puedan ser utilizados por el IGN para la evaluación de productos y servicios cartográficos y/o geodésicos.",
-      type: "checkbox",
-      name: "agree",
-      validation: {
-        required: {
-          value : true,
-          message : "Aceptar el uso de archivos por parte del IGN es requisito"
-        },
-      }
-    },
+    // {
+    //   label: "Acepto que los resultados del procesamiento puedan ser utilizados por el IGN para la evaluación de productos y servicios cartográficos y/o geodésicos.",
+    //   type: "checkbox",
+    //   name: "agree",
+    //   validation: {
+    //     required: {
+    //       value : true,
+    //       message : "Aceptar el uso de archivos por parte del IGN es requisito"
+    //     },
+    //   }
+    // },
   ]
 
   return( ( ) => {

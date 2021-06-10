@@ -12,8 +12,16 @@ const tableData = ( ordersClient = [ ] ) => {
     order_date: orderClient.date_order,
     base_name: orderClient.base_point.base_name,
     order_state: orderClient.state_order,
-    order_detail: 'Detalle',
-    order_download: 'download',
+    order_detail: { 
+      base : {
+        url_rinex_base: '',
+        antenna_height: orderClient.base_point.antenna_height,
+        antenna_model: orderClient.base_point.antenna_model,
+        antenna_type_height: orderClient.base_point.antenna_type_height,
+        base_name: orderClient.base_point.base_name,
+      },
+    },
+    order_download: 'download', // TODO : Poner link
   }));
 };
 
@@ -36,11 +44,12 @@ const Requests = ( ) => {
   }, [ ordersClient ]);
 
   return (
-    <div class='requests' >
+    <div className='requests' >
       <div className='request-header' >
         <h3>Solicitudes de procesamiento</h3>
 
         <p>Listado de todas las solicitudes realizadas. Podrá ver el estado y descargar los informes de procesamiento de aquellas solicitudes finalizadas.</p>
+        <hr/>
       </div>        
 
       <div className='request-container' >

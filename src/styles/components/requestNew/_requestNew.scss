@@ -1,28 +1,66 @@
 
 .request-new{
-  padding: 2rem 2.5rem;
+  background-color: $color-white; // gradiente gray... aca?
+  padding: 0rem 2.5rem;
+
+  p {
+    font-size: 1.5rem;
+  }
 }
 
 
 .request-new__header{
-  
-  h1 {
-    color: $color-grey--meidum;
-    font-size: 2.5rem;
-    font-weight: 400;
+  padding: 2.0rem 0rem;
+
+  h3 {
     padding: 1.5rem 0rem;
   }
+  // h1 {
+  //   color: $color-grey--meidum;
+  //   font-size: 2.5rem;
+  //   font-weight: 400;
+  //   padding: 1.5rem 0rem;
+  // }
 
-  p {
-    font-size: 1.3rem;
-    // font-weight: 400;
-  }
+  // p {
+  //   font-size: 1.3rem;
+  //   // font-weight: 400;
+  // }
 }
 
 
 .request-new__form{
   border: $color-lightblue--light solid 0.1rem;
   border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .form__row {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+      border: $color-lightblue--light solid 0.1rem;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      margin: 1.6rem 1.6rem 0rem 1.6rem;
+
+      &--agree{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        input {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
 
   h2 {
     background-color: $color-lightblue--light-2;
@@ -36,6 +74,7 @@
   label {
     font-size: 1.5rem;
     font-weight: 500;
+    padding: 1.5rem 0rem;
   }
 
   input {
@@ -47,4 +86,76 @@
     border-radius: .5rem;
     border-bottom: 0.1rem solid $color-lightblue--light;
   }
+
+  button {
+    margin: 1.5rem 3.8rem;
+    width: 100%;
+    font-weight: 700;
+  }
+}
+
+
+.optional-form {
+  border: $color-lightblue--light solid 0.1rem;
+  border-radius: 0.5rem;
+  margin: 1.6rem 3.8rem;
+
+  h3 {
+    background-color: $color-lightblue--light-2;
+    border-radius: 0.5rem;
+    color: $color-terciary;
+    font-size: 1.5rem;
+    padding: 1.6rem 2rem;
+    border-bottom: 0.1rem solid $color-lightblue--light;
+    cursor: pointer;
+  }
+
+  p {
+    padding: 1.5rem 1.6rem;
+  }
+
+  &--upload{
+    margin: 0rem 1.6rem;
+    border: $color-lightblue--light solid 0.1rem;
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+      background-color: $color-lightblue--light-2;
+      border-radius: 0.5rem;
+      color: $color-grey--meidum;
+      font-size: 1.5rem;
+      padding: 1.6rem 2rem;
+      border-bottom: 0.1rem solid $color-lightblue--light;
+    }
+
+    input {
+      padding: 1.6rem 2rem;
+    }
+  }
+
+  &--table{
+    margin: 1.6rem 1.6rem;
+    border: $color-lightblue--light solid 0.1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h4 {
+    background-color: $color-lightblue--light-2;
+    border-radius: 0.5rem;
+    color: $color-grey--meidum;
+    font-size: 1.5rem;
+    padding: 1.6rem 2rem;
+    border-bottom: 0.1rem solid $color-lightblue--light;
+  }
+
+}
+
+
+.hide {
+  height: 0rem;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 500ms ease, opacity 500ms ease;
 }
