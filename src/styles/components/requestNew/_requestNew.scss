@@ -39,12 +39,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content:flex-start;
 
     .form__row {
       display: flex;
       flex-direction: column;
-      width: 45%;
+      width: auto;
       border: $color-lightblue--light solid 0.1rem;
       border-radius: 0.5rem;
       padding: 0.5rem 1.5rem;
@@ -54,6 +54,8 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        margin: 0rem 1.6rem;
+        width: 100%;
 
         input {
           margin-left: 1rem;
@@ -98,7 +100,7 @@
 .optional-form {
   border: $color-lightblue--light solid 0.1rem;
   border-radius: 0.5rem;
-  margin: 1.6rem 3.8rem;
+  margin: 1.6rem 1.6rem;
 
   h3 {
     background-color: $color-lightblue--light-2;

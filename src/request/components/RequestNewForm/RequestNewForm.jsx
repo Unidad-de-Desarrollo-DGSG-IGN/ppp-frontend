@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons'; // faUpload
 
-import { fetchConToken, fetchFileConToken } from '../../../helpers/fetch';
+import { fetchConToken, fetchFileConToken, fetchSinToken } from '../../../helpers/fetch';
 import UserFormInput from '../../../users/components/UserFormInput/UserFormInput.component';
 import { startFormDataLoadingAntenna } from '../../actions/formData';
 import RequestNewFormOptionalFiles from '../RequestNewFormOptionalFiles/RequestNewFormOptionalFiles';
@@ -13,6 +13,37 @@ import RequestNewFormOptionalFiles from '../RequestNewFormOptionalFiles/RequestN
 import withData from './withData';
 
 const parameters = '';
+
+const antennasList = async( ) => {
+  const res = await fetchSinToken( 'antennas' );
+  const dataJson = await res.json();
+  return dataJson.data.antennas;
+}
+
+const antenna_id = ( antennas, antennaModel ) => {
+  return antennas.find( antenna => antenna.name === antennaModel )?.id;
+}
+
+const antennaHeightType_id = ( antennas, antennaTypeHeight, antennaModel ) => {
+  const antenna = antennas.find( antenna => antenna.name === antennaModel );
+  return antenna.height_types.find( height_type => height_type.name === antennaTypeHeight )?.id;
+}
+
+const movingPointsId = async( movingPoints ) => {
+  const antennas = await antennasList();
+
+  return movingPoints.map( movingPoint => ({
+    // TODO : Desesctrucutrar, para conservar campo id
+    name: movingPoint.name,
+    antennaId:  antenna_id( antennas, movingPoint.antennaModel ),
+    antennaHeightTypeId: antennaHeightType_id( antennas, movingPoint.antennaTypeHeight, movingPoint.antennaModel ),
+    height: movingPoint.antennaHeight,
+    file: movingPoint.file[ 0 ],
+    fileId: uuidv4( ),
+    id: uuidv4( ),
+  }) );
+}
+
 
 const RequestNewForm = ( { forms } ) => {
   const [ hide, setHide ] = useState( true );
@@ -29,53 +60,93 @@ const RequestNewForm = ( { forms } ) => {
   }, [ dispatch ] );
 
   const handleForm = async ( data ) => {
-    console.log( 'Datos del formulario', data );
-    console.log( opcionales );
-    console.log( data[`antennaHeight-opt-${ 1}`]  );
-    console.log( opcionales.map( opc => data[`antennaHeight-opt-${ opc }`] ) );
-
-    const movingPoints = opcionales.map( opc => ({
-      // [`antennaHeight`] : null, // [`antennaHeight-opt-${ opc }`]
-      [`antennaHeight`] : data[`antennaHeight-opt-${ opc }`],
-      [`antennaModel`] : data[`antennaModel-opt-${ opc }`],
-      [`antennaTypeHeight`] : data[`antennaTypeHeight-opt-${ opc }`],
-      [`name`] : data[`name-moving-${ opc }`],
-    }) );
-
-    console.log( 'Moving points: ', movingPoints );
-    // const formData = new FormData( );
-    // formData.append( 'file', data.file[0] );
-    // const id = uuidv4( );
-    // formData.append( 'id', id );
-
-    // const res = await fetchFileConToken( 'files', formData, 'POST' );
-    // const resJson = await res.json( );
-    // console.log( 'Respuesta del archivo enviado: ', resJson );
-
-    // if( resJson.status === 'success' ){
-    //   console.log('Perfecto');
-
-    //   const antenna = antennas.find( antenna => antenna.name === data.antennaModel );
-    //   const height_type = antenna.height_types.find( height_type => height_type.name === data.antennaTypeHeight )?.id;
+    // TODO : Revisar los casos posbiles. Revisar que todo funcione en "sincronia"
+    try{
+      console.log( 'Datos del formulario', data );
       
-    //   const order = {
-    //     id,
-    //     fileId: id,
-    //     name: data.name_base,
-    //     antennaId: antenna.id,
-    //     antennaHeightTypeId: height_type,
-    //     height: data.antennaHeight,
-    //     movingPoints: [], // TODO : Armar funcion que devuelva los moving point armados
-    //   }
+      // Archivo Principal - envio de archivo
+      const formData = new FormData( );
+      formData.append( 'file', data.file[0] );
+      const id = uuidv4( );
+      formData.append( 'id', id );
+  
+      const res = await fetchFileConToken( 'files', formData, 'POST' );
+      const resJson = await res.json( );
+      console.log( 'Respuesta del archivo principal enviado: ', resJson );
+      const isSendFileSuccess = resJson.status;
 
-    //   console.log(order);
-    //   const resOrder = await fetchConToken( 'orders', 
-    //   order, 
-    //   'POST',      
-    //   );
-    //   const resOrderJson = await resOrder.json();
-    //   console.log( resOrderJson );
-    // }
+      // Moving Points - Armado base de movingPoints y envio de archivos
+      // TODO : Generar el ID para el archivo MAIN y luego pasarlo a los moving points. Ver si no hay movingPoints, lista vacia
+      const movingPoints = opcionales.map( opc => ({
+        name : data[`name-moving-${ opc }`],
+        antennaModel : data[`antennaModel-opt-${ opc }`],
+        antennaTypeHeight : data[`antennaTypeHeight-opt-${ opc }`],
+        antennaHeight : data[`antennaHeight-opt-${ opc }`],
+        // TODO : generar ID general?
+        file: data[`file-opt-${ opc }`],
+      }) );
+  
+      console.log( 'Moving points: ', movingPoints );
+  
+      const movingPointsIdList = await movingPointsId( movingPoints );
+      console.log( 'Moivng Points IDs ', movingPointsIdList );
+
+      // TODO : Enviar archivo principal y opcionales
+      // TODO : Si los envios de archivos salen bien, enviar las ordenes con los datos
+
+      movingPointsIdList.forEach( async( movingPoint ) => {
+        // console.log(movingPoint.file);
+        // console.log(movingPoint.fileId);
+
+        // TODO : Hacer funcion de envio de archivo
+        const formData = new FormData( );
+        formData.append( 'file', movingPoint.file );
+        formData.append( 'id', movingPoint.fileId );
+
+        const res = await fetchFileConToken( 'files', formData, 'POST' );
+        const resJson = await res.json( );
+        console.log( 'Respuesta del archivo optativo enviado: ', resJson );
+        // TODO : Pensar como ver el caso en que no se envie correctamente algun archivo. Y no deje realizar las ordenes.
+      });
+
+
+      // Orden Completa
+      if( isSendFileSuccess === 'success' ){
+      //   console.log('Perfecto');
+  
+        const antenna = antennas.find( antenna => antenna.name === data.antennaModel );
+        const height_type = antenna.height_types.find( height_type => height_type.name === data.antennaTypeHeight )?.id;
+        
+        const order = {
+          id,
+          fileId: id,
+          name: data.name_base,
+          antennaId: antenna.id,
+          antennaHeightTypeId: height_type,
+          height: data.antennaHeight,
+          // TODO : // Armar funcion que devuelva la lista de optativos listos
+          movingPoints: movingPointsIdList.map( movingPoint => ({ 
+            id: movingPoint.id,
+            fileId: movingPoint.fileId,
+            name: movingPoint.name,
+            antennaId: movingPoint.antennaId,
+            antennaHeightTypeId: movingPoint.antennaHeightTypeId,
+            height: movingPoint.height,
+          })),
+        }
+  
+        console.log( 'Orden a  enviar: ', order);
+        const resOrder = await fetchConToken( 'orders', 
+        order, 
+        'POST',      
+        );
+        const resOrderJson = await resOrder.json();
+        console.log( resOrderJson );
+      }
+      
+    } catch( err ){
+      console.log( err );
+    }
 
   }
 
@@ -170,24 +241,6 @@ const RequestNewForm = ( { forms } ) => {
           />
         </div>
 
-        <div className='form__row form__row--agree'>
-          <label htmlFor='antennaHeight'>Acepto que los resultados del procesamiento puedan ser utilizados por el IGN para la evaluación de productos y servicios cartográficos y/o geodésicos.</label>
-          <input 
-            type='checkbox'
-            name='agree'
-            ref={ register }
-            errors={ errors }
-            validation={
-              {
-                required: {
-                  value : true,
-                  message : "Aceptar el uso de archivos por parte del IGN es requisito"
-                }
-              }
-            }
-          />
-        </div>
-
         <br/>
 
         <div 
@@ -244,6 +297,31 @@ const RequestNewForm = ( { forms } ) => {
             </div>
           </div>
 
+        </div>
+
+        {/* <hr /> */}
+
+        <div className='form__row form__row--agree'>
+          <label htmlFor='antennaHeight'>Acepto que los resultados del procesamiento puedan ser utilizados por el IGN para la evaluación de productos y servicios cartográficos y/o geodésicos.</label>
+          <input 
+            type='checkbox'
+            name='agree'
+            ref={ register( {
+              required: {
+                value : true,
+                message : "Aceptar el uso de archivos por parte del IGN es requisito"
+              }
+            } ) }
+            errors={ errors }
+            // validation={
+            //   {
+            //     required: {
+            //       value : true,
+            //       message : "Aceptar el uso de archivos por parte del IGN es requisito"
+            //     }
+            //   }
+            // }
+          />
         </div>
 
         <button className='btn' type="submit"> Registrar Solicitud </button>

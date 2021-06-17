@@ -5,8 +5,7 @@ const RequestFooter = ( ) => {
   return (
     
     <div className='request-footer' >
-      IGN 2021
-
+      <h4> República Argentina | Todos los derechos reservados | IGN 2021</h4>
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { startOrdersLoading } from '../../actions/orderFetch';
 import RequestTable from '../../components/RequestTable/RequestTable';
 
 
-// HELPER - TODO : Separar en otro archivo
+// TODO : Separar en otro archivo
 const tableData = ( ordersClient = [ ] ) => {
   return ordersClient.map( orderClient => ({
     order_date: orderClient.date_order,
@@ -14,12 +14,22 @@ const tableData = ( ordersClient = [ ] ) => {
     order_state: orderClient.state_order,
     order_detail: { 
       base : {
-        url_rinex_base: '',
+        url_rinex: orderClient.base_point.url_rinex,
         antenna_height: orderClient.base_point.antenna_height,
         antenna_model: orderClient.base_point.antenna_model,
         antenna_type_height: orderClient.base_point.antenna_type_height,
         base_name: orderClient.base_point.base_name,
       },
+      moving_points:
+        orderClient.mobile_points.map( moving_point => (
+          {
+            url_rinex: moving_point.url_rinex,
+            antenna_height: moving_point.antenna_height,
+            antenna_model: moving_point.antenna_model,
+            antenna_type_height: moving_point.antenna_type_height,
+            base_name: moving_point.base_name,
+          }
+        )),
     },
     order_download: 'download', // TODO : Poner link
   }));

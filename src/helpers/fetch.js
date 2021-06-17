@@ -8,11 +8,12 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
 
   if ( method === 'GET' ) {
     // return fetch( url,{
-    //   'mode': 'cors',
+    //   'mode': 'no-cors',
     //   'headers': {
     //       'Access-Control-Allow-Origin': '*',
     //       // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",//borrar
-    //       // 'Access-Control-Allow-Credentials': true,//borrar
+    //       // "Access-Control-Allow-Headers": "Content-Disposition",//borrar
+    //       'Access-Control-Allow-Credentials': true,//borrar
     //   } } );
     return fetch( url );
   } else {

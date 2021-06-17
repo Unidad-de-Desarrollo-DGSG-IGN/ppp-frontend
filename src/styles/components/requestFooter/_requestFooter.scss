@@ -1,0 +1,16 @@
+
+.request-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 0.1rem solid $color-lightblue--light;
+
+  margin-top: 2.5rem;
+  padding-bottom: 1rem;
+
+  h4 {
+    margin-top: 1.6rem;
+    font-size: 1.2rem;
+  }
+}
