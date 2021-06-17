@@ -13,11 +13,13 @@ const AntennaDetail = ( { base_name, url_rinex, antenna_model, antenna_type_heig
       // })
     fetchFileConToken( `files/${ url }` )
       .then((response) => {
-        console.log( response );
-        for (var pair of response.headers.entries()) {
-          console.log(pair[0]+ ': '+ pair[1]);
-        }
-        console.log( response.headers.get('Content-Disposition') );
+        // console.log( response );
+        // for (var pair of response.headers.entries()) {
+        //   console.log(pair[0]+ ': '+ pair[1]);
+        // }
+        console.log( 'Content Header File', response.headers.get('Content-Disposition') );
+        console.log( 'Content Header File array', response.headers.get('Content-Disposition').split('=')[ 1 ] );
+        console.log( 'Content Header File array', response.headers.get('Content-Disposition').replaceAll( '"', '' ).split('=')[ 1 ] );
         // response.json().then( res => console.log(res) )
 
         response.blob().then(blob => {
@@ -25,7 +27,7 @@ const AntennaDetail = ( { base_name, url_rinex, antenna_model, antenna_type_heig
           let url = window.URL.createObjectURL(blob);
           let a = document.createElement('a');
           a.href = url;
-          // a.download = 'employees';
+          a.download = response.headers.get('Content-Disposition').replaceAll( '"', '' ).split('=')[ 1 ];
           a.click();
           console.log(a );
         })
