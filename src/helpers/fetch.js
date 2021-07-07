@@ -1,5 +1,6 @@
 // const baseUrl = process.env.REACT_APP_API_URL;
-const baseUrl = "http://172.20.201.39/ppp-test";
+// const baseUrl = "http://172.20.201.39/ppp-test";
+const baseUrl = "http://melpomenia.linkpc.net/ppp";
 
 
 const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
@@ -11,9 +12,9 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
     //   'mode': 'no-cors',
     //   'headers': {
     //       'Access-Control-Allow-Origin': '*',
-    //       // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",//borrar
-    //       // "Access-Control-Allow-Headers": "Content-Disposition",//borrar
-    //       'Access-Control-Allow-Credentials': true,//borrar
+    //       // // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",//borrar
+    //       // // "Access-Control-Allow-Headers": "Content-Disposition",//borrar
+    //       // 'Access-Control-Allow-Credentials': true,//borrar
     //   } } );
     return fetch( url );
   } else {
