@@ -20,7 +20,7 @@ const PublicRoute = ({
   )
 }
 
-export default PublicRoute
+export default PublicRoute;
 
 PublicRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,

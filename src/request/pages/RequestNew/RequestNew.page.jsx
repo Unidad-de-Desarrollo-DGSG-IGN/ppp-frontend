@@ -1,7 +1,9 @@
 import React from 'react';
+
 import RequestNewForm from '../../components/RequestNewForm/RequestNewForm';
 
 const RequestNew = ( ) => {
+  console.log( '<RequestNew.js>/<RequestNew>: RequestNew' );
   return (
     <div className='request-new' >
       <div className='request-new__header' >
@@ -16,4 +18,4 @@ const RequestNew = ( ) => {
   )
 }
 
-export default RequestNew
+export default RequestNew;

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 // import UserFormInput from '../../../users/components/UserFormInput/UserFormInput.component';
 
+// TODO : Manejar los errores locales de los inputs
 const RowOptionalFiles = ( { opcional, setOpcionales, register, errors, antennas, watch } ) => {
   return (
     <tr>

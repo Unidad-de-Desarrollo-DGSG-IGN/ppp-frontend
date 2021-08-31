@@ -84,21 +84,19 @@ const UserFormRegister = ( ) => {
 
   const handleForm = async ( dataForm ) => {
     setButtonSumitDisable( true );
-    console.log( 'true' );
     const data = {
       ...dataForm,
       uuid : uuidv4( ),
     };
     
-    console.log( data ); // TODO: Borrar
+    console.log( 'data del formulario: ', data ); // TODO: Borrar
     
     if ( data.password !== data.repassword ) {
-      return console.log( 'Las contraseñas deben de ser iguales' );
+      return console.log( 'Las contraseñas deben de ser iguales' ); // TODO: Manejar el estado en este caso
     }
     
-    await dispatch( startRegister( data.email, data.password, data.name, data.surname ) );
+    await dispatch( startRegister( data.email, data.password, data.name, data.surname, data.uuid ) );
     setButtonSumitDisable( false );
-    console.log( 'false' );
   }
   
   return (

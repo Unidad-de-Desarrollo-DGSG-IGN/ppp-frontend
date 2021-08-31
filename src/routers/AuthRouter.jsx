@@ -6,6 +6,8 @@ import UserRecoverPassword from '../users/pages/UserRecoverPassword/UserRecoverP
 import UserRegister from '../users/pages/UserRegister/UserRegister.page';
 
 const AuthRouter = ( ) => {
+  // console.log( '<AuthRouter.js>/<AuthRouter>: AuthRouter' );
+
   return (
     <div className='auth' >
       <Switch>
@@ -28,4 +30,4 @@ const AuthRouter = ( ) => {
   )
 }
 
-export default AuthRouter
+export default AuthRouter;

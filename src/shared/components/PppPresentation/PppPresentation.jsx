@@ -1,6 +1,6 @@
 import React from 'react';
 
-import image_logo from './../../../images/logo.png';
+import image_logo from './../../../shared/images/logo.png';
 
 const PppPresentation = ( ) => {
   return (

@@ -5,6 +5,7 @@ import UserFormRegister from '../../components/UserFormRegister/UserFormRegister
 import UserNavigation from '../../components/UserNavigation/UserNavigation.component';
 
 const UserRegister = ( ) => {
+  console.log( '<UserRegister.page.js>/<UserRegister>: UserRegister' );
   return (
     <div className='form' >
       <PppPresentation />

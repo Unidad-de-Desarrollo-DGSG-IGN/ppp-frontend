@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+// TODO : Mejorar el estilo del componente.
 const UserInfo = ( ) => {
+  console.log( '<UserInfo.js>/<UserInfo>: UserInfo' );
 
-  const { firstname, lastname, email } = useSelector(state => state.auth)
+  const { firstname, lastname, username } = useSelector( state => state.auth.data );
 
   return (
     <div className='requests' >
@@ -24,7 +26,7 @@ const UserInfo = ( ) => {
             <p>Apellido: { lastname } </p>
           </div>
           <div>
-            <p>Email: { email } </p>
+            <p>Email: { username } </p>
           </div>
         </div>
       </div>

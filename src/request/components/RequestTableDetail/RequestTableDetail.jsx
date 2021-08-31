@@ -5,14 +5,12 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import RequestPopupDetail from '../RequestPopupDetail/RequestPopupDetail';
 
 const RequestTableDetail = ( { data } ) => {
+  const [ isOpen, setIsOpen ] = useState( false );
 
-  const [isOpen, setIsOpen] = useState( false );
-
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
+  const togglePopup = ( ) => {
+    setIsOpen( !isOpen );
   };
-
-  console.log( 'data cell:', data );
+  // console.log( 'data cell:', data );
 
   return (
     <div>

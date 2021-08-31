@@ -5,6 +5,7 @@ import UserNavigation from '../../components/UserNavigation/UserNavigation.compo
 import PppPresentation from '../../../shared/components/PppPresentation/PppPresentation';
 
 const UserLogin = ( ) => {
+  console.log( '<UserLogin.page.js>/<UserLogin>: UserLogin' );
 
   return (
     <div className='form' >

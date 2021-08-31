@@ -531,6 +531,290 @@ La aplicacion esta lista para desplegarla.
 * Descripción detallada de los componentes (si se conecta con una API, indicar endpoint, parámetros del request y parámetros de response)
 
 ---
+---
+
+## Testeo de Usabilidad
+
+* Se testea la aplicacion web y se recogen los puntos a corregir y mejorar
+* Se evaluara cada punto en: (Hacer link de cada pagina)
+  * Diseño visual
+  * Faltas ortograficas
+  * Contenido
+  * Experiencia de usuario
+* Se debe testear por:
+  * Grupo interno de desarrollo
+  * Grupo del Area del proyecto
+  * Posibles usuario
+  * Publico general
+
+---
+
+### Evaluacion General
+
+
+##### Diseño visual
+
+* [ ] Tiene que ser Responsive Design
+* [ ] Probar en distintos Navegadores
+
+##### Ortografia
+
+* [ ] Revisar toda ortografia del contenido
+
+##### Contenido
+
+* [ ] Falta tooltips para mas informacion para el usuario
+
+##### Experiencia de Usuario
+
+* [ ] Falta devolucion al usuario ante determindas acciones
+* [ ] Falta algunas animaciones para transiciones de las distintas acciones que realiza el usuario y la aplicacion web.
+
+##### Funcionalidad
+
+* [ ]
+
+
+### Bienvenida
+
+---
+
+#### Login
+
+<img src='./img_readme/bienvenida_login.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 
+
+##### Funcionalidad
+
+* [ ] Falta desarrollar la funcionanlidad del boton 'Recordarme'.
+
+---
+
+#### Registro de Usuario
+
+<img src='./img_readme/bienvenida_registro.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 
+
+---
+
+#### Recuperar contraseña
+
+<img src='./img_readme/bienvenida_recuperarContrasena.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 
 
 
 
+### Espacio de trabajo
+
+---
+
+#### Menu de navegacion
+
+<img src='./img_readme/trabajo_menuNavegacion.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 
+
+---
+
+#### Menu de Usuario
+
+<img src='./img_readme/trabajo_menuUsuario.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 
+
+---
+
+#### Listado de Ordenes
+
+<img src='./img_readme/trabajo_ordenes.png' >
+
+##### Diseño visual
+
+* [ ] La tabla de ordenes tiene que ser Responsive Design
+* [ ] Mejorar la parte visual de que Modo estan ordenados los items
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] El estado debe de mostrar una devolucion mas amigable con el usuario.
+* [ ] Tarda en cargarse inicialmente todas las ordenes
+
+##### Funcionalidad
+
+* [ ] No funciona correctamente los botones de **Anterior** y **Siguiente**.
+* [ ] No se ordena correctamente las fechas
+
+---
+
+#### Detalle de Orden
+
+<img src='./img_readme/trabajo_ordenDetalle.png' >
+
+##### Diseño visual
+
+* [ ] El boton de descarga de los archivos tiene que estar acomodado y tener un tamaño coherente con su contexto.
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] Si son archivos pesados a descargar, el pop-up tarda en abrirse.
+* [ ] 
+
+##### Funcionalidad
+
+* [ ] 
+
+
+---
+
+#### Crear ordenenes
+
+<img src='./img_readme/trabajo_ordenNuevaTitulo.png' >
+<img src='./img_readme/trabajo_ordenNueva.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 
+
+---
+
+#### Informacion del Usario
+
+<img src='./img_readme/trabajo_usuarioInfo.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 
+
+---
+
+#### Pie de Pagina
+
+<img src='./img_readme/trabajo_footer.png' >
+
+##### Diseño visual
+
+* [ ] 
+
+##### Ortografia
+
+* [ ] 
+
+##### Contenido
+
+* [ ] 
+
+##### Experiencia de Usuario
+
+* [ ] 

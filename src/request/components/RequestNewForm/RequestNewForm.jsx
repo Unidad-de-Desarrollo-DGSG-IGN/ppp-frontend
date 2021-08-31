@@ -5,32 +5,73 @@ import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons'; // faUpload
 
-import { fetchConToken, fetchFileConToken, fetchSinToken } from '../../../helpers/fetch';
+import { fetchConToken, fetchFileConToken, fetchSinToken } from '../../../shared/helpers/fetch';
 import UserFormInput from '../../../users/components/UserFormInput/UserFormInput.component';
 import { startFormDataLoadingAntenna } from '../../actions/formData';
 import RequestNewFormOptionalFiles from '../RequestNewFormOptionalFiles/RequestNewFormOptionalFiles';
 
 import withData from './withData';
+import { startSendNewOrder } from '../../actions/newOrder';
 
-const parameters = '';
+const parameters = ''; // Parametros que pueden servir para la composicion de componentes
 
+
+// HELPERS
+// TODO : Separar funciones en otro archivo para poder reutilizarlas
+// TODO : Revisar las funciones en caso que sucedan errores
+// TODO : Hacer test de las funciones
+
+/**
+ * Funcion que se encarga de traer el listado de antennas y su respectiva informacion.
+ * No recibe parametros.
+ * Devuelve El listano de antennas. 
+ * TODO : Atajar el caso en donde no se pueda solicitar las antennas. Manejar los errores.
+ * @returns {object[]} antennas
+ */
 const antennasList = async( ) => {
+  // TODO : Tomar info de antennas desde el STORE
   const res = await fetchSinToken( 'antennas' );
-  const dataJson = await res.json();
+  const dataJson = await res.json( );
   return dataJson.data.antennas;
 }
 
+/**
+ * Funcion que devuelve el ID de la antenna.
+ * Recibe el listado de las antennas, y el modelo de la antenna.
+ * Devuelve el correspondiente ID de la antenna.
+ * TODO : Manejar errores. Que hacer si no se encuentra el id
+ * @param {object[]} antennas 
+ * @param {string} antennaModel 
+ * @returns {string} id
+ */
 const antenna_id = ( antennas, antennaModel ) => {
   return antennas.find( antenna => antenna.name === antennaModel )?.id;
 }
 
+/**
+ * Funcion que devuelve el correspondiente ID del HeightType de una antenna.
+ * Recibe un listado de antennas, el modelo del TypeHeight de la antenna y el modelo de la antenna.
+ * Devuelve el ID del HeightType de la antenna.
+ * TODO : Manejar en caso de error.
+ * @param {object[]} antennas 
+ * @param {string} antennaTypeHeight 
+ * @param {string} antennaModel 
+ * @returns 
+ */
 const antennaHeightType_id = ( antennas, antennaTypeHeight, antennaModel ) => {
   const antenna = antennas.find( antenna => antenna.name === antennaModel );
   return antenna.height_types.find( height_type => height_type.name === antennaTypeHeight )?.id;
 }
 
+/**
+ * Funcion que procesa los movingPoints añadiendole informacion extra.
+ * Recibe los movingPoints
+ * Devuelve los movingPoints procesados.
+ * @param {object[]} movingPoints 
+ * @returns {object[]} movingPoints estructurado de una nueva forma
+ */
 const movingPointsId = async( movingPoints ) => {
-  const antennas = await antennasList();
+  const antennas = await antennasList( );
 
   return movingPoints.map( movingPoint => ({
     // TODO : Desesctrucutrar, para conservar campo id
@@ -46,113 +87,26 @@ const movingPointsId = async( movingPoints ) => {
 
 
 const RequestNewForm = ( { forms } ) => {
-  const [ hide, setHide ] = useState( true );
-
   const { handleSubmit, register, errors, watch } = useForm( );
+
+  const [ hide, setHide ] = useState( true );
+  let contadorValorInicial = 1;
+  const [contador, setContador] = useState( contadorValorInicial );
+  const [opcionales, setOpcionales] = useState( [ ] );
+  
+
+  // TODO : Perteneciente a la accion de o<enviar orden nueva
   const { antennas } = useSelector( state => state.formsData );
-  const dispatch = useDispatch();
-
-  const [opcionales, setOpcionales] = useState([]);
-  const [contador, setContador] = useState(1);
-
-  useEffect( ( ) => {
-    dispatch( startFormDataLoadingAntenna( ) );
-  }, [ dispatch ] );
+  const dispatch = useDispatch( );
+  
+  // TODO : No depender de la carga de antennas del estado?
+  // useEffect( ( ) => {
+  //   dispatch( startFormDataLoadingAntenna( ) );
+  // }, [ dispatch ] );
 
   const handleForm = async ( data ) => {
-    // TODO : Revisar los casos posbiles. Revisar que todo funcione en "sincronia"
-    try{
-      console.log( 'Datos del formulario', data );
-      
-      // Archivo Principal - envio de archivo
-      const formData = new FormData( );
-      formData.append( 'file', data.file[0] );
-      const id = uuidv4( );
-      formData.append( 'id', id );
-  
-      const res = await fetchFileConToken( 'files', formData, 'POST' );
-      const resJson = await res.json( );
-      console.log( 'Respuesta del archivo principal enviado: ', resJson );
-      const isSendFileSuccess = resJson.status;
-
-      // Moving Points - Armado base de movingPoints y envio de archivos
-      // TODO : Generar el ID para el archivo MAIN y luego pasarlo a los moving points. Ver si no hay movingPoints, lista vacia
-      const movingPoints = opcionales.map( opc => ({
-        name : data[`name-moving-${ opc }`],
-        antennaModel : data[`antennaModel-opt-${ opc }`],
-        antennaTypeHeight : data[`antennaTypeHeight-opt-${ opc }`],
-        antennaHeight : data[`antennaHeight-opt-${ opc }`],
-        // TODO : generar ID general?
-        file: data[`file-opt-${ opc }`],
-      }) );
-  
-      console.log( 'Moving points: ', movingPoints );
-  
-      const movingPointsIdList = await movingPointsId( movingPoints );
-      console.log( 'Moivng Points IDs ', movingPointsIdList );
-
-      // TODO : Enviar archivo principal y opcionales
-      // TODO : Si los envios de archivos salen bien, enviar las ordenes con los datos
-
-      movingPointsIdList.forEach( async( movingPoint ) => {
-        // console.log(movingPoint.file);
-        // console.log(movingPoint.fileId);
-
-        // TODO : Hacer funcion de envio de archivo
-        const formData = new FormData( );
-        formData.append( 'file', movingPoint.file );
-        formData.append( 'id', movingPoint.fileId );
-
-        const res = await fetchFileConToken( 'files', formData, 'POST' );
-        const resJson = await res.json( );
-        console.log( 'Respuesta del archivo optativo enviado: ', resJson );
-        // TODO : Pensar como ver el caso en que no se envie correctamente algun archivo. Y no deje realizar las ordenes.
-      });
-
-
-      // Orden Completa
-      if( isSendFileSuccess === 'success' ){
-      //   console.log('Perfecto');
-  
-        const antenna = antennas.find( antenna => antenna.name === data.antennaModel );
-        const height_type = antenna.height_types.find( height_type => height_type.name === data.antennaTypeHeight )?.id;
-        
-        const order = {
-          id,
-          fileId: id,
-          name: data.name_base,
-          antennaId: antenna.id,
-          antennaHeightTypeId: height_type,
-          height: data.antennaHeight,
-          // TODO : // Armar funcion que devuelva la lista de optativos listos
-          movingPoints: movingPointsIdList.map( movingPoint => ({ 
-            id: movingPoint.id,
-            fileId: movingPoint.fileId,
-            name: movingPoint.name,
-            antennaId: movingPoint.antennaId,
-            antennaHeightTypeId: movingPoint.antennaHeightTypeId,
-            height: movingPoint.height,
-          })),
-        }
-  
-        console.log( 'Orden a  enviar: ', order);
-        const resOrder = await fetchConToken( 'orders', 
-        order, 
-        'POST',      
-        );
-        const resOrderJson = await resOrder.json();
-        console.log( resOrderJson );
-      }
-      
-    } catch( err ){
-      console.log( err );
-    }
-
+    dispatch( startSendNewOrder( data, opcionales ) );
   }
-
-  // console.log( antennas );
-  // console.log( watch("antennaModel") );
-  // console.log( antennas.find( antenna => antenna.name === watch("antennaModel") )?.height_types );
 
   return (
     <div className='request-new__form' >
@@ -198,7 +152,6 @@ const RequestNewForm = ( { forms } ) => {
             }
           </select>
         </div>
-
 
         <div className='form__row'>
           <label htmlFor='antennaTypeHeight'>Tipo de altura de antena</label>

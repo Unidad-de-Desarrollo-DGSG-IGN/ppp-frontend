@@ -4,26 +4,22 @@ import { useDispatch } from 'react-redux';
 
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 import withData from './withData';
-// import './UserFormLogin.style.css';
-import { startLoadingUserInfo, startLogin } from '../../actions/auth';
+import { startLogin } from '../../actions/auth';
 
 const parameters = null;
 
 const UserFormLogin = ( { forms } ) => {
-  const dispatch = useDispatch();
-  // const { uid } = useSelector( state => state.auth );
+  const dispatch = useDispatch( );
+  // TODO : usar el estado del Login para deshabilitar o no el boton de Login.
+  // const { loading } = useSelector( state => state.auth.loading );
 
   const { register, handleSubmit, errors } = useForm( );
   const [ buttonSumitDisable ] = useState( false );
 
-  const handleForm = async( { email, password } ) => {
-    // setButtonSumitDisable( true );
-    await dispatch( startLogin( email, password ) );
-    // setButtonSumitDisable( false ); // TODO : Revisar tema de optimizacion
-    // TODO : Aca pedir las antenas - O en un useEffect?
-    // dispatch( startFormDataLoadingAntenna( ) );
+  const handleForm = ( { email, password } ) => {
+    // TODO : Anclar que si se esta cargando, esta en modo Proceso, y no se puede realizar una operacion/accion como logout
 
-    dispatch( startLoadingUserInfo( ) ); 
+    dispatch( startLogin( email, password ) );
   }
 
   return (

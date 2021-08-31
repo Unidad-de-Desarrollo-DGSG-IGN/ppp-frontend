@@ -1,4 +1,5 @@
 import React from 'react';
+
 import RowOptionalFiles from '../RowOptionalFiles/RowOptionalFiles';
 
 const RequestNewFormOptionalFiles = ( { setOpcionales, opcionales, register, errors, antennas, watch } ) => {
@@ -42,10 +43,7 @@ const RequestNewFormOptionalFiles = ( { setOpcionales, opcionales, register, err
         }
       </thead>
       <tbody>
-
       </tbody>
-
-
     </table>
   )
 }

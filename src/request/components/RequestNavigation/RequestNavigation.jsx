@@ -3,11 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTable, faList } from '@fortawesome/free-solid-svg-icons';
 
-
-import image_logo from './../../../images/logo.png';
+import image_logo from './../../../shared/images/logo.png';
 
 const RequestNavigation = ( ) => {
-
   return (
     <div className='nav--request'>
 

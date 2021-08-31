@@ -5,6 +5,7 @@ import UserFormRecoverPass from '../../components/UserFormRecoverPass/UserFormRe
 import UserNavigation from '../../components/UserNavigation/UserNavigation.component';
 
 const UserRecoverPassword = ( ) => {
+  console.log( '<UserRecoverPassword.page.js>/<UserRecoverPassword>: UserRecoverPassword' );
   return (
     <div className='form'>
       <PppPresentation />
