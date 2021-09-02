@@ -556,6 +556,7 @@ La aplicacion esta lista para desplegarla.
 
 * [ ] Tiene que ser Responsive Design
 * [ ] Probar en distintos Navegadores
+* [ ] Cambiar favicon de la aplicación por logo de IGN
 
 ##### Ortografia
 
@@ -597,7 +598,7 @@ La aplicacion esta lista para desplegarla.
 
 ##### Experiencia de Usuario
 
-* [ ] 
+* [ Indicar al usuario si existe error en login (por ejemplo: al poner mal el email y la contraseña) ] 
 
 ##### Funcionalidad
 
@@ -705,6 +706,8 @@ La aplicacion esta lista para desplegarla.
 
 * [ ] La tabla de ordenes tiene que ser Responsive Design
 * [ ] Mejorar la parte visual de que Modo estan ordenados los items
+* [ ] Quitar el campo de filtro de búsqueda principal (el de arriba de todo a la izquierda)
+* [ ] Quitar el campo de texto donde permite ingresar el número de página al que se desea ir
 
 ##### Ortografia
 
@@ -716,8 +719,11 @@ La aplicacion esta lista para desplegarla.
 
 ##### Experiencia de Usuario
 
-* [ ] El estado debe de mostrar una devolucion mas amigable con el usuario.
+* [ ] El estado debe de mostrar una devolucion mas amigable con el usuario
 * [ ] Tarda en cargarse inicialmente todas las ordenes
+* [ ] El filtro de búsqueda por fecha debería proponer un calendario
+* [ ] El filtro de búsqueda por estado debería proponer un combo con los estados posibles
+* [ ] Modificar el título de la columna "Descarga" por "Informe"
 
 ##### Funcionalidad
 
@@ -773,7 +779,8 @@ La aplicacion esta lista para desplegarla.
 
 ##### Experiencia de Usuario
 
-* [ ] 
+* [ ] Permitir subir solo archivos con las extensiones correctas (*.Z, *.??d, *.??o)
+* [ ] Controlar que el peso del archivo que se intenta subir no supere un máximo
 
 ---
 
