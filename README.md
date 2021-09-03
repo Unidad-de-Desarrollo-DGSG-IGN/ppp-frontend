@@ -586,7 +586,7 @@ La aplicacion esta lista para desplegarla.
 
 ##### Diseño visual
 
-* [ ] 
+* [ ]
 
 ##### Ortografia
 
@@ -598,7 +598,9 @@ La aplicacion esta lista para desplegarla.
 
 ##### Experiencia de Usuario
 
-* [ Indicar al usuario si existe error en login (por ejemplo: al poner mal el email y la contraseña) ] 
+* [ ] Indicar al usuario si existe error en login (por ejemplo: al poner mal el email y la contraseña)
+* [ ] Hacer mas grande el interlineado entre las opciones "¿Olvidó su contraseña?" y "Crear una cuenta"
+<img src='./img_readme/bienvenida_links_acciones.png' >
 
 ##### Funcionalidad
 
