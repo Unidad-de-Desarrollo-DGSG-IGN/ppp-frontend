@@ -35,6 +35,10 @@ export const types = {
   sendOrder_error: '[new order] send new order error',
   sendOrder_logout: '[new order] send new order logout',
 
+  sendRegister: '[register] start send register form',
+  sendRegister_success: '[register]',
+  sendRegister_error: '[register]',
+
   // PROCESSING some Action
   // TODO : Pensar en hacer una accion que modifique el estado de la apliacion entera para que no haya conflicto entre acciones.
 }

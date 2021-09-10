@@ -1,7 +1,9 @@
 // const baseUrl = process.env.REACT_APP_API_URL;
+import { config } from './../../config';
 
 // const baseUrl = "http://172.20.201.39/ppp-test";
-const baseUrl = "http://melpomenia.linkpc.net/ppp";
+// const baseUrl = "http://melpomenia.linkpc.net/ppp";
+const baseUrl = config.host;
 
 
 const fetchSinToken = ( endpoint, data, method = 'GET' ) => {

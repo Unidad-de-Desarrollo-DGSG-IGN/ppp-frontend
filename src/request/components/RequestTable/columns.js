@@ -34,7 +34,7 @@ export const COLUMNS = [
     Cell: ( { cell: { value } } ) => <RequestTableDetail data={ value } />
   },
   {
-    Header: 'Descarga',
+    Header: 'Informe',
     accessor: 'order_download',
     disableFilters: true,
     Filter: ColumnFilter,

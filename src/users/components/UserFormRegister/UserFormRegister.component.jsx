@@ -82,6 +82,7 @@ const UserFormRegister = ( ) => {
     },
   ]
 
+  // TODO : Que esta accion esta bajo el control de Redux
   const handleForm = async ( dataForm ) => {
     setButtonSumitDisable( true );
     const data = {

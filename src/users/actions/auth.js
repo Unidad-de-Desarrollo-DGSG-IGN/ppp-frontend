@@ -164,6 +164,7 @@ export const startLogout = ( ) => {
 // }
 
 
+// Mover a otro lado. 
 export const startRegister = ( email, password, name, surname, uuid ) => {
   return async( dispatch ) => {
     try{

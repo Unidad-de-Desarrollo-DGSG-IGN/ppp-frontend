@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import UserLogin from '../users/pages/UserLogin/UserLogin.page';
 import UserRecoverPassword from '../users/pages/UserRecoverPassword/UserRecoverPassword.page';
 import UserRegister from '../users/pages/UserRegister/UserRegister.page';
+import UserVerification from '../users/pages/UserVerification/UserVerification';
 
 const AuthRouter = ( ) => {
   // console.log( '<AuthRouter.js>/<AuthRouter>: AuthRouter' );
@@ -21,6 +22,10 @@ const AuthRouter = ( ) => {
 
         <Route exact path='/auth/recoverPassword'>
           <UserRecoverPassword />
+        </Route>
+
+        <Route path='/auth/verification/:code'>
+          <UserVerification />
         </Route>
 
         <Redirect to='/auth/login' />
