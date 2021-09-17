@@ -1,4 +1,4 @@
-import { fetchConToken, fetchSinToken } from '../../shared/helpers/fetch';
+import { fetchConToken } from '../../shared/helpers/fetch';
 import { types } from '../../shared/types/types';
 
 
@@ -12,6 +12,21 @@ const antenna_model = ( antennas, antennaId ) => {
   return antennas.find( antenna => antenna.id === antennaId ).name ;
 };
 
+const stateOrder = ( status ) => {
+  switch ( status ) {
+    case 'PROCESSING':
+      return 'Procesando';
+
+    case 'CANCELLED':
+      return 'Cancelado';
+
+    case 'FINISHED':
+      return 'Terminado';
+  
+    default:
+      return 'Procesando';
+  }
+};
 
 const typeHeight = ( antennas, antennaId, antennaHeightTypeId ) => {
   const antenna_order = antennas.find( antenna => antenna.id === antennaId );
@@ -121,7 +136,7 @@ export const startOrdersLoading = ( ) => {
 
       const orders =  await resOrders.data.orders.map( async( order ) => ({
         date_order: order.creationDate,
-        state_order: order.status,
+        state_order: stateOrder( order.status ),
         base_point :{
           url_rinex: order.fileId,
           base_name: order.name,

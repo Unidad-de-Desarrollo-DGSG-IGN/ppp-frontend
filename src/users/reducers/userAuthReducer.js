@@ -45,6 +45,14 @@ export const userAuthReducer = ( state = initialState, action ) => {
           data: {},
           checking: false, // Borrar en algun momento
       }
+
+      case types.auth_login_clean:
+        return {
+          checking: false,
+          loading: false, // Analizar si conviene
+          error: null,
+          data: {},
+        };
     // FIN - Nuevos Casos para Login ----------------------
 
     case types.authLogin:

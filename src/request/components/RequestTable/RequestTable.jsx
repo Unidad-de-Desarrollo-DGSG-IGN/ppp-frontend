@@ -52,7 +52,7 @@ const RequestTable = ( { data } ) => {
             </select>
             <span> registros</span>
           </span>
-          <GlobalFilter filter={ globalFilter } setFilter={ setGlobalFilter } />
+          {/* <GlobalFilter filter={ globalFilter } setFilter={ setGlobalFilter } /> */}
         </div>
 
         <table { ...getTableProps( ) }>
@@ -117,8 +117,8 @@ const RequestTable = ( { data } ) => {
           </span>
 
           <button onClick={ ( ) => gotoPage( 0 ) } disabled={ !canPreviousPage } >{ '<<' }</button>
-          <button onClick={ ( ) => nextPage( ) } disabled={ !canPreviousPage } >Anterior</button>
-          <button onClick={ ( ) => previousPage( ) } disabled={ !canNextPage } >Siguiente</button>
+          <button onClick={ ( ) => previousPage( ) } disabled={ !canPreviousPage } >Anterior</button>
+          <button onClick={ ( ) => nextPage( )} disabled={ !canNextPage } >Siguiente</button>
           <button onClick={ ( ) => gotoPage( pageCount - 1 ) } disabled={ !canNextPage } >{ '>>' }</button>
         </div>
       </div>

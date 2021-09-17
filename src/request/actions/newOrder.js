@@ -26,6 +26,11 @@ export const newOrderLogout = ( ) => ({
 });
 
 
+export const sendNewOrderClean = ( ) => ({
+  type: types.sendOrder_clean,
+});
+
+
 export const startSendNewOrder = ( data, opcionales ) => {
   // TODO : Hacer acciones con THUNK
   return async( dispatch, getState ) => {
@@ -112,17 +117,46 @@ export const startSendNewOrder = ( data, opcionales ) => {
         // console.log( '<RequestNewForm.jsx>/<handleForm> : Orden a  enviar: ', order );
         const resOrder = await fetchConToken( 'orders', username, order, 'POST' ); // TODO : Falta enviar username
         const resOrderJson = await resOrder.json( );
+        console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrder );
         console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrderJson );
         // TODO: manejar la respuesta de las ordenes
+        // Verificar respuesta
+        // if( resOrderJson?.status === 'success' ){
+        if( resOrder.status === 201 || resOrderJson?.status === 'success' ){
+          let msgSuccess = 'Orden enviada';
+          dispatch( sendNewOrderSuccess( msgSuccess ) );
+
+          setTimeout( ( ) => {
+            dispatch( sendNewOrderClean( ) )
+          },
+            3000
+          );
+        }else{
+          let msgError = 'Error al crear una nueva orden';
+          dispatch( sendNewOrderError( msgError ) );
+
+          setTimeout( ( ) => {
+            dispatch( sendNewOrderClean( ) )
+          },
+            3000
+          );
+        }
 
         // TODO : Repensar que poner en payload para la orden enviada.
-        dispatch( sendNewOrderSuccess( 'Orden enviada' ) );
+        // dispatch( sendNewOrderSuccess( 'Orden enviada' ) );
       }
       
     } catch( err ){
       console.log( '<newOrder.js>/<startSendNewOrder> : Error al enviar ordenes: ', err );
       // TODO : Manejar errores con Redux
-      dispatch( sendNewOrderError( err ) );
+      let msgError = 'Error al crear una nueva orden';
+      dispatch( sendNewOrderError( msgError ) );
+
+      setTimeout( ( ) => {
+        dispatch( sendNewOrderClean( ) )
+      },
+        3000
+      );
     }
   }
 }

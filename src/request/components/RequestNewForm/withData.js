@@ -18,6 +18,10 @@ const withData = ( parameters ) => ( Component ) => {
       placeholder: 'Nombre de la Base',
       name: "name_base",
       validation: {
+        required: {
+          value: true,
+          message: "Nombre de la base es requisito"
+        },
         minLength: {
           value: 4,
           message: "Nombre base corta"

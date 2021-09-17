@@ -1,108 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons'; // faUpload
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faPlus } from '@fortawesome/free-solid-svg-icons'; // faUpload
 
-import { fetchConToken, fetchFileConToken, fetchSinToken } from '../../../shared/helpers/fetch';
 import UserFormInput from '../../../users/components/UserFormInput/UserFormInput.component';
-import { startFormDataLoadingAntenna } from '../../actions/formData';
-import RequestNewFormOptionalFiles from '../RequestNewFormOptionalFiles/RequestNewFormOptionalFiles';
+// import RequestNewFormOptionalFiles from '../RequestNewFormOptionalFiles/RequestNewFormOptionalFiles';
 
 import withData from './withData';
 import { startSendNewOrder } from '../../actions/newOrder';
+import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
+import { startFormDataLoadingAntenna } from '../../actions/formData';
 
 const parameters = ''; // Parametros que pueden servir para la composicion de componentes
-
-
-// HELPERS
-// TODO : Separar funciones en otro archivo para poder reutilizarlas
-// TODO : Revisar las funciones en caso que sucedan errores
-// TODO : Hacer test de las funciones
-
-/**
- * Funcion que se encarga de traer el listado de antennas y su respectiva informacion.
- * No recibe parametros.
- * Devuelve El listano de antennas. 
- * TODO : Atajar el caso en donde no se pueda solicitar las antennas. Manejar los errores.
- * @returns {object[]} antennas
- */
-const antennasList = async( ) => {
-  // TODO : Tomar info de antennas desde el STORE
-  const res = await fetchSinToken( 'antennas' );
-  const dataJson = await res.json( );
-  return dataJson.data.antennas;
-}
-
-/**
- * Funcion que devuelve el ID de la antenna.
- * Recibe el listado de las antennas, y el modelo de la antenna.
- * Devuelve el correspondiente ID de la antenna.
- * TODO : Manejar errores. Que hacer si no se encuentra el id
- * @param {object[]} antennas 
- * @param {string} antennaModel 
- * @returns {string} id
- */
-const antenna_id = ( antennas, antennaModel ) => {
-  return antennas.find( antenna => antenna.name === antennaModel )?.id;
-}
-
-/**
- * Funcion que devuelve el correspondiente ID del HeightType de una antenna.
- * Recibe un listado de antennas, el modelo del TypeHeight de la antenna y el modelo de la antenna.
- * Devuelve el ID del HeightType de la antenna.
- * TODO : Manejar en caso de error.
- * @param {object[]} antennas 
- * @param {string} antennaTypeHeight 
- * @param {string} antennaModel 
- * @returns 
- */
-const antennaHeightType_id = ( antennas, antennaTypeHeight, antennaModel ) => {
-  const antenna = antennas.find( antenna => antenna.name === antennaModel );
-  return antenna.height_types.find( height_type => height_type.name === antennaTypeHeight )?.id;
-}
-
-/**
- * Funcion que procesa los movingPoints añadiendole informacion extra.
- * Recibe los movingPoints
- * Devuelve los movingPoints procesados.
- * @param {object[]} movingPoints 
- * @returns {object[]} movingPoints estructurado de una nueva forma
- */
-const movingPointsId = async( movingPoints ) => {
-  const antennas = await antennasList( );
-
-  return movingPoints.map( movingPoint => ({
-    // TODO : Desesctrucutrar, para conservar campo id
-    name: movingPoint.name,
-    antennaId:  antenna_id( antennas, movingPoint.antennaModel ),
-    antennaHeightTypeId: antennaHeightType_id( antennas, movingPoint.antennaTypeHeight, movingPoint.antennaModel ),
-    height: movingPoint.antennaHeight,
-    file: movingPoint.file[ 0 ],
-    fileId: uuidv4( ),
-    id: uuidv4( ),
-  }) );
-}
 
 
 const RequestNewForm = ( { forms } ) => {
   const { handleSubmit, register, errors, watch } = useForm( );
 
-  const [ hide, setHide ] = useState( true );
-  let contadorValorInicial = 1;
-  const [contador, setContador] = useState( contadorValorInicial );
-  const [opcionales, setOpcionales] = useState( [ ] );
+  // const [ hide, setHide ] = useState( true );
+  // let contadorValorInicial = 1;
+  // const [contador, setContador] = useState( contadorValorInicial );
+  // const [opcionales, setOpcionales] = useState( [ ] );
   
-
-  // TODO : Perteneciente a la accion de o<enviar orden nueva
-  const { antennas } = useSelector( state => state.formsData );
+  const [ opcionales ] = useState( [ ] );
+  
   const dispatch = useDispatch( );
-  
-  // TODO : No depender de la carga de antennas del estado?
-  // useEffect( ( ) => {
-  //   dispatch( startFormDataLoadingAntenna( ) );
-  // }, [ dispatch ] );
+  const { antennas } = useSelector( state => state.formsData );
+  const { loading, error, data } = useSelector( state => state.newOrder );
+
+  useEffect( ( ) => {
+    dispatch( startFormDataLoadingAntenna( ) );
+  }, [dispatch] );
 
   const handleForm = async ( data ) => {
     dispatch( startSendNewOrder( data, opcionales ) );
@@ -134,16 +63,23 @@ const RequestNewForm = ( { forms } ) => {
          <label htmlFor='antennaModel'>Modelo de Antena</label>
           <select 
             name='antennaModel'
-            ref={ register }
-            errors={ errors }
-            validation={
+            ref={ register(
               {
                 required: {
                   value : true,
                   message : "El modelo de antena es requisito"
                 }
               }
-            }
+            )}
+            errors={ errors }
+            // validation={
+            //   {
+            //     required: {
+            //       value : true,
+            //       message : "El modelo de antena es requisito"
+            //     }
+            //   }
+            // }
           >
             {
               antennas.map( antenna => 
@@ -151,22 +87,30 @@ const RequestNewForm = ( { forms } ) => {
               )
             }
           </select>
+          { errors['antennaModel'] && <div> <p className='form__error'> {errors['antennaModel'].message} </p> </div> }
         </div>
 
         <div className='form__row'>
           <label htmlFor='antennaTypeHeight'>Tipo de altura de antena</label>
           <select 
             name='antennaTypeHeight'
-            ref={ register }
-            errors={ errors }
-            validation={
+            ref={ register(
               {
                 required: {
                   value : true,
-                  message : "El tipo de antena es requisito"
+                  message : "El tipo de altura de antena es requisito"
                 }
               }
-            }
+            )}
+            errors={ errors }
+            // validation={
+            //   {
+            //     required: {
+            //       value : true,
+            //       message : "El tipo de antena es requisito"
+            //     }
+            //   }
+            // }
           >
             {
               antennas.find( antenna => antenna.name === watch("antennaModel") )?.height_types.map( height => 
@@ -174,6 +118,7 @@ const RequestNewForm = ( { forms } ) => {
               )
             }
           </select>
+          { errors['antennaTypeHeight'] && <div> <p className='form__error'> {errors['antennaTypeHeight'].message} </p> </div> }
         </div>
 
         <div className='form__row'>
@@ -181,22 +126,30 @@ const RequestNewForm = ( { forms } ) => {
           <input 
             type='number'
             name='antennaHeight'
-            ref={ register }
-            errors={ errors }
-            validation={
+            ref={ register(
               {
                 required: {
                   value : true,
                   message : "La altura de la antena es requisito"
                 }
               }
-            }
+            )}
+            errors={ errors }
+            // validation={
+            //   {
+            //     required: {
+            //       value : true,
+            //       message : "La altura de la antena es requisito"
+            //     }
+            //   }
+            // }
           />
+          { errors['antennaHeight'] && <div> <p className='form__error'> {errors['antennaHeight'].message} </p> </div> }
         </div>
 
         <br/>
 
-        <div 
+        {/* <div 
           className='optional-form'
         >
           <h3
@@ -213,15 +166,6 @@ const RequestNewForm = ( { forms } ) => {
               <h4>Ingreso de un nuevo punto MÓVIL</h4>
               <p>Archivo de observación RINEX del punto MÓVIL (se procesará en forma diferencial al punto BASE) Los formatos aceptados son: .Z, .??d, .??o</p>
 
-              {/* TODO : Ver como agregar estos archivos al  */}
-              {/* <div>
-                <input type='file' />
-                <div>  */}
-                  {/* TODO : Cuando se haga click, agregar al estado de opcionales */}
-                  {/* <FontAwesomeIcon icon={ faUpload } className='icon' />
-                  Confirmar archivo de punto móvil
-                  </div>
-                </div> */}
               <div>
                 <p>
                   <span 
@@ -250,7 +194,7 @@ const RequestNewForm = ( { forms } ) => {
             </div>
           </div>
 
-        </div>
+        </div> */}
 
         {/* <hr /> */}
 
@@ -275,12 +219,18 @@ const RequestNewForm = ( { forms } ) => {
             //   }
             // }
           />
+          { errors['agree'] && <div> <p className='form__error'> {errors['agree'].message} </p> </div> }
         </div>
 
-        <button className='btn' type="submit"> Registrar Solicitud </button>
+        <button className={ loading ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ loading } > Registrar Solicitud </button>
         
         <br/>
       </form>
+
+      {/* { loading && <p>Servidor procesando</p> } */}
+      { loading && <Spinner /> }
+      { error && <p>{ error }</p> }
+      { data && <p>{ data }</p> }
 
     </div>
   )

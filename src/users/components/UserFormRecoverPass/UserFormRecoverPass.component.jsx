@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
+import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
+import { sendRecoverPassword_clean, startSendRecoverPassword } from '../../actions/recoverPassword';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 import withData from './withData';
 
 const UserFormRecoverPass = ( { forms } ) => {
+  const dispatch = useDispatch( );
+  const { loading, data, error } = useSelector(state => state.recoverPassword );
   const { register, handleSubmit, errors } = useForm( );
-  const [ buttonSumitDisable, setButtonSumitDisable ] = useState( false );
 
   const handleForm = async ( ) => {
-    setButtonSumitDisable( true );
-    // TODO: Usar ACCION requerida
-    await setTimeout( () => {
-      console.log('Recuperando contraseña!!!');
-      setButtonSumitDisable( false );
-    } , 3000 );
-
-  }
+    dispatch( sendRecoverPassword_clean( ) ); // TODO : Donde limpiar?
+    dispatch( startSendRecoverPassword( ) );
+  };
 
   return (
     <div>
@@ -40,8 +39,13 @@ const UserFormRecoverPass = ( { forms } ) => {
           ) 
         }
 
-        <button className={ buttonSumitDisable ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ buttonSumitDisable }>Cambiar contraseña</button>
+        <button className={ loading ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ loading }>Cambiar contraseña</button>
       </form>
+
+      {/* { loading && <p>Servidor procesando</p> } */}
+      { loading && <Spinner /> }
+      { error && <p>{ error }</p> }
+      { data && <p>{ data }</p> }
     </div>
   )
 }

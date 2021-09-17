@@ -5,6 +5,7 @@ export const types = {
   auth_login: '[auth] Login start',
   auth_login_success: '[auth] Login success',
   auth_login_error: '[auth] Login error',
+  auth_login_clean: '[auth] Login clean',
   // FIN - Nuevos Types para el Login
   authLogout: '[auth] Logout',
   authCheckingFinish: '[auth] Finish checking login state',
@@ -34,10 +35,22 @@ export const types = {
   sendOrder_success: '[new order] send new order success',
   sendOrder_error: '[new order] send new order error',
   sendOrder_logout: '[new order] send new order logout',
+  sendOrder_clean: '[new order] clean order',
 
   sendRegister: '[register] start send register form',
-  sendRegister_success: '[register]',
-  sendRegister_error: '[register]',
+  sendRegister_success: '[register] send register success',
+  sendRegister_error: '[register] send register error',
+  sendRegister_clean: '[register] send register clean',
+
+  sendVerification: '[register verification] start send register verification',
+  sendVerification_success: '[register verification] send verification success',
+  sendVerification_error: '[register verification] send verification error',
+  sendVerification_clean: '[register verification] clean verification clean',
+
+  sendRecoverPassword: '[recover password] start recover password',
+  sendRecoverPassword_success: '[recover password] recover password success',
+  sendRecoverPassword_error: '[recover password] recover password error',
+  sendRecoverPassword_clean: '[recover password] recover password clean',
 
   // PROCESSING some Action
   // TODO : Pensar en hacer una accion que modifique el estado de la apliacion entera para que no haya conflicto entre acciones.

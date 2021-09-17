@@ -24,10 +24,13 @@ export const userRegisterReducer = ( state = INITIAL_STATE, action ) => {
 
     case types.sendRegister_error:
       return {
-        loading: true,
+        loading: false,
         error: action.payload,
         data: null,
       }
+    
+    case types.sendRegister_clean:
+      return INITIAL_STATE;
   
     default:
       return state;

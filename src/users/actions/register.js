@@ -20,12 +20,16 @@ const sendRegisterError = ( msg ) => ({
   payload: msg,
 });
 
+const sendRegisterClean = ( ) => ({
+  type: types.sendRegister_clean,
+});
+
 
 // Async Actions
 
 export const startSendRegister = ( dataForm ) => {
   return async( dispatch ) => {
-    sendRegister( );
+    dispatch( sendRegister( ) );
     try{
       // Armando los datos a enviar con uuid
       const data = {
@@ -37,7 +41,7 @@ export const startSendRegister = ( dataForm ) => {
       const resp = await fetchSinToken( 
         'users', 
         { 
-          email:data.email, 
+          email: data.email, 
           password: data.password, 
           firstname: data.name, 
           lastname: data.surname, 
@@ -51,14 +55,32 @@ export const startSendRegister = ( dataForm ) => {
       if( body?.status === 'success' ){
         let msg = 'Su registro ha sido exitoso. Le estara llegando un email para la verificacion de la cuenta.';
         dispatch( sendRegisterSuccess( msg ) );
+
+        setTimeout( ( ) => {
+          dispatch( sendRegisterClean() );
+        },
+          3000
+        );
       }else{
         let errorMsg = 'Ha ocurrido un error en el registro de la cuenta.';
-        sendRegisterError( errorMsg );
+        dispatch( sendRegisterError( errorMsg ) );
+
+        setTimeout( ( ) => {
+          dispatch( sendRegisterClean() );
+        },
+          3000
+        );
       }
 
     }catch( err ){
       let errorMsg = 'Ha ocurrido un error en el registro de la cuenta.';
-      sendRegisterError( errorMsg );
+      dispatch( sendRegisterError( errorMsg ) );
+
+      setTimeout( ( ) => {
+        dispatch( sendRegisterClean() );
+      },
+        3000
+      );
     };
   };
 };

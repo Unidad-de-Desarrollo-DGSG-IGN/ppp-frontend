@@ -21,13 +21,19 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
     //   } } );
     return fetch( url );
   } else {
-    return fetch( url, {
-      method,
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify( data )
-    });
+
+    if( data === null ){
+      return fetch( url, {
+        method });
+    }else {
+      return fetch( url, {
+        method,
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify( data )
+      });
+    }
   }
 }
 

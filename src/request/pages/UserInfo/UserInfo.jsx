@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import styles from './styles.module.scss';
+
 // TODO : Mejorar el estilo del componente.
 const UserInfo = ( ) => {
   console.log( '<UserInfo.js>/<UserInfo>: UserInfo' );
@@ -10,22 +12,22 @@ const UserInfo = ( ) => {
   return (
     <div className='requests' >
       <div className='request-header' >
-        <h3>Informacion del Usuario</h3>
+        <h3>Información del Usuario</h3>
 
-        <p>Info del usuario en detalle</p>
+        <p>Información del usuario en detalle</p>
         <hr/>
       </div>        
 
       <div className='request-container' >
         <h3>Info</h3>
         <div className='request-new__form' >
-          <div>
+          <div className={ styles.row} >
             <p>Nombre: { firstname } </p>
           </div>
-          <div>
+          <div className={ styles.row} >
             <p>Apellido: { lastname } </p>
           </div>
-          <div>
+          <div className={ styles.row} >
             <p>Email: { username } </p>
           </div>
         </div>

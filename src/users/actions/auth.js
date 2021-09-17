@@ -17,6 +17,10 @@ const authLoginError = ( ) => ({
   type: types.auth_login_error,
 });
 
+const authLoginClean = ( ) => ({
+  type: types.auth_login_clean,
+});
+
 // -------FIN - Nuevos actions
 
 
@@ -76,18 +80,29 @@ export const startLogin = ( email, password ) => {
             lastname: bodyDataUser.data.user.lastname,
           }) );
           // dispatch( startLoadingUserInfo( ) );
+
         }else {
           // TODO
           //      * Pensar en el error
           //      * Borrar lo guardado en el LocalStorage hasta el momento
           console.log( 'Error al Obtener toda la data user.' )
           dispatch( authLoginError( ) );
+          setTimeout( ( ) => {
+            dispatch( authLoginClean( ) )
+          },
+            3000
+          );
         }
-  
+        
       } else {
         // console.log( '<auth.js>/<startLogin>: Error en el login' ); // TODO: modificar el estado temporalmente para msj error
         // dispatch( login_error )
         dispatch( authLoginError( ) );
+        setTimeout( ( ) => {
+          dispatch( authLoginClean( ) )
+        },
+          3000
+        );
         // dispatch( logout ) - pensar si ponerlo
       }
       
@@ -112,14 +127,14 @@ export const startLogin = ( email, password ) => {
   }
 }
 
-const logout = ( ) => ({ type: types.authLogout });
+const logout = ( ) => ( { type: types.authLogout } );
 
 export const startLogout = ( ) => {
   return ( dispatch ) => {
 
     // TODO : Ver como Hacer todo los dispatch de las acciones de logout
     //        Quizas crear un helper que reciba como parametro a "dispatch"
-    localStorage.clear();
+    localStorage.clear( );
     dispatch( logout( ) );
     // logoutHelper( dispatch );
   }
@@ -165,42 +180,42 @@ export const startLogout = ( ) => {
 
 
 // Mover a otro lado. 
-export const startRegister = ( email, password, name, surname, uuid ) => {
-  return async( dispatch ) => {
-    try{
-      let firstname = name;
-      let lastname = surname;
-      let id = uuid;
-      const resp = await fetchSinToken( 'users', { email, password, firstname, lastname, id }, 'POST' );
-      const body = await resp.json();
+// export const startRegister = ( email, password, name, surname, uuid ) => {
+//   return async( dispatch ) => {
+//     try{
+//       let firstname = name;
+//       let lastname = surname;
+//       let id = uuid;
+//       const resp = await fetchSinToken( 'users', { email, password, firstname, lastname, id }, 'POST' );
+//       const body = await resp.json();
       
-      // TODO : Procesar la informacion en Redux para cuando se registra el usuario
-      // console.log( '<auth.js>/<startRegister>: Body de la respuesta al registrarse', body );
+//       // TODO : Procesar la informacion en Redux para cuando se registra el usuario
+//       // console.log( '<auth.js>/<startRegister>: Body de la respuesta al registrarse', body );
   
-      // if( body.ok ) {
-      //   localStorage.setItem('token', body.token );
-      //   localStorage.setItem('token-init-date', new Date().getTime() );
+//       // if( body.ok ) {
+//       //   localStorage.setItem('token', body.token );
+//       //   localStorage.setItem('token-init-date', new Date().getTime() );
   
-      //   dispatch( login({
-      //     uid: body.uid,
-      //     name: body.name
-      //   }) )
-      // } else {
-      //   console.log('Error al registrarse y loguearse');
-      // }
-    }catch{
-      // TODO : Hacer action que avise que hubo error al loguearse.
-      console.log('<auth.js>/<startRegister>: Error al registrar');
-    }
-  }
-}
+//       //   dispatch( login({
+//       //     uid: body.uid,
+//       //     name: body.name
+//       //   }) )
+//       // } else {
+//       //   console.log('Error al registrarse y loguearse');
+//       // }
+//     }catch{
+//       // TODO : Hacer action que avise que hubo error al loguearse.
+//       console.log('<auth.js>/<startRegister>: Error al registrar');
+//     }
+//   }
+// }
 
 
-const checkingFinish = ( ) => ({ type: types.authCheckingFinish });
+const checkingFinish = ( ) => ( { type: types.authCheckingFinish } );
 
 
-export const startChecking = () => {
-  return async(dispatch) => {
+export const startChecking = ( ) => {
+  return async( dispatch ) => {
 
     // const resp = await fetchConToken( 'auth/renew' );
     // const body = await resp.json();
@@ -209,7 +224,7 @@ export const startChecking = () => {
       // TODO : Verificar si estan todo los datos del usuario guardados en Local Storage.
       let token = localStorage.getItem('token');
       // console.log('<auth.js>/<startChecking>: token: ', token);
-      let user = localStorage.getItem('user');
+      let user = localStorage.getItem('username');
       let uid = localStorage.getItem('uid');
       let firstname = localStorage.getItem('firstname');
       let lastname = localStorage.getItem('lastname');
@@ -228,14 +243,15 @@ export const startChecking = () => {
           lastname: lastname,
         }) );
       }else{
-        console.log('<auth.js>/<startChecking>: No esta logueado');
+        console.log( '<auth.js>/<startChecking>: No esta logueado' );
         dispatch( checkingFinish( ) );
         // TODO : Tirar error de logueo(?) y hacer LOGOUT general, con todos los dispatch.
         authLoginError( );
       }
     }catch{
-      console.log('<auth.js>/<startChecking>: Error al checkear si tiene informacion para loguearse');
+      console.log( '<auth.js>/<startChecking>: Error al checkear si tiene informacion para loguearse' );
       // TODO : Hacer logout, y error de logueo(?)
+      // TODO : Clean Local Storage
     }
 
     // if( body.ok ) {

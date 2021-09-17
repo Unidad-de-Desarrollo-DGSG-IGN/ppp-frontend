@@ -4,37 +4,34 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   data: null,
-}
+};
 
-export const newOrderReducer = ( state = INITIAL_STATE, action ) => {
+export const userRecoverPasswordReducer = ( state = INITIAL_STATE, action ) => {
   switch ( action.type ) {
-    case types.sendOrder:
-      return{
+    case types.sendRecoverPassword:
+      return {
         loading: true,
         error: null,
         data: null,
-      };
-  
-    case types.sendOrder_success:
-      return{
+      }
+
+    case types.sendRecoverPassword_success:
+      return {
         loading: false,
         error: null,
         data: action.payload,
-      };
-  
-    case types.sendOrder_error:
-      return{
+      }
+
+    case types.sendRecoverPassword_error:
+      return {
         loading: false,
         error: action.payload,
         data: null,
-      };
-
-    case types.sendOrder_clean:
+      }
+    
+    case types.sendRecoverPassword_clean:
       return INITIAL_STATE;
-
-    case types.sendOrder_logout:
-      return INITIAL_STATE;
-
+  
     default:
       return state;
   }

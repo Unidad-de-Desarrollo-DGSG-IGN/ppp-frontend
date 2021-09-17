@@ -8,6 +8,8 @@
 
   grid-row: 3 / 4;
   grid-column: center-start / center-end;
+  display: flex;
+  flex-direction: column;
 }
 
 

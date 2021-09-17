@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { startRegister } from '../../actions/auth';
+import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
+import { startSendRegister } from '../../actions/register';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 
 const UserFormRegister = ( ) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch( );
 
   const { register, handleSubmit, errors, watch } = useForm( );
-  const [ buttonSumitDisable, setButtonSumitDisable ] = useState( false );
-  // const [serverResponse, setServerResponse] = useState( false );
+  const { loading, error, data } = useSelector( state => state.register );
 
+  // TODO : Mover "forms" como HOC, y sea props de UserFormRegister
   const forms = [
     {
       label: "Nombre",
@@ -80,25 +80,11 @@ const UserFormRegister = ( ) => {
         validate: (value) => value === watch('password') || 'Debe coincidir las contraseñas',
       }
     },
-  ]
+  ];
 
-  // TODO : Que esta accion esta bajo el control de Redux
   const handleForm = async ( dataForm ) => {
-    setButtonSumitDisable( true );
-    const data = {
-      ...dataForm,
-      uuid : uuidv4( ),
-    };
-    
-    console.log( 'data del formulario: ', data ); // TODO: Borrar
-    
-    if ( data.password !== data.repassword ) {
-      return console.log( 'Las contraseñas deben de ser iguales' ); // TODO: Manejar el estado en este caso
-    }
-    
-    await dispatch( startRegister( data.email, data.password, data.name, data.surname, data.uuid ) );
-    setButtonSumitDisable( false );
-  }
+    dispatch( startSendRegister( dataForm ) );
+  };
   
   return (
     <div>
@@ -121,8 +107,8 @@ const UserFormRegister = ( ) => {
         )}
 
         <button 
-          className={ buttonSumitDisable ? 'btn btn--disabled' :'btn'} 
-          disabled={ buttonSumitDisable }
+          className={ loading ? 'btn btn--disabled' :'btn'} 
+          disabled={ loading }
           type="submit" 
         >
           Registrar
@@ -131,10 +117,13 @@ const UserFormRegister = ( ) => {
       
       
       {/* { ( !serverResponse && buttonSumitDisable ) && <p>Servidor procesando</p> } */}
-      { buttonSumitDisable && <p>Servidor procesando</p> }
+      {/* { loading && <p>Servidor procesando</p> } */}
+      { loading && <Spinner /> }
+      { error && <p>{ error }</p> }
+      { data && <p>{ data }</p> }
 
     </div>
   )
 }
 
-export default UserFormRegister
+export default UserFormRegister;

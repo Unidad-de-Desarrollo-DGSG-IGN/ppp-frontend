@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
 import { startOrdersLoading } from '../../actions/orderFetch';
 import RequestTable from '../../components/RequestTable/RequestTable';
 
@@ -30,7 +31,7 @@ const tableData = ( ordersClient = [ ] ) => {
           }
         )),
     },
-    order_download: 'download', // TODO : Poner link. Imprimir orderClient.
+    order_download: 'download', // TODO : Poner link e Icono. Imprimir orderClient.
   }));
 };
 
@@ -41,7 +42,7 @@ const Requests = ( ) => {
 
   const dispatch = useDispatch( );
   const [ table, setTable ] = useState( [ ] );
-  const { data: ordersClient } = useSelector( state => state.orders );
+  const { data: ordersClient, loading } = useSelector( state => state.orders );
   const { antennas } = useSelector( state => state.formsData );
   // console.log( '<Requests.page.jsx>/<tableData>: Ordenes : ', ordersClient );
   
@@ -80,7 +81,9 @@ const Requests = ( ) => {
 
       <div className='request-container' >
         <h3>Solicitudes</h3>
-        <RequestTable data={ table } />
+
+        { loading ? <Spinner /> : <RequestTable data={ table } /> }
+        {/* <RequestTable data={ table } /> */}
       </div>
     </div>
   )
