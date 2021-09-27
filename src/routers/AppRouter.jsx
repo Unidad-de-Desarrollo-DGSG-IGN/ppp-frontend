@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Switch, Route } from 'react-router-dom';
+import ReportQR from '../request/pages/ReportQR/ReportQR';
 
 import { startChecking } from '../users/actions/auth';
 import AuthRouter from './AuthRouter';
@@ -29,6 +30,9 @@ const AppRouter = ( ) => {
     <Router>
       <div>
         <Switch>
+          {/* TODO : realizar una una Ruta generica */}
+          <Route path='/report/:code' component={ ( ) => <div className='auth' > <ReportQR /> </div> } />
+
           <PublicRoute path='/auth' isAuthenticated={ !!uid  } component={ AuthRouter } />
 
           <PrivateRoute path='/requests' isAuthenticated={ !!uid } component={ WorkRouter } />

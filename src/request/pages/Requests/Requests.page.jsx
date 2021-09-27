@@ -1,9 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import IconCancel from '../../../shared/components/IconCancel/IconCancel';
+import IconDownload from '../../../shared/components/IconDownload/IconDownload';
+import IconStop from '../../../shared/components/IconStop/IconStop';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
 import { startOrdersLoading } from '../../actions/orderFetch';
+import ReportDownload from '../../components/ReportDownload/ReportDownload';
 import RequestTable from '../../components/RequestTable/RequestTable';
+
+// TODO : Mover a columns.js
+const reportStatusIcon = ( status, pdfFileId ) => {
+  switch ( status ) {
+    case 'Procesando':
+      return <IconStop />
+
+    case 'Cancelado':
+      return <IconCancel />
+
+    case 'Terminado':
+      // TODO : Crear un componente que permita descargar el archivo. Usar Actions de Redux
+      return <ReportDownload pdfFileId={ pdfFileId } />
+  
+    default:
+      return <IconStop />
+  }
+};
 
 
 // TODO : Separar en otro archivo
@@ -31,7 +53,7 @@ const tableData = ( ordersClient = [ ] ) => {
           }
         )),
     },
-    order_download: 'download', // TODO : Poner link e Icono. Imprimir orderClient.
+    order_download: reportStatusIcon( orderClient.state_order, orderClient.pdfFileId ), // TODO : cambiar el componente a columns.js. Que reciba solamente el state_order
   }));
 };
 
@@ -41,6 +63,7 @@ const Requests = ( ) => {
   console.log( '<Requests.js>/<Requests>: Requests' );
 
   const dispatch = useDispatch( );
+  // TODO : Poner esta informacion de la tabla como props o como estado de Redux
   const [ table, setTable ] = useState( [ ] );
   const { data: ordersClient, loading } = useSelector( state => state.orders );
   const { antennas } = useSelector( state => state.formsData );
@@ -83,7 +106,6 @@ const Requests = ( ) => {
         <h3>Solicitudes</h3>
 
         { loading ? <Spinner /> : <RequestTable data={ table } /> }
-        {/* <RequestTable data={ table } /> */}
       </div>
     </div>
   )

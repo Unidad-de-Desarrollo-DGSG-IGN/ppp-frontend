@@ -8,6 +8,14 @@
   border: .1rem solid $color-primary;
   background-color: $color-primary;
   text-decoration: none;
+
+  &--NoMargin{
+    margin-left: 0.3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+  }
   
   &:hover {
     background-color: darken( $color-primary, 5% );

@@ -137,6 +137,7 @@ export const startOrdersLoading = ( ) => {
       const orders =  await resOrders.data.orders.map( async( order ) => ({
         date_order: order.creationDate,
         state_order: stateOrder( order.status ),
+        pdfFileId: order.pdfFileId,
         base_point :{
           url_rinex: order.fileId,
           base_name: order.name,

@@ -99,27 +99,31 @@ const RequestTable = ( { data } ) => {
         </table>
         <div className='table__footer' >
           <span>
-            Pagina { ' ' }
-            <strong>
-              { pageIndex + 1  } de { pageOptions.length }
-            </strong>{ ' ' }
+            <span>
+              Pagina { ' ' }
+              <strong>
+                { pageIndex + 1  } de { pageOptions.length }
+              </strong>{ ' ' }
+            </span>
+            <span>
+              | Ir a la página: { ' ' } 
+              <input 
+                type='number' 
+                defaultValue={ pageIndex + 1 } 
+                onChange={ e => { 
+                  const pageNumber = e.target.value ? Number( e.target.value ) - 1 : 0;
+                  gotoPage( pageNumber );
+                }} 
+              />
+            </span>
           </span>
+          
           <span>
-            | Ir a la página: { ' ' } 
-            <input 
-              type='number' 
-              defaultValue={ pageIndex + 1 } 
-              onChange={ e => { 
-                const pageNumber = e.target.value ? Number( e.target.value ) - 1 : 0;
-                gotoPage( pageNumber );
-              }} 
-            />
+            <button className='btn btn--NoMargin' onClick={ ( ) => gotoPage( 0 ) } disabled={ !canPreviousPage } >{ '<<' }</button>
+            <button className='btn btn--NoMargin' onClick={ ( ) => previousPage( ) } disabled={ !canPreviousPage } >Anterior</button>
+            <button className='btn btn--NoMargin' onClick={ ( ) => nextPage( )} disabled={ !canNextPage } >Siguiente</button>
+            <button className='btn btn--NoMargin' onClick={ ( ) => gotoPage( pageCount - 1 ) } disabled={ !canNextPage } >{ '>>' }</button>
           </span>
-
-          <button onClick={ ( ) => gotoPage( 0 ) } disabled={ !canPreviousPage } >{ '<<' }</button>
-          <button onClick={ ( ) => previousPage( ) } disabled={ !canPreviousPage } >Anterior</button>
-          <button onClick={ ( ) => nextPage( )} disabled={ !canNextPage } >Siguiente</button>
-          <button onClick={ ( ) => gotoPage( pageCount - 1 ) } disabled={ !canNextPage } >{ '>>' }</button>
         </div>
       </div>
   )

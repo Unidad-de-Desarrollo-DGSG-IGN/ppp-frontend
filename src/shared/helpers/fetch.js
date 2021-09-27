@@ -182,8 +182,25 @@ const fetchFileConToken = ( endpoint, formFile, method = 'GET' ) => {
 }
 
 
+const fetchFileSinToken = ( endpoint, formFile, method = 'GET' ) => {
+  const url = `${ baseUrl }/${ endpoint }`;
+
+  if ( method === 'GET' ) {
+    return fetch( url, {
+      method,
+    });
+  } else {
+    return fetch( url, {
+      method,
+      body: formFile
+    });
+  }
+}
+
+
 export {
   fetchSinToken,
   fetchConToken,
-  fetchFileConToken
+  fetchFileConToken,
+  fetchFileSinToken,
 }

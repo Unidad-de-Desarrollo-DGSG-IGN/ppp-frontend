@@ -9,7 +9,7 @@ export const COLUMNS = [
   {
     Header: 'Fecha de solicitud',
     accessor: 'order_date',
-    // disableFilters: false,
+    disableFilters: true,
     // Cell: ( { value } ) => { return format( value, 'dd/MM/yyyy' ) },
     Cell: ( { value } ) => { return format( new Date( value) , 'dd/MM/yyyy' ) },
     Filter: ColumnFilter,
@@ -17,13 +17,13 @@ export const COLUMNS = [
   {
     Header: 'Nombre del punto BASE',
     accessor: 'base_name',
-    // disableFilters: false,
+    disableFilters: true,
     Filter: ColumnFilter,
   },
   {
     Header: 'Estado',
     accessor: 'order_state',
-    // disableFilters: false,
+    disableFilters: true,
     Filter: ColumnFilter,
   },
   {
@@ -37,6 +37,6 @@ export const COLUMNS = [
     Header: 'Informe',
     accessor: 'order_download',
     disableFilters: true,
-    Filter: ColumnFilter,
+    Filter: ColumnFilter, // TODO: Aca procesar el ICON STATUS del Informe
   },
 ]

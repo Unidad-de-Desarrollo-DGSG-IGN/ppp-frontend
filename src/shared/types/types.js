@@ -52,6 +52,11 @@ export const types = {
   sendRecoverPassword_error: '[recover password] recover password error',
   sendRecoverPassword_clean: '[recover password] recover password clean',
 
+  downloadReport: '[download report] start download report',
+  downloadReport_success: '[download report] download success',
+  downloadReport_error: '[download report] download error',
+  downloadReport_clean: '[download report] download clean',
+
   // PROCESSING some Action
   // TODO : Pensar en hacer una accion que modifique el estado de la apliacion entera para que no haya conflicto entre acciones.
 }
