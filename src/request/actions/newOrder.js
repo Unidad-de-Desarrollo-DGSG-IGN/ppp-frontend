@@ -93,7 +93,10 @@ export const startSendNewOrder = ( data, opcionales ) => {
   
       // Orden Completa
       if( isSendFileSuccess === 'success' ){  
-        const antenna = antennas.find( antenna => antenna.name === data.antennaModel );
+        console.log( 'Data antenna model: ',data.antennaModel)
+        console.log( 'Antennas: ',antennas)
+        const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.replace(/ /g, "\u00a0") );
+        console.log( 'Antenna a enviar: ',antenna)
         const height_type = antenna.height_types.find( height_type => height_type.name === data.antennaTypeHeight )?.id;
         
         const order = {

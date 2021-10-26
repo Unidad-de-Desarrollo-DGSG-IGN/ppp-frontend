@@ -17,7 +17,6 @@ const parameters = ''; // Parametros que pueden servir para la composicion de co
 
 const RequestNewForm = ( { forms } ) => {
   const { handleSubmit, register, errors, watch } = useForm( );
-
   // const [ hide, setHide ] = useState( true );
   // let contadorValorInicial = 1;
   // const [contador, setContador] = useState( contadorValorInicial );
@@ -28,14 +27,15 @@ const RequestNewForm = ( { forms } ) => {
   const dispatch = useDispatch( );
   const { antennas } = useSelector( state => state.formsData );
   const { loading, error, data } = useSelector( state => state.newOrder );
-
+  
   useEffect( ( ) => {
     dispatch( startFormDataLoadingAntenna( ) );
   }, [dispatch] );
-
+  
   const handleForm = async ( data ) => {
     dispatch( startSendNewOrder( data, opcionales ) );
   }
+  
 
   return (
     <div className='request-new__form' >
@@ -83,7 +83,7 @@ const RequestNewForm = ( { forms } ) => {
           >
             {
               antennas.map( antenna => 
-                 <option key={antenna.id}>{ antenna.name }</option>
+                 <option key={antenna.id}>{ `${antenna.name.replace(/ /g, "\u00a0")}` }</option>
               )
             }
           </select>
@@ -113,8 +113,8 @@ const RequestNewForm = ( { forms } ) => {
             // }
           >
             {
-              antennas.find( antenna => antenna.name === watch("antennaModel") )?.height_types.map( height => 
-                 <option key={height.id}>{ height.name }</option>
+              antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel") )?.height_types.map( height => 
+                 <option key={ height.id }>{ height.name }</option>
               )
             }
           </select>
@@ -125,6 +125,7 @@ const RequestNewForm = ( { forms } ) => {
           <label htmlFor='antennaHeight'>Altura de antena [m]</label>
           <input 
             type='number'
+            step='.001'
             name='antennaHeight'
             ref={ register(
               {
