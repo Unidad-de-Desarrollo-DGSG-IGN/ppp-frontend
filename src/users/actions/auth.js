@@ -17,7 +17,7 @@ const authLoginError = ( ) => ({
   type: types.auth_login_error,
 });
 
-const authLoginClean = ( ) => ({
+export const authLoginClean = ( ) => ({
   type: types.auth_login_clean,
 });
 
@@ -87,22 +87,24 @@ export const startLogin = ( email, password ) => {
           //      * Borrar lo guardado en el LocalStorage hasta el momento
           console.log( 'Error al Obtener toda la data user.' )
           dispatch( authLoginError( ) );
-          setTimeout( ( ) => {
-            dispatch( authLoginClean( ) )
-          },
-            3000
-          );
+          
+          // setTimeout( ( ) => {
+          //   dispatch( authLoginClean( ) )
+          // },
+          //   3000
+          // );
         }
         
       } else {
         // console.log( '<auth.js>/<startLogin>: Error en el login' ); // TODO: modificar el estado temporalmente para msj error
         // dispatch( login_error )
         dispatch( authLoginError( ) );
-        setTimeout( ( ) => {
-          dispatch( authLoginClean( ) )
-        },
-          3000
-        );
+        
+        // setTimeout( ( ) => {
+        //   dispatch( authLoginClean( ) )
+        // },
+        //   3000
+        // );
         // dispatch( logout ) - pensar si ponerlo
       }
       

@@ -129,20 +129,20 @@ export const startSendNewOrder = ( data, opcionales ) => {
           let msgSuccess = 'Orden enviada';
           dispatch( sendNewOrderSuccess( msgSuccess ) );
 
-          setTimeout( ( ) => {
-            dispatch( sendNewOrderClean( ) )
-          },
-            3000
-          );
+          // setTimeout( ( ) => {
+          //   dispatch( sendNewOrderClean( ) )
+          // },
+          //   3000
+          // );
         }else{
           let msgError = 'Error al crear una nueva orden';
           dispatch( sendNewOrderError( msgError ) );
 
-          setTimeout( ( ) => {
-            dispatch( sendNewOrderClean( ) )
-          },
-            3000
-          );
+          // setTimeout( ( ) => {
+          //   dispatch( sendNewOrderClean( ) )
+          // },
+          //   3000
+          // );
         }
 
         // TODO : Repensar que poner en payload para la orden enviada.
@@ -155,11 +155,11 @@ export const startSendNewOrder = ( data, opcionales ) => {
       let msgError = 'Error al crear una nueva orden';
       dispatch( sendNewOrderError( msgError ) );
 
-      setTimeout( ( ) => {
-        dispatch( sendNewOrderClean( ) )
-      },
-        3000
-      );
+      // setTimeout( ( ) => {
+      //   dispatch( sendNewOrderClean( ) )
+      // },
+      //   3000
+      // );
     }
   }
 }

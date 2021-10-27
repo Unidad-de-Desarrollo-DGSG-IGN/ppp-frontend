@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
+import { authLoginClean } from '../../actions/auth';
 import { startSendRegister } from '../../actions/register';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 
@@ -11,6 +12,8 @@ const UserFormRegister = ( ) => {
 
   const { register, handleSubmit, errors, watch } = useForm( );
   const { loading, error, data } = useSelector( state => state.register );
+  
+  const { error : error_login } = useSelector( state => state.auth );
 
   // TODO : Mover "forms" como HOC, y sea props de UserFormRegister
   const forms = [
@@ -85,6 +88,13 @@ const UserFormRegister = ( ) => {
   const handleForm = async ( dataForm ) => {
     dispatch( startSendRegister( dataForm ) );
   };
+
+  // TODO : Limpiar los errores de los otros formularios publicos
+  useEffect(() => {
+    if( error_login ){
+      dispatch( authLoginClean( ) )
+    }
+  }, [ dispatch, error_login ])
   
   return (
     <div>

@@ -1,17 +1,17 @@
 const withData = ( parameters ) => ( Component ) => {
   // data
   const forms = [
-    {
-      label: "Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o)",
-      type: "file",
-      name: "file",
-      validation: {
-        required: {
-          value : true,
-          message : "El archivo del punto BASE de la antena es requisito"
-        },
-      }
-    },
+    // {
+    //   label: "Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o)",
+    //   type: "file",
+    //   name: "file",
+    //   validation: {
+    //     required: {
+    //       value : true,
+    //       message : "El archivo del punto BASE de la antena es requisito"
+    //     },
+    //   }
+    // },
     {
       label: "Nombre del punto BASE (opcional) Cuatro caracteres alfanuméricos",
       type: "text",
@@ -19,7 +19,7 @@ const withData = ( parameters ) => ( Component ) => {
       name: "name_base",
       validation: {
         required: {
-          value: true,
+          value: false,
           message: "Nombre de la base es requisito"
         },
         minLength: {
@@ -27,7 +27,7 @@ const withData = ( parameters ) => ( Component ) => {
           message: "Nombre base corta"
         },
         maxLength:{
-          value: 4,
+          value: 8,
           message: "Nombre base largo"
         },
         pattern: {

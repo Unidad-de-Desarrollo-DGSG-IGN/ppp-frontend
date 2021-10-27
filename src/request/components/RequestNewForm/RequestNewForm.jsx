@@ -16,7 +16,7 @@ const parameters = ''; // Parametros que pueden servir para la composicion de co
 
 
 const RequestNewForm = ( { forms } ) => {
-  const { handleSubmit, register, errors, watch } = useForm( );
+  const { handleSubmit, register, errors, watch, setError } = useForm( );
   // const [ hide, setHide ] = useState( true );
   // let contadorValorInicial = 1;
   // const [contador, setContador] = useState( contadorValorInicial );
@@ -34,6 +34,7 @@ const RequestNewForm = ( { forms } ) => {
   
   const handleForm = async ( data ) => {
     dispatch( startSendNewOrder( data, opcionales ) );
+    console.log( 'Datos del formulario: ', data);
   }
   
 
@@ -42,6 +43,39 @@ const RequestNewForm = ( { forms } ) => {
       <h2>Datos de la BASE para el procesamiento PPP</h2>
 
       <form onSubmit={ handleSubmit( handleForm ) }>
+      <div className='form__row'>
+          <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o)</label>
+          <input 
+            type='file'
+            name='file'
+            ref={ register(
+              {
+                required: {
+                  value : true,
+                  message : "El archivo del punto BASE de la antena es requisito"
+                },
+              }
+            )}
+            errors={ errors }
+            onChange={ e => {
+              console.log(e.target.files[0].size);
+              let archivo_limite_mb = 20 // TODO : Consultar a una api el valor limite del archivo
+              if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){ 
+                console.log('Te pasaste!');
+                setError(
+                  'file',
+                  {
+                    type: 'manual',
+                    message: `Tamaño de archivo excedido. Limite ${archivo_limite_mb} mb.`
+                  }
+                )
+              }
+            }}
+          />
+          { errors['file'] && <div> <p className='form__error'> {errors['file'].message} </p> </div> }
+        </div>
+
+
         { forms.map( form => 
             
             <UserFormInput 
