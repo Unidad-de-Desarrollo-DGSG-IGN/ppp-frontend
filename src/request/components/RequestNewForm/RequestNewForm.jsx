@@ -44,7 +44,7 @@ const RequestNewForm = ( { forms } ) => {
 
       <form onSubmit={ handleSubmit( handleForm ) }>
       <div className='form__row'>
-          <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o)</label>
+          <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o). Tamaño máximo permitido 20MB.</label>
           <input 
             type='file'
             name='file'
@@ -92,7 +92,7 @@ const RequestNewForm = ( { forms } ) => {
           ) 
         }
 
-        {/* // Refactorizar en with data */}
+        {/* // TODO : Refactorizar en with data */}
         <div className='form__row'>
          <label htmlFor='antennaModel'>Modelo de Antena</label>
           <select 
@@ -106,14 +106,6 @@ const RequestNewForm = ( { forms } ) => {
               }
             )}
             errors={ errors }
-            // validation={
-            //   {
-            //     required: {
-            //       value : true,
-            //       message : "El modelo de antena es requisito"
-            //     }
-            //   }
-            // }
           >
             {
               antennas.map( antenna => 
@@ -137,14 +129,6 @@ const RequestNewForm = ( { forms } ) => {
               }
             )}
             errors={ errors }
-            // validation={
-            //   {
-            //     required: {
-            //       value : true,
-            //       message : "El tipo de antena es requisito"
-            //     }
-            //   }
-            // }
           >
             {
               antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel") )?.height_types.map( height => 
@@ -170,14 +154,6 @@ const RequestNewForm = ( { forms } ) => {
               }
             )}
             errors={ errors }
-            // validation={
-            //   {
-            //     required: {
-            //       value : true,
-            //       message : "La altura de la antena es requisito"
-            //     }
-            //   }
-            // }
           />
           { errors['antennaHeight'] && <div> <p className='form__error'> {errors['antennaHeight'].message} </p> </div> }
         </div>
@@ -245,14 +221,6 @@ const RequestNewForm = ( { forms } ) => {
               }
             } ) }
             errors={ errors }
-            // validation={
-            //   {
-            //     required: {
-            //       value : true,
-            //       message : "Aceptar el uso de archivos por parte del IGN es requisito"
-            //     }
-            //   }
-            // }
           />
           { errors['agree'] && <div> <p className='form__error'> {errors['agree'].message} </p> </div> }
         </div>
@@ -262,10 +230,9 @@ const RequestNewForm = ( { forms } ) => {
         <br/>
       </form>
 
-      {/* { loading && <p>Servidor procesando</p> } */}
       { loading && <Spinner /> }
-      { error && <p>{ error }</p> }
-      { data && <p>{ data }</p> }
+      { error && <p className='message__error'>{ error }</p> }
+      { data && <p className='message__success'>{ data }</p> }
 
     </div>
   )

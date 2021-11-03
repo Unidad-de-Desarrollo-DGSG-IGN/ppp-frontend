@@ -12,8 +12,6 @@ const UserFormRegister = ( ) => {
 
   const { register, handleSubmit, errors, watch } = useForm( );
   const { loading, error, data } = useSelector( state => state.register );
-  
-  const { error : error_login } = useSelector( state => state.auth );
 
   // TODO : Mover "forms" como HOC, y sea props de UserFormRegister
   const forms = [
@@ -88,13 +86,6 @@ const UserFormRegister = ( ) => {
   const handleForm = async ( dataForm ) => {
     dispatch( startSendRegister( dataForm ) );
   };
-
-  // TODO : Limpiar los errores de los otros formularios publicos
-  useEffect(() => {
-    if( error_login ){
-      dispatch( authLoginClean( ) )
-    }
-  }, [ dispatch, error_login ])
   
   return (
     <div>
@@ -129,8 +120,8 @@ const UserFormRegister = ( ) => {
       {/* { ( !serverResponse && buttonSumitDisable ) && <p>Servidor procesando</p> } */}
       {/* { loading && <p>Servidor procesando</p> } */}
       { loading && <Spinner /> }
-      { error && <p>{ error }</p> }
-      { data && <p>{ data }</p> }
+      { error && <p className='message__error'>{ error }</p> }
+      { data && <p className='message__success'>{ data }</p> }
 
     </div>
   )

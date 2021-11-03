@@ -49,7 +49,7 @@ const UserFormLogin = ( { forms } ) => {
 
       {/* { loading && <p>Servidor procesando</p> } */}
       { loading && <Spinner /> }
-      { error && <p>{ error }</p> }
+      { error && <p className='message__error'>{ error }</p> }
       {/* { data && <p>{ data }</p> }  */}
     </div>
   )

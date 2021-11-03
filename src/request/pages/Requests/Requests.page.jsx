@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IconCancel from '../../../shared/components/IconCancel/IconCancel';
-import IconDownload from '../../../shared/components/IconDownload/IconDownload';
+// import IconDownload from '../../../shared/components/IconDownload/IconDownload';
 import IconStop from '../../../shared/components/IconStop/IconStop';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
+import { sendNewOrderClean } from '../../actions/newOrder';
 import { startOrdersLoading } from '../../actions/orderFetch';
 import ReportDownload from '../../components/ReportDownload/ReportDownload';
 import RequestTable from '../../components/RequestTable/RequestTable';
@@ -67,29 +68,26 @@ const Requests = ( ) => {
   const [ table, setTable ] = useState( [ ] );
   const { data: ordersClient, loading } = useSelector( state => state.orders );
   const { antennas } = useSelector( state => state.formsData );
-  // console.log( '<Requests.page.jsx>/<tableData>: Ordenes : ', ordersClient );
+
+  useEffect( ( ) => {
+    dispatch( sendNewOrderClean( ) )
+  }, [ dispatch ] );
   
   // TODO : Decidir que debe estar en el Root de PrivateRoot
   //        * Los datos de las antenas deben estar en el Root
   //        * Las ordenes se deberan cargar cada vez que se llegue a este componente
-  // useEffect( ( ) => {
-  //   dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
-  //   // dispatch( startOrdersLoading( ) );
-  // }, [ dispatch ] );
+
   
   useEffect( ( ) => {
     // TODO : Hacer funciones que digan si esta o no la condicion de antennas y username
     console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
     if( antennas.length !== THERE_ARE_NOT_ANTENNAS_LOADED ){
       dispatch( startOrdersLoading( ) );
-      // console.log( '<Requests.page.jsx>/<Request>: Antennas Completa', antennas );
     }else{
-      // console.log( '<Requests.page.jsx>/<Request>: Antennas Vacia', antennas );
     }
   } , [ dispatch, antennas ] );
 
   useEffect( ( ) => {
-    // Verificar si ordersClient es lo que tiene que ser
     setTable( tableData( ordersClient ) );
   }, [ ordersClient ]);
 

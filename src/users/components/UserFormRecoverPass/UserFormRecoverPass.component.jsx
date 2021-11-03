@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
-import { sendRecoverPassword_clean, startSendRecoverPassword } from '../../actions/recoverPassword';
+import { startSendRecoverPassword } from '../../actions/recoverPassword';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 import withData from './withData';
 
@@ -13,7 +13,7 @@ const UserFormRecoverPass = ( { forms } ) => {
   const { register, handleSubmit, errors } = useForm( );
 
   const handleForm = async ( ) => {
-    dispatch( sendRecoverPassword_clean( ) ); // TODO : Donde limpiar?
+    // dispatch( sendRecoverPassword_clean( ) ); // TODO : Donde limpiar?
     dispatch( startSendRecoverPassword( ) );
   };
 
@@ -44,8 +44,8 @@ const UserFormRecoverPass = ( { forms } ) => {
 
       {/* { loading && <p>Servidor procesando</p> } */}
       { loading && <Spinner /> }
-      { error && <p>{ error }</p> }
-      { data && <p>{ data }</p> }
+      { error && <p className='message__error'>{ error }</p> }
+      { data && <p className='message__success'>{ data }</p> }
     </div>
   )
 }

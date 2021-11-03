@@ -20,7 +20,7 @@ const sendRegisterError = ( msg ) => ({
   payload: msg,
 });
 
-const sendRegisterClean = ( ) => ({
+export const sendRegisterClean = ( ) => ({
   type: types.sendRegister_clean,
 });
 
@@ -51,36 +51,17 @@ export const startSendRegister = ( dataForm ) => {
       );
       const body = await resp.json( );
       
-      // Verificar respuesta
       if( body?.status === 'success' ){
         let msg = 'Su registro ha sido exitoso. Le estara llegando un email para la verificacion de la cuenta.';
         dispatch( sendRegisterSuccess( msg ) );
-
-        setTimeout( ( ) => {
-          dispatch( sendRegisterClean() );
-        },
-          3000
-        );
       }else{
         let errorMsg = 'Ha ocurrido un error en el registro de la cuenta.';
         dispatch( sendRegisterError( errorMsg ) );
-
-        setTimeout( ( ) => {
-          dispatch( sendRegisterClean() );
-        },
-          3000
-        );
       }
 
     }catch( err ){
       let errorMsg = 'Ha ocurrido un error en el registro de la cuenta.';
       dispatch( sendRegisterError( errorMsg ) );
-
-      setTimeout( ( ) => {
-        dispatch( sendRegisterClean() );
-      },
-        3000
-      );
     };
   };
 };

@@ -1,11 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendNewOrderClean } from '../../actions/newOrder';
 
 import styles from './styles.module.scss';
 
 // TODO : Mejorar el estilo del componente.
 const UserInfo = ( ) => {
-  console.log( '<UserInfo.js>/<UserInfo>: UserInfo' );
+  const dispatch = useDispatch( );
+
+  useEffect( ( ) => {
+    dispatch( sendNewOrderClean( ) )
+  }, [ dispatch ] );
 
   const { firstname, lastname, username } = useSelector( state => state.auth.data );
 

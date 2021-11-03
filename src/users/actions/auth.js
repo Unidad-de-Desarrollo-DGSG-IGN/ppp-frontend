@@ -1,9 +1,7 @@
 import { fetchSinToken, fetchConToken } from "../../shared/helpers/fetch";
-// import { logoutHelper } from "../../shared/helpers/logout";
 import { types } from "../../shared/types/types";
 
 
-// -------Nuevos actions
 const authLogin = ( ) => ({ // modificar los nombres
   type: types.auth_login,
 });
@@ -20,9 +18,6 @@ const authLoginError = ( ) => ({
 export const authLoginClean = ( ) => ({
   type: types.auth_login_clean,
 });
-
-// -------FIN - Nuevos actions
-
 
 export const startLogin = ( email, password ) => {
   // console.log('<auth.js>/<startLogin> : Comienza el startLogin');
@@ -87,25 +82,10 @@ export const startLogin = ( email, password ) => {
           //      * Borrar lo guardado en el LocalStorage hasta el momento
           console.log( 'Error al Obtener toda la data user.' )
           dispatch( authLoginError( ) );
-          
-          // setTimeout( ( ) => {
-          //   dispatch( authLoginClean( ) )
-          // },
-          //   3000
-          // );
         }
         
       } else {
-        // console.log( '<auth.js>/<startLogin>: Error en el login' ); // TODO: modificar el estado temporalmente para msj error
-        // dispatch( login_error )
         dispatch( authLoginError( ) );
-        
-        // setTimeout( ( ) => {
-        //   dispatch( authLoginClean( ) )
-        // },
-        //   3000
-        // );
-        // dispatch( logout ) - pensar si ponerlo
       }
       
     }catch{

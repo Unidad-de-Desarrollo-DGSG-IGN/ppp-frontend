@@ -23,33 +23,27 @@ export const userAuthReducer = ( state = initialState, action ) => {
 
     case types.auth_login_success:
       return{
-        // ...state,
         loading: false,
         error: null,
         data: {
-          // uid: '',
-          // username: '',
-          // firstname: '',
-          // lastname: '',
           ...action.payload,
         },
 
-        checking: false, // Borrar en algun momento
+        checking: false, 
       }
       
       case types.auth_login_error:
         return{
-          // ...state,
           loading: false,
-          error: 'Error en el login',
+          error: 'Error al acceder',
           data: {},
-          checking: false, // Borrar en algun momento
+          checking: false,
       }
 
       case types.auth_login_clean:
         return {
           checking: false,
-          loading: false, // Analizar si conviene
+          loading: false,
           error: null,
           data: {},
         };

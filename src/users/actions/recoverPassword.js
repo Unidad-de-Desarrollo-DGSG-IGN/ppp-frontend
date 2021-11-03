@@ -41,32 +41,16 @@ export const startSendRecoverPassword = ( email ) => {
       if( body?.status === 'success' ){
         let msg = 'Se ha enviado un correo electronico para recuperar su cuenta.';
         dispatch( sendRecoverPassword_success( msg ) );
-
-        setTimeout( ( ) => {
-          dispatch( sendRecoverPassword_clean( ) )
-        },
-          3000
-        );
       }else{
         let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su cuenta.';
         dispatch( sendRecoverPassword_error( errorMsg ) );
-
-        setTimeout( ( ) => {
-          dispatch( sendRecoverPassword_clean( ) )
-        },
-          3000
-        );
       }
 
     }catch( err ){
       let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su cuenta.';
       dispatch( sendRecoverPassword_error( errorMsg ) );
       
-      setTimeout( ( ) => {
-        dispatch( sendRecoverPassword_clean( ) )
-      },
-        3000
-      );
+    
     };
   };
 };
