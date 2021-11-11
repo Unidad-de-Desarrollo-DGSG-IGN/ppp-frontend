@@ -44,7 +44,7 @@ const tableData = ( ordersClient = [ ] ) => {
         base_name: orderClient.base_point.base_name,
       },
       moving_points:
-        orderClient.mobile_points.map( moving_point => (
+        orderClient.mobile_points?.map( moving_point => (
           {
             url_rinex: moving_point.url_rinex,
             antenna_height: moving_point.antenna_height,
@@ -66,7 +66,7 @@ const Requests = ( ) => {
   const dispatch = useDispatch( );
   // TODO : Poner esta informacion de la tabla como props o como estado de Redux
   const [ table, setTable ] = useState( [ ] );
-  const { data: ordersClient, loading } = useSelector( state => state.orders );
+  const { data: ordersClient, loading, error } = useSelector( state => state.orders );
   const { antennas } = useSelector( state => state.formsData );
 
   useEffect( ( ) => {
@@ -102,8 +102,9 @@ const Requests = ( ) => {
 
       <div className='request-container' >
         <h3>Solicitudes</h3>
-
+        {/* TODO : Revisar el tema del error */}
         { loading ? <Spinner /> : <RequestTable data={ table } /> }
+        { error &&  'Error' } 
       </div>
     </div>
   )

@@ -11,6 +11,7 @@ import { userRegisterReducer } from '../../users/reducers/userRegisterReducer';
 import { userRegisterVerificationReducer } from '../../users/reducers/userRegisterVerificationReducer';
 import { userRecoverPasswordReducer } from '../../users/reducers/userRecoverPasswordReducer';
 import { reportReducer } from '../../request/reducers/reportReducer';
+import { orderDetailReducer } from '../../request/reducers/orderDetailReducer';
 
 // Herramienta para habilitar REDUX como herramienta de desarrollo en el Chrome
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   auth: userAuthReducer,
   formsData: formDataReducer,
   orders: ordersLoadingReducer,
+  orderDetail: orderDetailReducer,
   newOrder: newOrderReducer,
   register: userRegisterReducer,
   registerVerification: userRegisterVerificationReducer,

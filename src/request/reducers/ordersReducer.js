@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   data: [ ],
-}
+};
 
 /**
  * Funcion que hace de Reductor para cambiar el estado de la aplicacion a traves de Redux.
@@ -21,7 +21,7 @@ export const ordersLoadingReducer = ( state = INITIAL_STATE, action ) => {
       return{
         loading: true,
         error: null,
-        data: [ ...state.data ],
+        data: [ ...state.data ], // TODO: Revisar
       }
 
     case types.loadOrders_success:

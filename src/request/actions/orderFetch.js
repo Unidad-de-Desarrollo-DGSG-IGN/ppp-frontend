@@ -74,7 +74,8 @@ export const ordersLogout = ( ) => ({
 //   payload: orders,
 // });
 
-// NUEVO
+
+
 const LoadOrders = ( ) => ({
   type: types.loadOrders,
 });
@@ -85,10 +86,10 @@ const LoadOrdersSuccess = ( orders ) => ({
 });
 
 const LoadOrdersError = ( errorMsg ) => ({
-  type: types.loadOrders_success,
+  type: types.loadOrders_error,
   payload: errorMsg,
 });
-// FIN - NUEVO
+
 
 
 /**
@@ -102,66 +103,27 @@ export const startOrdersLoading = ( ) => {
   return async ( dispatch, getState ) => {
     dispatch( LoadOrders( ) );
     try{
-      const { antennas } = getState( ).formsData;
       const { username }  = getState( ).auth.data;
-      console.log( 'startOrdersLoading, username:', username );
-      // console.log( '<orderFetch.js>/<startOrdersLoading> : antennas desde el estado', antennas );
-      // console.log( '<orderFetch.js>/<startOrdersLoading> : username', username );
-      
-      // const res = await fetchSinToken( 'antennas' );
-      // const dataJson = await res.json( );
-      // console.log( '<orderFetch.js>/<startOrdersLoading> : antennas desde el URL', dataJson.data.antennas );
-      // console.log( '<orderFetch.js>/<startOrdersLoading>: antennas : ' , dataJson.data.antennas);
-      // const antennas = dataJson.data.antennas;
   
-
-      // TODO : Como transformar este llamado para que pueda acceder al username(getState, ademas del dispatch)
       const resList = await fetchConToken( 'orders', username );
-      // console.log( '<orderFetch.js>/<startOrdersLoading>: Respuesta Lista con token: ', resList );
       const resOrders = await resList.json( );
-      // console.log( '<orderFetch.js>/<startOrdersLoading>: Ordenes Crudos : ', resOrders.data.orders );
       
-      // const orders =  await resOrders.data.orders.map( ( order ) => ({
-      //   date_order: order.creationDate,
-      //   state_order: order.status,
-      //   base_point :{
-      //     url_rinex: '',
-      //     base_name: order.name,
-      //     antenna_model: antenna_model( antennas, order.antennaId ),
-      //     antenna_height: order.height,
-      //     antenna_type_height: typeHeight( antennas, order.antennaId, order.antennaHeightTypeId ),
-      //   },
-      //   // mobile_points: await movingPoints( order.id ) || [], // TODO devolver la lista de mobile points ya procesados
-      // }) );
-
-      const orders =  await resOrders.data.orders.map( async( order ) => ({
+      const orders =  await resOrders.data.orders.map( ( order ) => ({
         date_order: order.creationDate,
         state_order: stateOrder( order.status ),
         pdfFileId: order.pdfFileId,
         base_point :{
           url_rinex: order.fileId,
           base_name: order.name,
-          antenna_model: antenna_model( antennas, order.antennaId ),
+          antenna_model: order.antennaId,
           antenna_height: order.height,
-          antenna_type_height: typeHeight( antennas, order.antennaId, order.antennaHeightTypeId ),
+          antenna_type_height: order.antennaHeightTypeId,
         },
-        mobile_points: await movingPoints( order.id, antennas, username ) || [], // TODO devolver la lista de mobile points ya procesados
-      }));
+        // mobile_points: await movingPoints( order.id ) || [], // TODO devolver la lista de mobile points ya procesados
+      }) );
 
-      Promise.all( orders ).then( result => {
-        // console.log( '<orderFetch.js>/<startOrdersLoading>: Ordenes al estado: ',result )
-        // dispatch( ordersLoading( result ) );
-        dispatch( LoadOrdersSuccess( result ) );
-        // TODO : UX para avisar al usuario de la carga de datos de ordenes
-      });
+      dispatch( LoadOrdersSuccess( orders ) );
 
-      // orders.then((result) => {
-      //   console.log( 'Ordenes al estado: ',result )
-      //   dispatch( ordersLoading( result ) ); 
-      // }).catch((err) => {
-        
-      // }); 
-      // dispatch( ordersLoading( orders ) ); 
     }catch( err ){
       // TODO : UX Manejar el error cambiando el estado de ERRORES de forma sincronica
       console.log( '<orderFetch.js>/<startOrdersLoading>: No se pudo cargar la orden correctamente', err );

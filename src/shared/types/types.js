@@ -57,6 +57,11 @@ export const types = {
   downloadReport_error: '[download report] download error',
   downloadReport_clean: '[download report] download clean',
 
+  loadOrderDetail: '[load order detail] start load antenna detail',
+  loadOrderDetail_success: '[load order detail] load antenna detail success',
+  loadOrderDetail_error: '[load order detail] load antenna detail error',
+  loadOrderDetail_clean: '[load order detail] clean antenna detail',
+
   // PROCESSING some Action
   // TODO : Pensar en hacer una accion que modifique el estado de la apliacion entera para que no haya conflicto entre acciones.
 }
