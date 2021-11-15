@@ -1,0 +1,29 @@
+
+.nav--user {
+  background-color: $color-white;
+  border-radius: 0 0 2rem 2rem;
+  font-size: 1.3rem;
+  padding: 0rem 0rem;
+  text-align: center;
+
+  grid-row: 3 / 4;
+  grid-column: center-start / center-end;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.navlink {
+  color: $color-terciary;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-secondary;
+    text-decoration: underline;
+  }
+}
+
+
+.link--active {
+  display:none;
+}

@@ -1,0 +1,25 @@
+
+// COLORS
+@import './colors/colors';
+
+// TYPOGRAPHY
+@import './typography/typography';
+
+// GLOBAL SETTINGS
+@import './globalSettings/globalSettings';
+
+
+hr {
+  background-color:rgba(0, 0, 0, 0.1);
+  border: none;
+  height: .1rem;
+  margin: 2rem 0;
+}
+
+
+h3 {
+  color: #5a5c69;
+  font-size: 2.5rem;
+  font-family: "Nunito";
+  font-weight: 400;
+}

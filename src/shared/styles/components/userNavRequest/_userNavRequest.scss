@@ -1,0 +1,15 @@
+
+.nav-user-request{
+  background-color: $color-white;
+  border-bottom: $color-grey--light-2  solid .1rem;
+
+  padding: 1rem 1rem;
+  
+  grid-row: 1 / 2;
+  grid-column: requests-start / requests-end;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}

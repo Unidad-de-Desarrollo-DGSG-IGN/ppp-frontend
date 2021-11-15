@@ -1,0 +1,11 @@
+.auth {
+  // background-image:  linear-gradient( 180deg, $color-primary 10%, $color-secondary 100%);
+  // background-image:  $color-white;
+  background-color: $color-white;
+
+  height: 100vh;
+
+  display: grid;
+  grid-template-rows: 1fr minmax( min-content, 70vh ) 1fr;
+  grid-template-columns: [full-start] 1fr [center-start] 80vw [center-end] 1fr [full-end];
+}

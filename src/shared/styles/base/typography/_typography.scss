@@ -1,0 +1,19 @@
+
+// FONT FAMILY
+$font-family-primary: 'Nunito'; 
+$font-family-secondary: sans-serif; 
+$font-family-terciary: sans-serif; // TODO : Buscar tercera opcion
+
+
+// FONT SIZE
+// Respetar la regla de 4. Como maximo 4 tamaños de typografia
+$font-size-primary: 5rem;
+$font-size-secondary: 4rem;
+$font-size-terciary: 2rem;
+$font-size-terniary: 1rem;
+
+
+// Seteo Global
+body { 
+  font-family: $font-family-primary, $font-family-secondary, $font-family-terciary;
+}
