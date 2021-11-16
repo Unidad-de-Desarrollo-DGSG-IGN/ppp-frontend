@@ -32,9 +32,12 @@ export const sendNewOrderClean = ( ) => ({
 
 
 export const startSendNewOrder = ( data, opcionales ) => {
+  console.log( 'Data antenna model: ', data.antennaModel.value );
   // TODO : Hacer acciones con THUNK
   return async( dispatch, getState ) => {
     dispatch( sendNewOrder( ) );
+
+    // TODO : Contemplar que si hay algun error, manejarlo
     try{
       console.log( '<RequestNewForm.jsx>/<handleForm> : Datos del formulario', data );
       const { username }  = getState( ).auth.data;
@@ -59,7 +62,7 @@ export const startSendNewOrder = ( data, opcionales ) => {
       // TODO : Separar en una funcion.
       const movingPoints = opcionales.map( ( opc ) => ({
         name : data[`name-moving-${ opc }`],
-        antennaModel : data[`antennaModel-opt-${ opc }`],
+        antennaModel : data[`antennaModel-opt-${ opc }`], // TODO : .value
         antennaTypeHeight : data[`antennaTypeHeight-opt-${ opc }`],
         antennaHeight : data[`antennaHeight-opt-${ opc }`],
         // TODO : generar ID general?
@@ -93,10 +96,10 @@ export const startSendNewOrder = ( data, opcionales ) => {
   
       // Orden Completa
       if( isSendFileSuccess === 'success' ){  
-        console.log( 'Data antenna model: ',data.antennaModel)
-        console.log( 'Antennas: ',antennas)
-        const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.replace(/ /g, "\u00a0") );
-        console.log( 'Antenna a enviar: ',antenna)
+        console.log( 'Data antenna model: ', data.antennaModel.value );
+        // console.log( 'Antennas: ',antennas );
+        const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.value.replace(/ /g, "\u00a0") );
+        console.log( 'Antenna a enviar: ',antenna );
         const height_type = antenna.height_types.find( height_type => height_type.name === data.antennaTypeHeight )?.id;
         
         const order = {
