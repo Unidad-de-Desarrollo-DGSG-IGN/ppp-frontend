@@ -108,7 +108,7 @@ Tecnologias usadas
   }
   ```
 
-#### Listado de antenas
+#### Listado de antenas y tipos de altura
 
 * Endpoint
   * URL: `http://172.20.201.39/ppp-test/antennas`
