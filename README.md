@@ -50,6 +50,7 @@ Tecnologias usadas
     "rand": 1
   }
   ```
+  
 
 
 #### Registro de usuario
