@@ -54,6 +54,11 @@
       padding: 0.5rem 1.5rem;
       margin: 1.6rem 1.6rem 0rem 1.6rem;
 
+      select {
+        font-family: $font-family-primary;
+        padding-left: 0.7rem;
+      }
+
       &--agree{
         display: flex;
         flex-direction: row;

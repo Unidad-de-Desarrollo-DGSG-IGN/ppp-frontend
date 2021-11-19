@@ -22,12 +22,12 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
   }
 
   return (
-    <>
+    <div>
       <div className='form__row'>
-         <label htmlFor='antennaModel'>Modelo de Antena</label>
+         <label htmlFor='antennaTypeHeight'>Modelo de Antena</label>
 
           <Controller 
-            name="antennaModel"
+            name="antennaTypeHeight"
             as={ Select }
             placeholder={'Buscar modelo de antena'}
             defaultValue=""
@@ -37,33 +37,14 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
             rules={{
               required: {
                 value : true,
-                message : "El modelo de antena es requisito"
+                message : "El tipo de altura de antena es requisito"
               }
             }}
           />
 
-          {/* <select 
-            name='antennaModel'
-            ref={ register(
-              {
-                required: {
-                  value : true,
-                  message : "El modelo de antena es requisito"
-                }
-              }
-            )}
-            errors={ errors }
-          >
-            {
-              antennas.map( antenna => 
-                 <option key={antenna.id}>{ `${antenna.name.replace(/ /g, "\u00a0")}` }</option>
-              )
-            }
-          </select> */}
-
-          { errors[ 'antennaModel' ] && <div> <p className='form__error'> { errors['antennaModel'].message } </p> </div> }
+          { errors[ 'antennaTypeHeight' ] && <div> <p className='form__error'> { errors['antennaTypeHeight'].message } </p> </div> }
         </div>
-    </>
+    </div>
   );
 };
 
