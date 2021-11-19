@@ -27,7 +27,7 @@ const AppRouter = ( ) => {
   }
 
   return (
-    <Router>
+    <Router basename={ `${process.env.PUBLIC_URL}` } >
       <div>
         <Switch>
           {/* TODO : realizar una una Ruta generica */}
