@@ -1,6 +1,7 @@
 {
   "name": "ppp-frontend",
   "version": "0.1.0",
+  "homepage": "/apps/ppp",
   "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -16,6 +17,7 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-select": "^5.2.1",
     "react-table": "^7.6.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",

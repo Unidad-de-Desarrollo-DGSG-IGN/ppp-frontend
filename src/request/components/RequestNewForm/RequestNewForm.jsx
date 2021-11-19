@@ -11,12 +11,15 @@ import withData from './withData';
 import { startSendNewOrder } from '../../actions/newOrder';
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
 import { startFormDataLoadingAntenna } from '../../actions/formData';
+import AntennaModelInput from '../AntennaModelInput/AntennaModelInput';
 
 const parameters = ''; // Parametros que pueden servir para la composicion de componentes
 
 
 const RequestNewForm = ( { forms } ) => {
-  const { handleSubmit, register, errors, watch, setError } = useForm( );
+  const { handleSubmit, register, errors, watch, setError, control } = useForm({
+    defaultValues: {antennaModel: ''}
+  });
   // const [ hide, setHide ] = useState( true );
   // let contadorValorInicial = 1;
   // const [contador, setContador] = useState( contadorValorInicial );
@@ -93,7 +96,7 @@ const RequestNewForm = ( { forms } ) => {
         }
 
         {/* // TODO : Refactorizar en with data */}
-        <div className='form__row'>
+        {/* <div className='form__row'>
          <label htmlFor='antennaModel'>Modelo de Antena</label>
           <select 
             name='antennaModel'
@@ -114,7 +117,9 @@ const RequestNewForm = ( { forms } ) => {
             }
           </select>
           { errors['antennaModel'] && <div> <p className='form__error'> {errors['antennaModel'].message} </p> </div> }
-        </div>
+        </div> */}
+
+        <AntennaModelInput errors={ errors } antennas={ antennas } control={ control }  />
 
         <div className='form__row'>
           <label htmlFor='antennaTypeHeight'>Tipo de altura de antena</label>
@@ -131,7 +136,7 @@ const RequestNewForm = ( { forms } ) => {
             errors={ errors }
           >
             {
-              antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel") )?.height_types.map( height => 
+              antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel").value )?.height_types.map( height => 
                  <option key={ height.id }>{ height.name }</option>
               )
             }
