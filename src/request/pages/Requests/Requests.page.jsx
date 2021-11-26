@@ -5,6 +5,7 @@ import IconCancel from '../../../shared/components/IconCancel/IconCancel';
 import IconStop from '../../../shared/components/IconStop/IconStop';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
+import { startFormDataLoadingAntenna } from '../../actions/formData';
 import { sendNewOrderClean } from '../../actions/newOrder';
 import { startOrdersLoading } from '../../actions/orderFetch';
 import ReportDownload from '../../components/ReportDownload/ReportDownload';
@@ -61,7 +62,7 @@ const tableData = ( ordersClient = [ ] ) => {
 const THERE_ARE_NOT_ANTENNAS_LOADED = 0;
 
 const Requests = ( ) => {
-  console.log( '<Requests.js>/<Requests>: Requests' );
+  // console.log( '<Requests.js>/<Requests>: Requests' );
 
   const dispatch = useDispatch( );
   // TODO : Poner esta informacion de la tabla como props o como estado de Redux
@@ -71,6 +72,12 @@ const Requests = ( ) => {
 
   useEffect( ( ) => {
     dispatch( sendNewOrderClean( ) )
+  }, [ dispatch ] )
+
+  // console.log( '<RequestNew.js>/<RequestNew>: RequestNew' );
+  useEffect( ( ) => {
+    dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
+    // dispatch( startOrdersLoading( ) );
   }, [ dispatch ] );
   
   // TODO : Decidir que debe estar en el Root de PrivateRoot

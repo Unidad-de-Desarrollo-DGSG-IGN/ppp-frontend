@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { startFormDataLoadingAntenna } from '../../actions/formData';
 
 import RequestNewForm from '../../components/RequestNewForm/RequestNewForm';
 
 const RequestNew = ( ) => {
-  console.log( '<RequestNew.js>/<RequestNew>: RequestNew' );
+  const dispatch = useDispatch( );
+
+  // console.log( '<RequestNew.js>/<RequestNew>: RequestNew' );
+  useEffect( ( ) => {
+    dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
+    // dispatch( startOrdersLoading( ) );
+  }, [ dispatch ] );
   return (
     <div className='request-new' >
       <div className='request-new__header' >

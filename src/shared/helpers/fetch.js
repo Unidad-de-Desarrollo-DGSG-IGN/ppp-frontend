@@ -95,6 +95,10 @@ const fetchConToken = async( endpoint, username, info, method = 'GET' ) => {
       data => {
         // TODO : Guardar Tokens en LocalStorage
         // console.log( '<fetch.js>/<fetchSinToken>: Renew response', data );
+        if( data.status !== 'success' ){
+          console.log( 'Renew not success' );
+          return new Error('renew invalid');
+        } 
         // console.log( '<fetch.js>/<fetchSinToken>: status', data.status );
         // console.log( '<fetch.js>/<fetchSinToken>: Token', data.data.token.access_token );
         // console.log( '<fetch.js>/<fetchSinToken>: Renew Token', data.data.token.renovation_token );
@@ -113,7 +117,8 @@ const fetchConToken = async( endpoint, username, info, method = 'GET' ) => {
     .catch(
       err => {
         // TODO : Logout - Redux
-        console.log( '<fetch.js>/<fetchSinToken>: Error Token. Logout', err);
+        // console.log( '<fetch.js>/<fetchSinToken>: Error Token. Logout', err );
+        return new Error('renew invalid');
         // dispatch( startLogout );
         // Avisar afuera que se debe hacer logout - Promise con Error
       }

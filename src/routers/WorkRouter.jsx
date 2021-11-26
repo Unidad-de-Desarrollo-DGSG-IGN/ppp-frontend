@@ -13,13 +13,13 @@ import UserInfo from '../request/pages/UserInfo/UserInfo';
 const WorkRouter = ( ) => {
   console.log( '<WorkRouter.js>/<WorkRouter>: WorkRouter' );
 
-  const dispatch = useDispatch( );
+  // const dispatch = useDispatch( );
   // TODO : Aca cargar los datoa de las antenas?. O junto cuando se dispara con login_success?
   //        * Usar useEffect []
-  useEffect( ( ) => {
-    dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
-    // dispatch( startOrdersLoading( ) );
-  }, [ dispatch ] );
+  // useEffect( ( ) => {
+  //   dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
+  //   // dispatch( startOrdersLoading( ) );
+  // }, [ dispatch ] );
 
   useEffect( ( ) => {
     // console.log( '<PrivateRoute.jsx>/<PrivateRoute>: PrivateRoute' );

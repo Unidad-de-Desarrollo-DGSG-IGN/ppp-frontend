@@ -225,13 +225,15 @@ export const startChecking = ( ) => {
           lastname: lastname,
         }) );
       }else{
-        console.log( '<auth.js>/<startChecking>: No esta logueado' );
+        // console.log( '<auth.js>/<startChecking>: No esta logueado' );
         dispatch( checkingFinish( ) );
+        dispatch( authLoginError( ) );
+        dispatch( startLogout( ) );
         // TODO : Tirar error de logueo(?) y hacer LOGOUT general, con todos los dispatch.
-        authLoginError( );
       }
     }catch{
-      console.log( '<auth.js>/<startChecking>: Error al checkear si tiene informacion para loguearse' );
+      // console.log( '<auth.js>/<startChecking>: Error al checkear si tiene informacion para loguearse' );
+      dispatch( startLogout( ) );
       // TODO : Hacer logout, y error de logueo(?)
       // TODO : Clean Local Storage
     }

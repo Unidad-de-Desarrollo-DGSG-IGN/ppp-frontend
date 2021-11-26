@@ -7,7 +7,7 @@ import { fetchFileConToken } from '../../../shared/helpers/fetch';
 
 const AntennaDetail = ( { base_name, url_rinex, antenna_model, antenna_type_height, antenna_height } ) => {
   // TODO : Separarlo como funcion para reutilizarla. 
-  // TODO : Manejar ERORRES en caso que falle. Try catch al resolver la promesa
+  // TODO : Manejar ERORRES en caso que falle. Try catch al resolver la promesa. Si falla el renew, salir
   const downloadHandle = ( url ) => {
     fetchFileConToken( `files/${ url }` )
       .then( ( response ) => {
@@ -19,7 +19,8 @@ const AntennaDetail = ( { base_name, url_rinex, antenna_model, antenna_type_heig
           a.click( );
         })
       }).catch( ( error ) => {
-        console.log( '<AntennaDetail.jsx>/<AntennaDetail>: Error al abrir el pop-up de descarga del archivo', error );
+        // console.log( '<AntennaDetail.jsx>/<AntennaDetail>: Error al abrir el pop-up de descarga del archivo', error );
+        // TODO : Tratar error del download
       });
   };
 
