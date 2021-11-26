@@ -1,5 +1,6 @@
 import { fetchConToken } from '../../shared/helpers/fetch';
 import { types } from '../../shared/types/types';
+import { startLogout } from '../../users/actions/auth';
 
 
 // HELPERS
@@ -106,6 +107,11 @@ export const startOrdersLoading = ( ) => {
       const { username }  = getState( ).auth.data;
   
       const resList = await fetchConToken( 'orders', username );
+      // console.log( 'Respuesta ordenes: ', resList )
+      if( resList.message === 'renew invalid' ){
+        dispatch( startLogout( ) );
+      }
+
       const resOrders = await resList.json( );
       
       const orders =  await resOrders.data.orders.map( ( order ) => ({
@@ -126,7 +132,10 @@ export const startOrdersLoading = ( ) => {
 
     }catch( err ){
       // TODO : UX Manejar el error cambiando el estado de ERRORES de forma sincronica
-      console.log( '<orderFetch.js>/<startOrdersLoading>: No se pudo cargar la orden correctamente', err );
+      // console.log( '<orderFetch.js>/<startOrdersLoading>: No se pudo cargar la orden correctamente', err );
+      if( err.message === 'renew invalid' ){
+        dispatch( startLogout( ) );
+      }
       dispatch( LoadOrdersError( 'Error en la carga de las ordenes' ) ); // TODO : Hacer un archivo separado con objeto de mensajes de errores. Y no hardcodear dichos mensajes
     }
   }

@@ -37,7 +37,7 @@ const RequestNewForm = ( { forms } ) => {
   
   const handleForm = async ( data ) => {
     dispatch( startSendNewOrder( data, opcionales ) );
-    console.log( 'Datos del formulario: ', data);
+    // console.log( 'Datos del formulario: ', data);
   }
   
 

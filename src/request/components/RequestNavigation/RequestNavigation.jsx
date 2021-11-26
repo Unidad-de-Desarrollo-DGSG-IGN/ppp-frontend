@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTable, faList } from '@fortawesome/free-solid-svg-icons';
 
-import image_logo from './../../../shared/images/logo.png';
+import image_logo from './../../../shared/images/logo_ign.png';
 
 const RequestNavigation = ( ) => {
   return (

@@ -37,7 +37,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
         <hr />
 
         {/* TODO : Comentar los puntos moviles hasta que se desarrolle tal analisis */}
-        <div> 
+        {/* <div> 
           <h4>Puntos Móviles</h4>
           {
             ( data.moving_points?.length === MOVING_POINTS_CANTIDAD_NULA || !data.moving_points ) && <p>No hay puntos moviles</p>
@@ -45,7 +45,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
           {
             data.moving_points?.map( moving_point => <AntennaDetail  key={ moving_point.id } {...moving_point} />)
           }
-        </div>
+        </div> */}
 
       </div>
     </div>

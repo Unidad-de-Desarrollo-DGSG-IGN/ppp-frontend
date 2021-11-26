@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { types } from "../../shared/types/types";
 import { fetchConToken, fetchFileConToken, fetchSinToken } from '../../shared/helpers/fetch';
+import { startLogout } from '../../users/actions/auth';
 
 
 const sendNewOrder = ( ) => ({
@@ -88,6 +89,11 @@ export const startSendNewOrder = ( data, opcionales ) => {
   
         // const res = await fetchFileConToken( 'files', username, formData, 'POST' );
         const res = await fetchFileConToken( 'files', formData, 'POST' );
+
+        if( res.message === 'renew invalid' ){
+          dispatch( startLogout( ) );
+        }
+
         const resJson = await res.json( );
         console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta del archivo optativo enviado: ', resJson );
         // TODO : Pensar como ver el caso en que no se envie correctamente algun archivo. Y no deje realizar las ordenes.
