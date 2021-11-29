@@ -37,6 +37,7 @@ const tableData = ( ordersClient = [ ] ) => {
     base_name: orderClient.base_point.base_name,
     order_state: orderClient.state_order,
     order_detail: { 
+      processingError: orderClient.processingError,
       base : {
         url_rinex: orderClient.base_point.url_rinex,
         antenna_height: orderClient.base_point.antenna_height,

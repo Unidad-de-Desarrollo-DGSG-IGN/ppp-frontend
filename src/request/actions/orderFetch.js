@@ -13,6 +13,35 @@ const antenna_model = ( antennas, antennaId ) => {
   return antennas.find( antenna => antenna.id === antennaId ).name ;
 };
 
+const TypeError = ( processingError ) => {
+  const numberError = processingError[ 1 ];
+  switch ( numberError ){
+    case '1':
+      return 'No se puede generar el archivo de resumen';
+
+    case '2':
+      return 'No se puede procesar un RINEX de simple frecuencia';
+
+    case '3':
+      return 'Coordenadas fuera de los límites';
+
+    case '4':
+      return 'La fecha de medición debe ser superarior a 2006.362';
+
+    case '5':
+      return 'La fecha de medición debe ser de, al menos, dos días atrás de la fecha actual';
+
+    case '6':
+      return 'No se pudo procesar porque no se encontraron archivos de efemérides para descargar';
+
+    case '7':
+      return 'Error al generar el archivo resumen del RINEX';
+    
+    default:
+      return 'Error del proceso de la orden';
+  }
+};
+
 const stateOrder = ( status ) => {
   switch ( status ) {
     case 'PROCESSING':
@@ -118,6 +147,7 @@ export const startOrdersLoading = ( ) => {
         date_order: order.creationDate,
         state_order: stateOrder( order.status ),
         pdfFileId: order.pdfFileId,
+        processingError: TypeError( order.processingError ), // TODO : Mapear los errores
         base_point :{
           url_rinex: order.fileId,
           base_name: order.name,

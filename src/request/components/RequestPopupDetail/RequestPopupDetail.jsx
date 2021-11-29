@@ -5,9 +5,10 @@ import { loadOrderDetailClean, startLoadOrderDetail } from '../../actions/orderD
 import AntennaDetail from '../AntennaDetail/AntennaDetail';
 
 const RequestPopupDetail = ( { handleClose, data } ) => {
-  const MOVING_POINTS_CANTIDAD_NULA = 0 ;
+  // const MOVING_POINTS_CANTIDAD_NULA = 0 ;
   const dispatch = useDispatch( );
-  const orderDetail = useSelector(state => state.orderDetail );
+  const orderDetail = useSelector( state => state.orderDetail );
+  console.log( 'Order detail: ', orderDetail );
 
   // console.log( 'popup moving points', data.moving_points );
   // TODO : Crear un CustomHook que mapee "data" con datos matcheables procesados
@@ -20,6 +21,15 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
       dispatch( loadOrderDetailClean( ) );
     }
   }, [ dispatch, data ] );
+
+  const error = ( data ) => {
+    return(
+      <>
+        <h4>Error</h4>
+        <p>{data.processingError}</p>
+      </>
+    );
+  };
 
   return (
     <div className="popup-box" >
@@ -35,6 +45,12 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
         </div>
 
         <hr />
+
+        {
+          data.processingError 
+            ? error( data )
+            : null
+        }
 
         {/* TODO : Comentar los puntos moviles hasta que se desarrolle tal analisis */}
         {/* <div> 
