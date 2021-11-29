@@ -26,7 +26,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
     return(
       <>
         <h4>Error</h4>
-        <p>{data.processingError}</p>
+        <p>{data?.processingError}</p>
       </>
     );
   };
