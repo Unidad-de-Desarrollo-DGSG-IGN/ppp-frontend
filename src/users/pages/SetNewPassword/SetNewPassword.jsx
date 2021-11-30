@@ -92,8 +92,8 @@ const SetNewPassword = ( ) => {
         </form>
 
         { loading && <Spinner /> }
-        { error && <p>{ error }</p> }
-        { data && <p>{ data }</p> }
+        { error && <p className='message__error'>{ error }</p> }
+        { data && <p className='message__success'>{ data }</p> }
 
         <UserNavigation />
       </div>
