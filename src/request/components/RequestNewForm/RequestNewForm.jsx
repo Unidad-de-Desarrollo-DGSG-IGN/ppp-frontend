@@ -33,7 +33,7 @@ const RequestNewForm = ( { forms } ) => {
   
   useEffect( ( ) => {
     dispatch( startFormDataLoadingAntenna( ) );
-  }, [dispatch] );
+  }, [ dispatch ] );
   
   const handleForm = async ( data ) => {
     dispatch( startSendNewOrder( data, opcionales ) );

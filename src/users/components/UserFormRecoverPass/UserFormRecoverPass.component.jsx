@@ -12,9 +12,10 @@ const UserFormRecoverPass = ( { forms } ) => {
   const { loading, data, error } = useSelector(state => state.recoverPassword );
   const { register, handleSubmit, errors } = useForm( );
 
-  const handleForm = async ( ) => {
+  const handleForm = async ( data ) => {
+    console.log(data)
     // dispatch( sendRecoverPassword_clean( ) ); // TODO : Donde limpiar?
-    dispatch( startSendRecoverPassword( ) );
+    dispatch( startSendRecoverPassword( data.email ) );
   };
 
   return (

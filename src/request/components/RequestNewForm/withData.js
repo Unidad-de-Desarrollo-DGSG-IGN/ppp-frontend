@@ -2,7 +2,7 @@ const withData = ( parameters ) => ( Component ) => {
   
   const forms = [
     {
-      label: "Nombre del punto BASE (Entre cuatro y ocho caracteres alfanuméricos)",
+      label: "Nombre del punto BASE (Entre cuatro y nueve caracteres alfanuméricos)",
       type: "text",
       placeholder: 'Nombre de la Base',
       name: "name_base",

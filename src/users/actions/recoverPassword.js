@@ -26,14 +26,15 @@ export const sendRecoverPassword_clean = ( ) => ({
 // Async Actions
 
 export const startSendRecoverPassword = ( email ) => {
+  console.log( 'email: ', email )
   return async( dispatch ) => {
     dispatch( sendRecoverPassword( ) );
     try{
-
-      // TODO : Armar la URL para 
       const resp = await fetchSinToken( 
-        `users/recover/${ email }`, // Fix URL
-        null,
+        `auth/recovery-password`,
+        {
+          email: email,
+        },
         'POST',
       );
       const body = await resp.json( );
