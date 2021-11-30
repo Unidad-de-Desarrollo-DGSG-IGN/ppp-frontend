@@ -16,7 +16,7 @@ const withData = ( parameters ) => ( Component ) => {
           message: "Nombre base corta"
         },
         maxLength:{
-          value: 8,
+          value: 9,
           message: "Nombre base largo"
         },
         pattern: {
