@@ -12,6 +12,7 @@ import { startSendNewOrder } from '../../actions/newOrder';
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
 import { startFormDataLoadingAntenna } from '../../actions/formData';
 import AntennaModelInput from '../AntennaModelInput/AntennaModelInput';
+import { Redirect } from 'react-router';
 
 const parameters = ''; // Parametros que pueden servir para la composicion de componentes
 
@@ -237,6 +238,7 @@ const RequestNewForm = ( { forms } ) => {
 
       { loading && <Spinner /> }
       { error && <p className='message__error'>{ error }</p> }
+      { data && <Redirect to='/requests/request-new/success' /> }
       { data && <p className='message__success'>{ data }</p> }
 
     </div>

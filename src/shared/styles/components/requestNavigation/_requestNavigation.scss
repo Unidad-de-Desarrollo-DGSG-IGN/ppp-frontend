@@ -26,5 +26,17 @@
   
   border-top: $color-lightblue--light solid 0.1rem;
   border-bottom: $color-lightblue--light solid 0.1rem;
+
+  &--column {
+    height: auto;
+    align-items: center;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2rem 0rem 2rem 0rem;
+    border: none;
+  }
 }
 

@@ -94,8 +94,8 @@ const fetchConToken = async( endpoint, username, info, method = 'GET' ) => {
     .then(
       data => {
         // TODO : Guardar Tokens en LocalStorage
-        // console.log( '<fetch.js>/<fetchSinToken>: Renew response', data );
-        if( data.status !== 'success' ){
+        console.log( '<fetch.js>/<fetchSinToken>: Renew response', data );
+        if( data.status !== 'success' || data.status === 'fail' ){
           console.log( 'Renew not success' );
           return new Error('renew invalid');
         } 
@@ -164,6 +164,8 @@ const fetchConToken = async( endpoint, username, info, method = 'GET' ) => {
 const fetchFileConToken = ( endpoint, formFile, method = 'GET' ) => {
   const url = `${ baseUrl }/${ endpoint }`;
   const token = localStorage.getItem('token') || '';
+
+  // TODO : Ver el tema de RENEW y salida en caso de fallo
 
   if ( method === 'GET' ) {
     return fetch( url, {

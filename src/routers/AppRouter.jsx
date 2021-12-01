@@ -30,7 +30,7 @@ const AppRouter = ( ) => {
     <Router basename={ `${process.env.PUBLIC_URL}` } >
       <div>
         <Switch>
-          {/* TODO : realizar una una Ruta generica */}
+          {/* TODO : realizar una Ruta generica */}
           <Route path='/report/:code' component={ ( ) => <div className='auth' > <ReportQR /> </div> } />
 
           <PublicRoute path='/auth' isAuthenticated={ !!uid  } component={ AuthRouter } />

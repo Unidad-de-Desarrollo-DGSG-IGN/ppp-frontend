@@ -24,8 +24,8 @@ const UserInfo = ( ) => {
       </div>        
 
       <div className='request-container' >
-        <h3>Info</h3>
-        <div className='request-new__form' >
+        <h3>Información</h3>
+        <div className='request-new__form request-new__form--noborder' >
           <div className={ styles.row} >
             <p>Nombre: { firstname } </p>
           </div>
