@@ -57,6 +57,11 @@ export const startSendNewOrder = ( data, opcionales ) => {
       const resJson = await res.json( );
       console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta del archivo principal enviado: ', resJson );
       const isSendFileSuccess = resJson.status;
+      if( isSendFileSuccess !==  'success' ){
+        console.log('Salir');
+        // TODO : dispatch para salir
+        dispatch( startLogout( ) );
+      }
   
       // Moving Points - Armado base de movingPoints y envio de archivos
       // TODO : Generar el ID para el archivo MAIN y luego pasarlo a los moving points. Ver si no hay movingPoints, lista vacia.
@@ -133,25 +138,13 @@ export const startSendNewOrder = ( data, opcionales ) => {
         console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrderJson );
         // TODO: manejar la respuesta de las ordenes
         // Verificar respuesta
-        // if( resOrderJson?.status === 'success' ){
         if( resOrder.status === 201 || resOrderJson?.status === 'success' ){
           let msgSuccess = 'Orden enviada';
           dispatch( sendNewOrderSuccess( msgSuccess ) );
-
-          // setTimeout( ( ) => {
-          //   dispatch( sendNewOrderClean( ) )
-          // },
-          //   3000
-          // );
         }else{
           let msgError = 'Error al crear una nueva orden';
           dispatch( sendNewOrderError( msgError ) );
-
-          // setTimeout( ( ) => {
-          //   dispatch( sendNewOrderClean( ) )
-          // },
-          //   3000
-          // );
+          dispatch( startLogout( ) );
         }
 
         // TODO : Repensar que poner en payload para la orden enviada.

@@ -7,6 +7,7 @@ import RequestFooter from '../request/components/RequestFooter/RequestFooter';
 import RequestNavigation from '../request/components/RequestNavigation/RequestNavigation';
 import RequestUserNavigation from '../request/components/UserRequestNavigation/RequestUserNavigation';
 import RequestNew from '../request/pages/RequestNew/RequestNew.page';
+import RequestNewSuccess from '../request/pages/RequestNewSuccess/RequestNewSuccess';
 import Requests from '../request/pages/Requests/Requests.page';
 import UserInfo from '../request/pages/UserInfo/UserInfo';
 
@@ -37,6 +38,10 @@ const WorkRouter = ( ) => {
       <Switch>
         <Route exact path='/requests/request-new'>
           <RequestNew />
+        </Route>
+
+        <Route exact path='/requests/request-new/success'>
+          <RequestNewSuccess />
         </Route>
 
         <Route exact path='/requests/requests'>

@@ -32,6 +32,12 @@
     border-bottom: 0.1rem solid $color-lightblue--light;
     font-weight: bold;
   }
+
+  &--column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 

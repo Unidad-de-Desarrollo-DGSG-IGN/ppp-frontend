@@ -39,12 +39,12 @@ export const startLogin = ( email, password ) => {
         await localStorage.setItem( 'token', body.data.token.access_token );
         await localStorage.setItem( 'token_renew', body.data.token.renovation_token );
 
-        console.log( '<auth.js>/<startLogin>: user Info ', body.data.user)
+        // console.log( '<auth.js>/<startLogin>: user Info ', body.data.user );
         
 
         const respDataUser = await fetchConToken( `users/${ body.data.user.userId }`, username );
         const bodyDataUser = await respDataUser.json();
-        console.log( '<auth.js>/<startLogin>: Body: ', bodyDataUser );
+        // console.log( '<auth.js>/<startLogin>: Body: ', bodyDataUser );
 
         if( bodyDataUser?.status === 'success' ){
           // console.log( '<auth.js>/<startLogin>: Body: ', body.data.user );
@@ -80,7 +80,7 @@ export const startLogin = ( email, password ) => {
           // TODO
           //      * Pensar en el error
           //      * Borrar lo guardado en el LocalStorage hasta el momento
-          console.log( 'Error al Obtener toda la data user.' )
+          // console.log( 'Error al Obtener toda la data user.' )
           dispatch( authLoginError( ) );
         }
         

@@ -71,6 +71,10 @@
         }
       }
     }
+
+    &--noborder {
+      border: none;
+    }
   }
 
   h2 {
@@ -103,6 +107,10 @@
     width: 100%;
     max-width: 95%;
     font-weight: 700;
+  }
+
+  &--success{
+    border: none;
   }
 }
 
