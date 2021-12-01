@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import SetNewPassword from '../users/pages/SetNewPassword/SetNewPassword';
 
 import UserLogin from '../users/pages/UserLogin/UserLogin.page';
 import UserRecoverPassword from '../users/pages/UserRecoverPassword/UserRecoverPassword.page';
@@ -26,6 +27,10 @@ const AuthRouter = ( ) => {
 
         <Route path='/auth/verification/:code'>
           <UserVerification />
+        </Route>
+
+        <Route path='/auth/change-password/:code'>
+          <SetNewPassword />
         </Route>
 
         <Redirect to='/auth/login' />

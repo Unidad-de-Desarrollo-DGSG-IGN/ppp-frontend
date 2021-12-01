@@ -62,6 +62,11 @@ export const types = {
   loadOrderDetail_error: '[load order detail] load antenna detail error',
   loadOrderDetail_clean: '[load order detail] clean antenna detail',
 
+  sendResetPassword: '[send reset password] start send reset password',
+  sendResetPassword_success: '[send reset password] send reset password success',
+  sendResetPassword_error: '[send reset password] send reset password error',
+  sendResetPassword_clean: '[send reset password] clean reset password',
+
   // PROCESSING some Action
   // TODO : Pensar en hacer una accion que modifique el estado de la apliacion entera para que no haya conflicto entre acciones.
 }

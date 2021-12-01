@@ -40,32 +40,14 @@ export const startSendRegisterVerification = ( token ) => {
       if( body?.status === 'success' ){
         let msg = 'Su cuenta ha sido registrada satisfactoriamente.';
         dispatch( sendRegisterVerificationSuccess( msg ) );
-
-        setTimeout( ( ) => {
-          dispatch( sendRegisterVerificationClean( ) )
-        },
-          3000
-        );
       }else{
         let errorMsg = 'Ha ocurrido un error en el verificación de la cuenta.';
         dispatch( sendRegisterVerificationError( errorMsg ) );
-
-        setTimeout( ( ) => {
-          dispatch( sendRegisterVerificationClean( ) )
-        },
-          3000
-        );
       }
 
     }catch( err ){
       let errorMsg = 'Ha ocurrido un error en el verificación de la cuenta.';
       dispatch( sendRegisterVerificationError( errorMsg ) );
-
-      setTimeout( ( ) => {
-        dispatch( sendRegisterVerificationClean( ) )
-      },
-        3000
-      );
     };
   };
 };
