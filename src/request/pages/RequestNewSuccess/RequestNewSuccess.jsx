@@ -20,13 +20,13 @@ const RequestNewSuccess = ( ) => {
       <div className='request-header' >
         <h3>Solicitud</h3>
 
-        <p>Solitud realizada</p>
+        {/* <p>Solitud realizada</p> */}
         <hr/>
       </div>        
 
       <div className='request-container request-container--column' >
         <div className='request-new__form request-new__form--success' >
-        <h3>Orden</h3>
+        <h3>Solicitud genereda correctamente</h3>
           <div className={ styles.row} >
             <p>
               El procesamiento ha comenzado y puede demorar algunos minutos. Le enviaremos desde la cuenta ppp@ign.gob.ar un correo electrónico con un reporte de los resultados una vez finalizado el mismo con éxito.
