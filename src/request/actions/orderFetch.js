@@ -161,9 +161,12 @@ export const startOrdersLoading = ( ) => {
           antenna_model: order.antennaId,
           antenna_height: order.height,
           antenna_type_height: order.antennaHeightTypeId,
+          measurementSurfaceId: order.measurementSurfaceId,
         },
         // mobile_points: await movingPoints( order.id ) || [], // TODO devolver la lista de mobile points ya procesados
       }) );
+
+      // console.log( 'res Orders!!!',orders);
 
       dispatch( LoadOrdersSuccess( orders ) );
 
@@ -173,7 +176,7 @@ export const startOrdersLoading = ( ) => {
       if( err.message === 'renew invalid' ){
         dispatch( startLogout( ) );
       }
-      console.log( err )
+      // console.log( err )
       dispatch( LoadOrdersError( 'Error en la carga de las ordenes' ) ); // TODO : Hacer un archivo separado con objeto de mensajes de errores. Y no hardcodear dichos mensajes
     }
   }

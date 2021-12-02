@@ -8,7 +8,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
   // const MOVING_POINTS_CANTIDAD_NULA = 0 ;
   const dispatch = useDispatch( );
   const orderDetail = useSelector( state => state.orderDetail );
-  console.log( 'Order detail: ', orderDetail );
+  // console.log( 'Order detail: ', orderDetail );
 
   // console.log( 'popup moving points', data.moving_points );
   // TODO : Crear un CustomHook que mapee "data" con datos matcheables procesados
@@ -26,7 +26,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
     return(
       <>
         <h4>Error</h4>
-        <p>{data?.processingError}</p>
+        <p>{ data?.processingError }</p>
       </>
     );
   };

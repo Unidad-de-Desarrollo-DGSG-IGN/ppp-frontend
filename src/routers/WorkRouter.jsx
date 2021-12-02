@@ -12,7 +12,7 @@ import Requests from '../request/pages/Requests/Requests.page';
 import UserInfo from '../request/pages/UserInfo/UserInfo';
 
 const WorkRouter = ( ) => {
-  console.log( '<WorkRouter.js>/<WorkRouter>: WorkRouter' );
+  // console.log( '<WorkRouter.js>/<WorkRouter>: WorkRouter' );
 
   // const dispatch = useDispatch( );
   // TODO : Aca cargar los datoa de las antenas?. O junto cuando se dispara con login_success?

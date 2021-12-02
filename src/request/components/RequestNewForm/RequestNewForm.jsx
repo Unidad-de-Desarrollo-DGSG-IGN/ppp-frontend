@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,8 @@ import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
 import { startFormDataLoadingAntenna } from '../../actions/formData';
 import AntennaModelInput from '../AntennaModelInput/AntennaModelInput';
 import { Redirect } from 'react-router';
+import MeasurementSurfacesInput from '../MeasurementSurfacesInput/MeasurementSurfacesInput';
+import { startLoadMeasurementSurface } from '../../actions/MeasurementSurfacesFetch';
 
 const parameters = ''; // Parametros que pueden servir para la composicion de componentes
 
@@ -26,19 +28,26 @@ const RequestNewForm = ( { forms } ) => {
   // const [contador, setContador] = useState( contadorValorInicial );
   // const [opcionales, setOpcionales] = useState( [ ] );
   
-  const [ opcionales ] = useState( [ ] );
+  // const [ opcionales ] = useState( [ ] );
   
   const dispatch = useDispatch( );
   const { antennas } = useSelector( state => state.formsData );
+  const { data: measurementSurfaces } = useSelector( state => state.measurementSurfaces );
   const { loading, error, data } = useSelector( state => state.newOrder );
   
   useEffect( ( ) => {
     dispatch( startFormDataLoadingAntenna( ) );
   }, [ dispatch ] );
   
+  useEffect( ( ) => {
+    dispatch( startLoadMeasurementSurface( ) );
+  }, [ dispatch ] );
+  
   const handleForm = async ( data ) => {
-    dispatch( startSendNewOrder( data, opcionales ) );
-    // console.log( 'Datos del formulario: ', data);
+    // dispatch( startSendNewOrder( data, opcionales ) );
+    dispatch( startSendNewOrder( data ) );
+    // console.log( 'Datos del formulario: ', data );
+    // console.log( 'Datos del formulario: ', data.measurementSurfaces.value );
   }
   
 
@@ -62,7 +71,7 @@ const RequestNewForm = ( { forms } ) => {
             )}
             errors={ errors }
             onChange={ e => {
-              console.log(e.target.files[0].size);
+              // console.log(e.target.files[0].size);
               let archivo_limite_mb = 20 // TODO : Consultar a una api el valor limite del archivo
               if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){ 
                 console.log('Te pasaste!');
@@ -96,30 +105,6 @@ const RequestNewForm = ( { forms } ) => {
           ) 
         }
 
-        {/* // TODO : Refactorizar en with data */}
-        {/* <div className='form__row'>
-         <label htmlFor='antennaModel'>Modelo de Antena</label>
-          <select 
-            name='antennaModel'
-            ref={ register(
-              {
-                required: {
-                  value : true,
-                  message : "El modelo de antena es requisito"
-                }
-              }
-            )}
-            errors={ errors }
-          >
-            {
-              antennas.map( antenna => 
-                 <option key={antenna.id}>{ `${antenna.name.replace(/ /g, "\u00a0")}` }</option>
-              )
-            }
-          </select>
-          { errors['antennaModel'] && <div> <p className='form__error'> {errors['antennaModel'].message} </p> </div> }
-        </div> */}
-
         <AntennaModelInput errors={ errors } antennas={ antennas } control={ control }  />
 
         <div className='form__row'>
@@ -142,7 +127,7 @@ const RequestNewForm = ( { forms } ) => {
               )
             }
           </select>
-          { errors['antennaTypeHeight'] && <div> <p className='form__error'> {errors['antennaTypeHeight'].message} </p> </div> }
+          { errors['antennaTypeHeight'] && <div> <p className='form__error'> { errors['antennaTypeHeight'].message } </p> </div> }
         </div>
 
         <div className='form__row'>
@@ -164,7 +149,9 @@ const RequestNewForm = ( { forms } ) => {
           { errors['antennaHeight'] && <div> <p className='form__error'> {errors['antennaHeight'].message} </p> </div> }
         </div>
 
-        <br/>
+        {/* <br/> */}
+
+        <MeasurementSurfacesInput errors={ errors } measurementSurfaces={ measurementSurfaces } control={ control } />
 
         {/* <div 
           className='optional-form'
@@ -215,7 +202,7 @@ const RequestNewForm = ( { forms } ) => {
 
         {/* <hr /> */}
 
-        <div className='form__row form__row--agree'>
+        {/* <div className='form__row form__row--agree'>
           <label htmlFor='antennaHeight'>Acepto que los resultados del procesamiento puedan ser utilizados por el IGN para la evaluación de productos y servicios cartográficos y/o geodésicos.</label>
           <input 
             type='checkbox'
@@ -229,7 +216,7 @@ const RequestNewForm = ( { forms } ) => {
             errors={ errors }
           />
           { errors['agree'] && <div> <p className='form__error'> {errors['agree'].message} </p> </div> }
-        </div>
+        </div> */}
 
         <button className={ loading ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ loading } > Registrar Solicitud </button>
         

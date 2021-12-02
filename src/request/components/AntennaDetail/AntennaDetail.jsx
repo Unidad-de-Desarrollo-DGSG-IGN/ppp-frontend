@@ -5,7 +5,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { fetchFileConToken } from '../../../shared/helpers/fetch';
 
 
-const AntennaDetail = ( { base_name, url_rinex, antenna_model, antenna_type_height, antenna_height } ) => {
+const AntennaDetail = ( { base_name, url_rinex, antenna_model, antenna_type_height, antenna_height, measurementSurface } ) => {
   // TODO : Separarlo como funcion para reutilizarla. 
   // TODO : Manejar ERORRES en caso que falle. Try catch al resolver la promesa. Si falla el renew, salir
   const downloadHandle = ( url ) => {
@@ -38,6 +38,7 @@ const AntennaDetail = ( { base_name, url_rinex, antenna_model, antenna_type_heig
       <p>Modelo de antena: { antenna_model }</p>
       <p>Tipo de altura de antena: { antenna_type_height } </p>
       <p>Altura de antena: {antenna_height } </p>
+      <p>Lugar de donde se midio la base: { measurementSurface }</p>
     </div>
   )
 }

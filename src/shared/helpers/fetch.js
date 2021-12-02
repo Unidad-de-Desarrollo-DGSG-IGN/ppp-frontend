@@ -94,7 +94,7 @@ const fetchConToken = async( endpoint, username, info, method = 'GET' ) => {
     .then(
       data => {
         // TODO : Guardar Tokens en LocalStorage
-        console.log( '<fetch.js>/<fetchSinToken>: Renew response', data );
+        // console.log( '<fetch.js>/<fetchSinToken>: Renew response', data );
         if( data.status !== 'success' || data.status === 'fail' ){
           console.log( 'Renew not success' );
           return new Error('renew invalid');

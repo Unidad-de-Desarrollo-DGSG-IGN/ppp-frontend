@@ -6,6 +6,7 @@ import IconStop from '../../../shared/components/IconStop/IconStop';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
 import { startFormDataLoadingAntenna } from '../../actions/formData';
+import { startLoadMeasurementSurface } from '../../actions/MeasurementSurfacesFetch';
 import { sendNewOrderClean } from '../../actions/newOrder';
 import { startOrdersLoading } from '../../actions/orderFetch';
 import ReportDownload from '../../components/ReportDownload/ReportDownload';
@@ -44,6 +45,7 @@ const tableData = ( ordersClient = [ ] ) => {
         antenna_model: orderClient.base_point.antenna_model,
         antenna_type_height: orderClient.base_point.antenna_type_height,
         base_name: orderClient.base_point.base_name,
+        measurementSurfaceId: orderClient.base_point.measurementSurfaceId,
       },
       moving_points:
         orderClient.mobile_points?.map( moving_point => (
@@ -80,6 +82,11 @@ const Requests = ( ) => {
     dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
     // dispatch( startOrdersLoading( ) );
   }, [ dispatch ] );
+
+  useEffect( ( ) => {
+    dispatch( startLoadMeasurementSurface( ) ); // TODO : Mover unos componentes mas arriba
+    // dispatch( startOrdersLoading( ) );
+  }, [ dispatch ] );
   
   // TODO : Decidir que debe estar en el Root de PrivateRoot
   //        * Los datos de las antenas deben estar en el Root
@@ -88,7 +95,7 @@ const Requests = ( ) => {
   
   useEffect( ( ) => {
     // TODO : Hacer funciones que digan si esta o no la condicion de antennas y username
-    console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
+    // console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
     if( antennas.length !== THERE_ARE_NOT_ANTENNAS_LOADED ){
       dispatch( startOrdersLoading( ) );
     }else{

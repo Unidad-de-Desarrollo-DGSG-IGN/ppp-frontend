@@ -33,8 +33,8 @@ export const sendNewOrderClean = ( ) => ({
 
 
 export const startSendNewOrder = ( data, opcionales ) => {
-  console.log( 'Data antenna model: ', data.antennaModel.value );
-  // TODO : Hacer acciones con THUNK
+  // console.log( 'Data antenna model: ', data.antennaModel.value );
+
   return async( dispatch, getState ) => {
     dispatch( sendNewOrder( ) );
 
@@ -44,8 +44,14 @@ export const startSendNewOrder = ( data, opcionales ) => {
       const { username }  = getState( ).auth.data;
       // const { data: antennas }  = getState( ).formsData; // TODO : Guardar antennas en data, y no en antennas.
       const { antennas }  = getState( ).formsData;
+      const { data: measurementSurfacesList }  = getState( ).measurementSurfaces;
+
+      // console.log('MeasurementSurfaces: ')
+      // console.log( measurementSurfacesList );
+      // console.log( data.measurementSurfaces.value );
 
       // Archivo Principal - envio de archivo
+      // TODO : Comprimir esto en una funcion para abstraer funcionalidad
       const formData = new FormData( );
       let indicePrimerElementoFile = 0;
       formData.append( 'file', data.file[ indicePrimerElementoFile ] );
@@ -55,62 +61,63 @@ export const startSendNewOrder = ( data, opcionales ) => {
       // const res = await fetchFileConToken( 'files', username, formData, 'POST' );
       const res = await fetchFileConToken( 'files', formData, 'POST' );
       const resJson = await res.json( );
-      console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta del archivo principal enviado: ', resJson );
+      // console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta del archivo principal enviado: ', resJson );
       const isSendFileSuccess = resJson.status;
       if( isSendFileSuccess !==  'success' ){
-        console.log('Salir');
-        // TODO : dispatch para salir
+        // console.log('Salir');
+        // TODO : dispatch para salir o tirar error? Verificar el codigo 400
         dispatch( startLogout( ) );
       }
   
       // Moving Points - Armado base de movingPoints y envio de archivos
       // TODO : Generar el ID para el archivo MAIN y luego pasarlo a los moving points. Ver si no hay movingPoints, lista vacia.
       // TODO : Separar en una funcion.
-      const movingPoints = opcionales.map( ( opc ) => ({
-        name : data[`name-moving-${ opc }`],
-        antennaModel : data[`antennaModel-opt-${ opc }`], // TODO : .value
-        antennaTypeHeight : data[`antennaTypeHeight-opt-${ opc }`],
-        antennaHeight : data[`antennaHeight-opt-${ opc }`],
-        // TODO : generar ID general?
-        file: data[`file-opt-${ opc }`],
-      }) );
+      // const movingPoints = opcionales.map( ( opc ) => ({
+      //   name : data[`name-moving-${ opc }`],
+      //   antennaModel : data[`antennaModel-opt-${ opc }`], // TODO : .value
+      //   antennaTypeHeight : data[`antennaTypeHeight-opt-${ opc }`],
+      //   antennaHeight : data[`antennaHeight-opt-${ opc }`],
+      //   // TODO : generar ID general?
+      //   file: data[`file-opt-${ opc }`],
+      // }) );
   
       // console.log( '<RequestNewForm.jsx>/<handleForm> : Moving points: ', movingPoints );
   
-      const movingPointsIdList = await movingPointsId( movingPoints );
+      // const movingPointsIdList = await movingPointsId( movingPoints );
       // console.log( '<RequestNewForm.jsx>/<handleForm> : Moivng Points IDs ', movingPointsIdList );
   
       // TODO : Enviar archivo principal y opcionales
       // TODO : Si los envios de archivos salen bien, enviar las ordenes con los datos
   
-      movingPointsIdList.forEach( async( movingPoint ) => {
-        // console.log(movingPoint.file);
-        // console.log(movingPoint.fileId);
+      // movingPointsIdList.forEach( async( movingPoint ) => {
+      //   // console.log(movingPoint.file);
+      //   // console.log(movingPoint.fileId);
   
-        // TODO : Hacer funcion de envio de archivo
-        const formData = new FormData( );
-        formData.append( 'file', movingPoint.file );
-        formData.append( 'id', movingPoint.fileId );
+      //   // TODO : Hacer funcion de envio de archivo
+      //   const formData = new FormData( );
+      //   formData.append( 'file', movingPoint.file );
+      //   formData.append( 'id', movingPoint.fileId );
   
-        // const res = await fetchFileConToken( 'files', username, formData, 'POST' );
-        const res = await fetchFileConToken( 'files', formData, 'POST' );
+      //   // const res = await fetchFileConToken( 'files', username, formData, 'POST' );
+      //   const res = await fetchFileConToken( 'files', formData, 'POST' );
 
-        if( res.message === 'renew invalid' ){
-          dispatch( startLogout( ) );
-        }
+      //   if( res.message === 'renew invalid' ){
+      //     // TODO : Salir en caso de error
+      //     dispatch( startLogout( ) );
+      //   }
 
-        const resJson = await res.json( );
-        console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta del archivo optativo enviado: ', resJson );
-        // TODO : Pensar como ver el caso en que no se envie correctamente algun archivo. Y no deje realizar las ordenes.
-      });
+      //   const resJson = await res.json( );
+      //   console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta del archivo optativo enviado: ', resJson );
+      //   // TODO : Pensar como ver el caso en que no se envie correctamente algun archivo. Y no deje realizar las ordenes.
+      // });
   
   
       // Orden Completa
       if( isSendFileSuccess === 'success' ){  
-        console.log( 'Data antenna model: ', data.antennaModel.value );
+        // console.log( 'Data antenna model: ', data.antennaModel.value );
         // console.log( 'Antennas: ',antennas );
         const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.value.replace(/ /g, "\u00a0") );
-        console.log( 'Antenna a enviar: ',antenna );
+        // console.log( 'Antenna a enviar: ',antenna );
         const height_type = antenna.height_types.find( height_type => height_type.name === data.antennaTypeHeight )?.id;
         
         const order = {
@@ -120,16 +127,20 @@ export const startSendNewOrder = ( data, opcionales ) => {
           antennaId: antenna.id,
           antennaHeightTypeId: height_type,
           height: data.antennaHeight,
+          measurementSurfaceId: measurementSurface_id( data.measurementSurfaces.value, measurementSurfacesList ), // TODO : Procesar la opcion y poner el id correspondiente
+          movingPoints: [ ], // TODO : modificar luego cuando se desarrolle los puntos moviles
           // TODO : // Armar funcion que devuelva la lista de optativos listos
-          movingPoints: movingPointsIdList.map( movingPoint => ({ 
-            id: movingPoint.id,
-            fileId: movingPoint.fileId,
-            name: movingPoint.name,
-            antennaId: movingPoint.antennaId,
-            antennaHeightTypeId: movingPoint.antennaHeightTypeId,
-            height: movingPoint.height,
-          })),
+          // movingPoints: movingPointsIdList.map( movingPoint => ({ 
+          //   id: movingPoint.id,
+          //   fileId: movingPoint.fileId,
+          //   name: movingPoint.name,
+          //   antennaId: movingPoint.antennaId,
+          //   antennaHeightTypeId: movingPoint.antennaHeightTypeId,
+          //   height: movingPoint.height,
+          // })),
         }
+
+        console.log( 'Order a enviar: ', order );
   
         // console.log( '<RequestNewForm.jsx>/<handleForm> : Orden a  enviar: ', order );
         const resOrder = await fetchConToken( 'orders', username, order, 'POST' ); // TODO : Falta enviar username
@@ -174,6 +185,24 @@ export const startSendNewOrder = ( data, opcionales ) => {
 // TODO : Revisar las funciones en caso que sucedan errores
 // TODO : Hacer test de las funciones
 
+const measurementSurface_id = ( measurementSurfaceOption, measurementSurfaceList ) => {
+  console.log(measurementSurfaceOption)
+  console.log(measurementSurfaceList)
+  // return measurementSurfaceList.find( measurementSurfaceElement => measurementSurfaceElement.name === measurementSurfaceOption )?.id;
+  let envio =  measurementSurfaceList.find( measurementSurfaceElement => {
+    let result = measurementSurfaceElement.name.replace(/ /g, "\u00a0") === measurementSurfaceOption.replace(/ /g, "\u00a0");
+    console.log('Comparando:');
+    console.log( measurementSurfaceElement.name )
+    console.log( measurementSurfaceOption )
+
+    return result
+  } );
+
+  console.log(envio);
+  return envio?.id;
+};
+
+
 /**
  * Funcion que se encarga de traer el listado de antennas y su respectiva informacion.
  * No recibe parametros.
@@ -188,6 +217,7 @@ export const startSendNewOrder = ( data, opcionales ) => {
   return dataJson.data.antennas;
 }
 
+
 /**
  * Funcion que devuelve el ID de la antenna.
  * Recibe el listado de las antennas, y el modelo de la antenna.
@@ -200,6 +230,7 @@ export const startSendNewOrder = ( data, opcionales ) => {
 const antenna_id = ( antennas, antennaModel ) => {
   return antennas.find( antenna => antenna.name === antennaModel )?.id;
 }
+
 
 /**
  * Funcion que devuelve el correspondiente ID del HeightType de una antenna.
@@ -215,6 +246,7 @@ const antennaHeightType_id = ( antennas, antennaTypeHeight, antennaModel ) => {
   const antenna = antennas.find( antenna => antenna.name === antennaModel );
   return antenna.height_types.find( height_type => height_type.name === antennaTypeHeight )?.id;
 }
+
 
 /**
  * Funcion que procesa los movingPoints añadiendole informacion extra.
