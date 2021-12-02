@@ -96,11 +96,19 @@ const Requests = ( ) => {
   useEffect( ( ) => {
     // TODO : Hacer funciones que digan si esta o no la condicion de antennas y username
     // console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
-    if( antennas.length !== THERE_ARE_NOT_ANTENNAS_LOADED ){
+
       dispatch( startOrdersLoading( ) );
-    }else{
-    }
-  } , [ dispatch, antennas ] );
+
+  } , [ dispatch ] );
+  
+  // useEffect( ( ) => {
+  //   // TODO : Hacer funciones que digan si esta o no la condicion de antennas y username
+  //   // console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
+  //   if( antennas.length !== THERE_ARE_NOT_ANTENNAS_LOADED ){
+  //     dispatch( startOrdersLoading( ) );
+  //   }else{
+  //   }
+  // } , [ dispatch, antennas ] );
 
   useEffect( ( ) => {
     setTable( tableData( ordersClient ) );
