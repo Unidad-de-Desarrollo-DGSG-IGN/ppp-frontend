@@ -67,6 +67,11 @@ export const types = {
   sendResetPassword_error: '[send reset password] send reset password error',
   sendResetPassword_clean: '[send reset password] clean reset password',
 
+  loadMeasurementSurfaces:'[load measurement surfaces] start load measurement surfaces options',
+  loadMeasurementSurfaces_success:'[load measurement surfaces] load measurement surfaces options success',
+  loadMeasurementSurfaces_error:'[load measurement surfaces] load measurement surfaces options error',
+  loadMeasurementSurfaces_clean:'[load measurement surfaces] clean load measurement surfaces options',
+
   // PROCESSING some Action
   // TODO : Pensar en hacer una accion que modifique el estado de la apliacion entera para que no haya conflicto entre acciones.
 }

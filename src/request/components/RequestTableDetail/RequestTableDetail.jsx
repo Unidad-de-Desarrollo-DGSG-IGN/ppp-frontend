@@ -10,7 +10,7 @@ const RequestTableDetail = ( { data } ) => {
   const togglePopup = ( ) => {
     setIsOpen( !isOpen );
   };
-  console.log( 'data cell:', data );
+  // console.log( 'data cell:', data );
 
   return (
     <div>

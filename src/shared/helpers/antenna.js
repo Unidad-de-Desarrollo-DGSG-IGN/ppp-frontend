@@ -5,7 +5,7 @@ import { fetchConToken } from "./fetch";
 export const antenna_model = ( antennas, antennaId ) => {
   // console.log( 'antennas: ',antennas)
   // console.log( 'antenna ID: ',antennaId)
-  console.log(antennas.find( antenna => antenna.id === antennaId ))
+  // console.log(antennas.find( antenna => antenna.id === antennaId ));
   return antennas.find( antenna => antenna.id === antennaId ).name ;
 };
 
