@@ -31,7 +31,7 @@ const AppRouter = ( ) => {
       <div>
         <Switch>
           {/* TODO : realizar una Ruta generica */}
-          <Route path='/report/:code' component={ ( ) => <div className='auth' > <ReportQR /> </div> } />
+          <Route path='/report/:code/:base' component={ ( ) => <div className='auth' > <ReportQR /> </div> } />
 
           <PublicRoute path='/auth' isAuthenticated={ !!uid  } component={ AuthRouter } />
 

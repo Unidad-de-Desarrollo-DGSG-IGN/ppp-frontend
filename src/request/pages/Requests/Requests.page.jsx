@@ -32,6 +32,7 @@ const reportStatusIcon = ( status, pdfFileId ) => {
 
 
 // TODO : Separar en otro archivo
+// tableData Mapea los datos de las ordenes de forma tal que le sirva a la tabla para acceder (columns.js)
 const tableData = ( ordersClient = [ ] ) => {
   return ordersClient.map( orderClient => ({
     order_date: orderClient.date_order,

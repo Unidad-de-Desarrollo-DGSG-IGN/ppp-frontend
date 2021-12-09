@@ -9,7 +9,7 @@ const PppPresentation = ( ) => {
           <img src={ image_logo } alt='Logo IGN PPP-Ar' className='logo' />
           <div>
             <h4>PPP-Ar</h4>
-            <h3>Posicionamiento Puntual Preciso</h3>
+            <h3>Servicio de Posicionamiento Puntual Preciso de la República Argentina</h3>
           </div>
 
       </div>

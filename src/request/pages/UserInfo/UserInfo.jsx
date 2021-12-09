@@ -17,9 +17,9 @@ const UserInfo = ( ) => {
   return (
     <div className='requests' >
       <div className='request-header' >
-        <h3>Información del Usuario</h3>
+        <h3>Perfil del Usuario</h3>
 
-        <p>Información del usuario en detalle</p>
+        {/* <p>Información del usuario en detalle</p> */}
         <hr/>
       </div>        
 
@@ -33,7 +33,7 @@ const UserInfo = ( ) => {
             <p>Apellido: { lastname } </p>
           </div>
           <div className={ styles.row} >
-            <p>Email: { username } </p>
+            <p>Correo electrónico: { username } </p>
           </div>
         </div>
       </div>

@@ -72,11 +72,12 @@
       }
     }
 
-    &--noborder {
-      border: none;
-    }
   }
-
+  
+  &--noborder {
+    border: none;
+  }
+  
   h2 {
     background-color: $color-lightblue--light-2;
     border-radius: 0.5rem;
@@ -111,6 +112,12 @@
 
   &--success{
     border: none;
+
+    h3 {
+      background-color: greenyellow;
+      font-weight: 700;
+      color: #099d02;
+    }
   }
 }
 
