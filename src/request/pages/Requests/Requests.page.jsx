@@ -11,15 +11,17 @@ import { sendNewOrderClean } from '../../actions/newOrder';
 import { startOrdersLoading } from '../../actions/orderFetch';
 import ReportDownload from '../../components/ReportDownload/ReportDownload';
 import RequestTable from '../../components/RequestTable/RequestTable';
+import RequestErrorDetail from '../../components/RequestErrorDetail/RequestErrorDetail';
 
 // TODO : Mover a columns.js
-const reportStatusIcon = ( status, pdfFileId ) => {
+const reportStatusIcon = ( status, pdfFileId, errorMsg ) => {
   switch ( status ) {
     case 'Procesando':
       return <IconStop />
 
     case 'Cancelado':
-      return <IconCancel />
+      // return <IconCancel />
+      return <RequestErrorDetail errorMsg={ errorMsg } icon={ <IconCancel /> } /> 
 
     case 'Terminado':
       // TODO : Crear un componente que permita descargar el archivo. Usar Actions de Redux
@@ -59,7 +61,11 @@ const tableData = ( ordersClient = [ ] ) => {
           }
         )),
     },
-    order_download: reportStatusIcon( orderClient.state_order, orderClient.pdfFileId ), // TODO : cambiar el componente a columns.js. Que reciba solamente el state_order
+    order_download: reportStatusIcon( orderClient.state_order, orderClient.pdfFileId, orderClient.processingError ), // TODO : cambiar el componente a columns.js. Que reciba solamente el state_order
+    // order_download: {
+    //   icon : reportStatusIcon( orderClient.state_order, orderClient.pdfFileId )
+    //   processingError: orderClient.processingError,
+    // },
   }));
 };
 

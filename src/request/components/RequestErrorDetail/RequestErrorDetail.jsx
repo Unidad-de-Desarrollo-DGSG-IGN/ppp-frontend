@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-import RequestPopupDetail from '../RequestPopupDetail/RequestPopupDetail';
+import RequestPopupErrorDetail from '../RequestPopupErrorDetail/RequestPopupErrorDetail';
 
-const RequestTableDetail = ( { data } ) => {
+const RequestErrorDetail = ( { icon, errorMsg } ) => {
   const [ isOpen, setIsOpen ] = useState( false );
 
   const togglePopup = ( ) => {
     setIsOpen( !isOpen );
   };
-  // console.log( 'data cell:', data );
 
   return (
     <div>
@@ -18,14 +15,11 @@ const RequestTableDetail = ( { data } ) => {
         className='icon-container'
         onClick={ togglePopup }
       >
-        <FontAwesomeIcon 
-          icon={ faInfoCircle } 
-          className='icon'
-        />
+        { icon }
       </div>
-      { isOpen &&  <RequestPopupDetail handleClose={ togglePopup } data={ data } /> }
+      { isOpen &&  <RequestPopupErrorDetail handleClose={ togglePopup } errorMsg={ errorMsg } /> }
     </div>
   )
 }
 
-export default RequestTableDetail;
+export default RequestErrorDetail;

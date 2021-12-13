@@ -9,6 +9,7 @@ const IconStop = ( { size = 4 } ) => {
     <div 
       className={ styles.iconContainer }
       style={ { height: `${size}rem`, width: `${size}rem` } }
+      title="Orden en proceso"
     >
       <FontAwesomeIcon 
         icon={ faStopCircle } 
