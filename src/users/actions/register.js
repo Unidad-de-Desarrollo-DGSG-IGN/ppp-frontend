@@ -52,7 +52,7 @@ export const startSendRegister = ( dataForm ) => {
       const body = await resp.json( );
       
       if( body?.status === 'success' ){
-        let msg = 'Su registro ha sido exitoso. Le estara llegando un email para la verificacion de la cuenta.';
+        let msg = 'El registro ha sido exitoso. En breve recibirá un correo electrónico para verificar su cuenta.';
         dispatch( sendRegisterSuccess( msg ) );
       }else{
         let errorMsg = 'Ha ocurrido un error en el registro de la cuenta.';

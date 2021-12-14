@@ -89,26 +89,12 @@ const UserVerification = ( ) => {
       <div className='user-fields' >
         <h1>Verificación</h1>
         <hr />
-        <p>Verifique su email con el siguiente codigo:</p>
-
-        <p style={ { fontWeight: 'bold' } }>{ code }</p>
-        {/* <form 
-          className='form--login'
-          onSubmit={ onSubmit }
-        >
-          <p style={ { fontWeight: 'bold' } }>{ code }</p>
-          <button 
-            className={ loading ? 'btn btn--disabled' :'btn'} 
-            disabled={ loading }
-          >
-            Enviar código de verificación
-          </button>
-        </form> */}
 
         {/* { loading && <p>Servidor procesando</p> } */}
         { loading && <Spinner /> }
         { error && <p>{ error }</p> }
         { data && <p>{ data }</p> }
+        {/* TODO : Agregar componente de link para que el usuario vaya a Login si su cuenta se verifico correctamente. "Puede acceder al servicio haciendo click "aqui". " */}
 
         <UserNavigation />
       </div>

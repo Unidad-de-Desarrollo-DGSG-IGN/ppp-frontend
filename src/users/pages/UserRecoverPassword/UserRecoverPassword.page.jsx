@@ -23,7 +23,7 @@ const UserRecoverPassword = ( ) => {
       <div className='user-fields' >
         <h1>¿Olvidó su contraseña?</h1>
         <hr />
-        <p>Simplemente ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña.</p>
+        <p>Por favor, ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.</p>
         <UserFormRecoverPass />
 
         <UserNavigation />

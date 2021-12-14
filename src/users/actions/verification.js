@@ -38,7 +38,7 @@ export const startSendRegisterVerification = ( token ) => {
       const body = await resp.json( );
       
       if( body?.status === 'success' ){
-        let msg = 'Su cuenta ha sido registrada satisfactoriamente.';
+        let msg = 'La cuenta ha sido verificada satisfactoriamente.';
         dispatch( sendRegisterVerificationSuccess( msg ) );
       }else{
         let errorMsg = 'Ha ocurrido un error en el verificación de la cuenta.';

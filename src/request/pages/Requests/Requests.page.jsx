@@ -11,15 +11,17 @@ import { sendNewOrderClean } from '../../actions/newOrder';
 import { startOrdersLoading } from '../../actions/orderFetch';
 import ReportDownload from '../../components/ReportDownload/ReportDownload';
 import RequestTable from '../../components/RequestTable/RequestTable';
+import RequestErrorDetail from '../../components/RequestErrorDetail/RequestErrorDetail';
 
 // TODO : Mover a columns.js
-const reportStatusIcon = ( status, pdfFileId ) => {
+const reportStatusIcon = ( status, pdfFileId, errorMsg ) => {
   switch ( status ) {
     case 'Procesando':
-      return <IconStop />
+      return <IconStop title='Orden en proceso' />
 
     case 'Cancelado':
-      return <IconCancel />
+      // return <IconCancel />
+      return <RequestErrorDetail errorMsg={ errorMsg } icon={ <IconCancel /> } /> 
 
     case 'Terminado':
       // TODO : Crear un componente que permita descargar el archivo. Usar Actions de Redux
@@ -32,6 +34,7 @@ const reportStatusIcon = ( status, pdfFileId ) => {
 
 
 // TODO : Separar en otro archivo
+// tableData Mapea los datos de las ordenes de forma tal que le sirva a la tabla para acceder (columns.js)
 const tableData = ( ordersClient = [ ] ) => {
   return ordersClient.map( orderClient => ({
     order_date: orderClient.date_order,
@@ -58,11 +61,13 @@ const tableData = ( ordersClient = [ ] ) => {
           }
         )),
     },
-    order_download: reportStatusIcon( orderClient.state_order, orderClient.pdfFileId ), // TODO : cambiar el componente a columns.js. Que reciba solamente el state_order
+    order_download: reportStatusIcon( orderClient.state_order, orderClient.pdfFileId, orderClient.processingError ), // TODO : cambiar el componente a columns.js. Que reciba solamente el state_order
+    // order_download: {
+    //   icon : reportStatusIcon( orderClient.state_order, orderClient.pdfFileId )
+    //   processingError: orderClient.processingError,
+    // },
   }));
 };
-
-const THERE_ARE_NOT_ANTENNAS_LOADED = 0;
 
 const Requests = ( ) => {
   // console.log( '<Requests.js>/<Requests>: Requests' );
@@ -71,7 +76,6 @@ const Requests = ( ) => {
   // TODO : Poner esta informacion de la tabla como props o como estado de Redux
   const [ table, setTable ] = useState( [ ] );
   const { data: ordersClient, loading, error } = useSelector( state => state.orders );
-  const { antennas } = useSelector( state => state.formsData );
 
   useEffect( ( ) => {
     dispatch( sendNewOrderClean( ) )
@@ -100,15 +104,7 @@ const Requests = ( ) => {
       dispatch( startOrdersLoading( ) );
 
   } , [ dispatch ] );
-  
-  // useEffect( ( ) => {
-  //   // TODO : Hacer funciones que digan si esta o no la condicion de antennas y username
-  //   // console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
-  //   if( antennas.length !== THERE_ARE_NOT_ANTENNAS_LOADED ){
-  //     dispatch( startOrdersLoading( ) );
-  //   }else{
-  //   }
-  // } , [ dispatch, antennas ] );
+
 
   useEffect( ( ) => {
     setTable( tableData( ordersClient ) );
@@ -127,7 +123,7 @@ const Requests = ( ) => {
         <h3>Solicitudes</h3>
         {/* TODO : Revisar el tema del error */}
         { loading ? <Spinner /> : <RequestTable data={ table } /> }
-        { error &&  'Error' } 
+        { error &&  'Error al cargar las ordenes.' } 
       </div>
     </div>
   )

@@ -40,15 +40,15 @@ export const startSendRecoverPassword = ( email ) => {
       const body = await resp.json( );
       
       if( body?.status === 'success' ){
-        let msg = 'Se ha enviado un correo electronico para recuperar su cuenta.';
+        let msg = 'Se ha enviado un correo electrónico para restablecer su contraseña.';
         dispatch( sendRecoverPassword_success( msg ) );
       }else{
-        let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su cuenta.';
+        let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su contraseña.';
         dispatch( sendRecoverPassword_error( errorMsg ) );
       }
 
     }catch( err ){
-      let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su cuenta.';
+      let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su contraseña.';
       dispatch( sendRecoverPassword_error( errorMsg ) );
       
     

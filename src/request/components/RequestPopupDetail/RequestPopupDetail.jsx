@@ -22,10 +22,10 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
     }
   }, [ dispatch, data ] );
 
-  const error = ( data ) => {
+  const ErrorSection = ( data ) => {
     return(
       <>
-        <h4>Error</h4>
+        <h4>Motivo de cancelación de la solicitud</h4>
         <p>{ data?.processingError }</p>
       </>
     );
@@ -48,7 +48,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
 
         {
           data.processingError 
-            ? error( data )
+            ? ErrorSection( data )
             : null
         }
 
