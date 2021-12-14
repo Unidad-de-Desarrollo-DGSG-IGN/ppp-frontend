@@ -17,7 +17,7 @@ import RequestErrorDetail from '../../components/RequestErrorDetail/RequestError
 const reportStatusIcon = ( status, pdfFileId, errorMsg ) => {
   switch ( status ) {
     case 'Procesando':
-      return <IconStop />
+      return <IconStop title='Orden en proceso' />
 
     case 'Cancelado':
       // return <IconCancel />
@@ -69,8 +69,6 @@ const tableData = ( ordersClient = [ ] ) => {
   }));
 };
 
-const THERE_ARE_NOT_ANTENNAS_LOADED = 0;
-
 const Requests = ( ) => {
   // console.log( '<Requests.js>/<Requests>: Requests' );
 
@@ -78,7 +76,6 @@ const Requests = ( ) => {
   // TODO : Poner esta informacion de la tabla como props o como estado de Redux
   const [ table, setTable ] = useState( [ ] );
   const { data: ordersClient, loading, error } = useSelector( state => state.orders );
-  const { antennas } = useSelector( state => state.formsData );
 
   useEffect( ( ) => {
     dispatch( sendNewOrderClean( ) )
@@ -107,15 +104,7 @@ const Requests = ( ) => {
       dispatch( startOrdersLoading( ) );
 
   } , [ dispatch ] );
-  
-  // useEffect( ( ) => {
-  //   // TODO : Hacer funciones que digan si esta o no la condicion de antennas y username
-  //   // console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
-  //   if( antennas.length !== THERE_ARE_NOT_ANTENNAS_LOADED ){
-  //     dispatch( startOrdersLoading( ) );
-  //   }else{
-  //   }
-  // } , [ dispatch, antennas ] );
+
 
   useEffect( ( ) => {
     setTable( tableData( ordersClient ) );
@@ -134,7 +123,7 @@ const Requests = ( ) => {
         <h3>Solicitudes</h3>
         {/* TODO : Revisar el tema del error */}
         { loading ? <Spinner /> : <RequestTable data={ table } /> }
-        { error &&  'Error' } 
+        { error &&  'Error al cargar las ordenes.' } 
       </div>
     </div>
   )

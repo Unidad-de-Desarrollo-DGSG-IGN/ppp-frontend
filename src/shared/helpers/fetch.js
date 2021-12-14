@@ -82,7 +82,6 @@ const fetchConToken = async( endpoint, username, info, method = 'GET' ) => {
   // console.log( '<fecth.js>/<fetchConToken> :', username, endpoint ); 
 
   let passport = {
-    // username: 'alan@ign.ar', // TODO : Usar Redux para recuperar username. Recuperar por parametro
     username: username,
     expiredToken: token,
     renovationToken: tokenRenew,
