@@ -40,7 +40,6 @@
 
   .logo-login {
     flex-direction: row;
-    // flex-wrap: wrap;
     gap: 3.5rem;
     grid-column: 1 / -1;
     grid-row: 1 / -1;
@@ -48,6 +47,10 @@
     .logo{
       height: 22vw;
     }
+  }
+
+  .logo-header{
+    padding-bottom: 1rem;
   }
 
 }

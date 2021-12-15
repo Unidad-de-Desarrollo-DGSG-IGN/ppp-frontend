@@ -11,7 +11,8 @@
     .user-fields {
       grid-column: 1 / -1;
       grid-row: 2 / -1;
-      // flex-wrap: wrap;
+      padding: 3rem 3rem;
+      justify-content: start;
     }
   }
 }
