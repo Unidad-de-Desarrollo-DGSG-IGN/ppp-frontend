@@ -9,3 +9,10 @@
   grid-template-rows: 1fr minmax( min-content, 70vh ) 1fr;
   grid-template-columns: [full-start] 1fr [center-start] 80vw [center-end] 1fr [full-end];
 }
+
+@media ( max-width: 700px ) {
+  .auth {
+    grid-template-rows: min-content;
+    grid-template-columns: auto;
+  }
+}
