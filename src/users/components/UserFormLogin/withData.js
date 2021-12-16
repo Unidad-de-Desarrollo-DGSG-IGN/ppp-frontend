@@ -29,14 +29,14 @@ const withData = ( parameters ) => ( Component ) => {
         }
       }
     },
-    {
-      label: "Recordame",
-      type: "checkbox",
-      placeholder: "Recordame",
-      name: "recordar",
-      validation: { 
-      }
-    },
+    // {
+    //   label: "Recordame",
+    //   type: "checkbox",
+    //   placeholder: "Recordame",
+    //   name: "recordar",
+    //   validation: { 
+    //   }
+    // },
   ]
 
   return( ( ) => {

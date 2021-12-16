@@ -66,10 +66,39 @@
         margin: 0rem 1.6rem;
         width: 100%;
 
-        input {
-          margin-left: 1rem;
+      }
+      input {
+        // margin-left: 1rem;
+        border: solid 1px hsl(0, 0%, 80%);
+        padding: 8px;
+
+        &:focus {
+          border: solid 1px #2684FF;
+        }
+        
+        &:focus-visible {
+          border: solid 2px #2684FF;
+          // background-color: red;
+          outline: none;
         }
       }
+
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+
+      // input[type="file"] {
+      //   // display: none;
+      // }
+
     }
 
   }
@@ -90,7 +119,7 @@
   label {
     font-size: 1.5rem;
     font-weight: 500;
-    padding: 1.5rem 0rem;
+    padding: 0.75rem 0rem;
   }
 
   input {
@@ -104,7 +133,7 @@
   }
 
   button {
-    margin: 1.5rem 3.8rem;
+    margin: 1.5rem 2rem;
     width: 100%;
     max-width: 95%;
     font-weight: 700;
@@ -186,6 +215,40 @@
   overflow: hidden;
   transition: height 500ms ease, opacity 500ms ease;
 }
+
+
+
+.uploadFile {
+  display: none;
+}
+
+.custom-file-upload {
+  border-radius: 4px;
+  
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-lightblue--light-2;
+    // border: solid 0.2px #2684FF;
+    // outline: none;
+  }
+
+  &:focus-visible{
+    border: solid 2px #2684FF;
+    outline: none;
+  }
+
+  &:focus{
+    border: solid 2px #2684FF;
+    outline: none;
+  }
+}
+
+.form__row--file .custom-file-upload{
+  padding: 1rem 1rem;
+}
+
 
 
 @media ( max-width: 700px ) {

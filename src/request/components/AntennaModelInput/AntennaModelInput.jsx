@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 
 
 const AntennaModelInput = ( { errors, control, antennas } ) => {
@@ -8,6 +8,14 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
     value: `${antenna.name.replace(/ /g, "\u00a0")}`,
     label: `${antenna.name.replace(/ /g, "\u00a0")}`,
   }) );
+
+  const NoOptionsMessage = props => {
+    return (
+      <components.NoOptionsMessage {...props}>
+        <span className="custom-css-class">No se encontro modelo de antena</span> 
+      </components.NoOptionsMessage>
+    );
+  };
 
   const coulourStyles = {
     control: styles => ({ ...styles, color: 'black', fontFamily: 'Nunito', fontSize: '1.2rem', }),
@@ -29,6 +37,7 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
           <Controller 
             name="antennaModel"
             as={ Select }
+            components={ { NoOptionsMessage } }
             placeholder={'Buscar modelo de antena'}
             defaultValue=""
             styles={ coulourStyles }
@@ -41,25 +50,6 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
               }
             }}
           />
-
-          {/* <select 
-            name='antennaModel'
-            ref={ register(
-              {
-                required: {
-                  value : true,
-                  message : "El modelo de antena es requisito"
-                }
-              }
-            )}
-            errors={ errors }
-          >
-            {
-              antennas.map( antenna => 
-                 <option key={antenna.id}>{ `${antenna.name.replace(/ /g, "\u00a0")}` }</option>
-              )
-            }
-          </select> */}
 
           { errors[ 'antennaModel' ] && <div> <p className='form__error'> { errors['antennaModel'].message } </p> </div> }
         </div>

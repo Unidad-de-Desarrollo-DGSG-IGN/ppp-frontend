@@ -35,12 +35,12 @@ const RequestNewSuccess = ( ) => {
         </div>
 
         <div className='nav__options nav__options--column' >
-          <NavLink className='navlink navlink' to='/requests/requests'>
+          <NavLink className='navlink navlink--border' to='/requests/requests'>
             <FontAwesomeIcon icon={ faTable } className='icon' /> Solicitudes
           </NavLink>
 
 
-          <NavLink className='navlink navlink' to='/requests/request-new'>
+          <NavLink className='navlink navlink--border' to='/requests/request-new'>
             <FontAwesomeIcon icon={ faList } className='icon' /> Nueva solicitud
           </NavLink>
         </div>

@@ -116,16 +116,22 @@ export const startSendNewOrder = ( data, opcionales ) => {
       if( isSendFileSuccess === 'success' ){  
         // console.log( 'Data antenna model: ', data.antennaModel.value );
         // console.log( 'Antennas: ',antennas );
+
+        // Proceso de normalizacion de opciones seleccionadas del HTML select
         const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.value.replace(/ /g, "\u00a0") );
         // console.log( 'Antenna a enviar: ',antenna );
-        const height_type = antenna.height_types.find( height_type => height_type.name === data.antennaTypeHeight )?.id;
+
+        console.log( 'Tipo altura Antenna a enviar: ',data.antennaTypeHeight );
+        console.log( 'Lista Tipo altura Antenna: ',antenna.height_types );
+        const height_type = antenna.height_types.find( height_type => height_type.name.replace(/ /g, "\u00a0")  === data.antennaTypeHeight.value);
+        console.log( 'Tipo altura Antenna(id) a enviar: ',height_type.id );
         
         const order = {
           id,
           fileId: id,
           name: data.name_base,
           antennaId: antenna.id,
-          antennaHeightTypeId: height_type,
+          antennaHeightTypeId: height_type?.id, // TODO : revisar
           height: data.antennaHeight,
           measurementSurfaceId: measurementSurface_id( data.measurementSurfaces.value, measurementSurfacesList ), // TODO : Procesar la opcion y poner el id correspondiente
           movingPoints: [ ], // TODO : modificar luego cuando se desarrolle los puntos moviles
