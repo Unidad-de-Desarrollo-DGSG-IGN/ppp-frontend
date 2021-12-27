@@ -4,6 +4,7 @@ import Select, { components } from 'react-select';
 
 
 const AntennaTypeHeightInput = ( { errors, control, antennas, watch } ) => {
+  console.log('antenna model: ', watch('antennaModel') === '');
 
   const options = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel").value )?.height_types.map( height_type => ({
     value: `${height_type.name.replace(/ /g, "\u00a0")}`,
@@ -36,6 +37,7 @@ const AntennaTypeHeightInput = ( { errors, control, antennas, watch } ) => {
 
           <Controller 
             name="antennaTypeHeight"
+            isDisabled={ watch('antennaModel') === '' }
             as={ Select }
             components={ {NoOptionsMessage} }
             placeholder={'Buscar altura de antena'}

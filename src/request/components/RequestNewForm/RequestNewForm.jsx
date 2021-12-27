@@ -59,38 +59,6 @@ const RequestNewForm = ( { forms } ) => {
       <h2>Datos de la BASE para el procesamiento PPP</h2>
 
       <form onSubmit={ handleSubmit( handleForm ) }>
-      {/* <div className='form__row'>
-          <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o). Tamaño máximo permitido 20MB.</label>
-          <input 
-            type='file'
-            name='file'
-            ref={ register(
-              {
-                required: {
-                  value : true,
-                  message : "El archivo del punto BASE de la antena es requisito"
-                },
-              }
-            )}
-            errors={ errors }
-            onChange={ e => {
-              // console.log(e.target.files[0].size);
-              // TODO : Controlar la extension de los archivos a subir
-              let archivo_limite_mb = 20 // TODO : Consultar a una API el valor limite del archivo
-              if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){ 
-                // console.log('Te pasaste!');
-                setError(
-                  'file',
-                  {
-                    type: 'manual',
-                    message: `Tamaño de archivo excedido. Limite ${archivo_limite_mb} mb.`
-                  }
-                )
-              }
-            }}
-          />
-          { errors['file'] && <div> <p className='form__error'> {errors['file'].message} </p> </div> }
-        </div> */}
 
       <div className='form__row form__row--file'>
           <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o). Tamaño máximo permitido 20MB.</label>
@@ -127,7 +95,7 @@ const RequestNewForm = ( { forms } ) => {
             }}
           />
           <label htmlFor="file-upload" className="custom-file-upload">
-            <IconUpload /> Seleccionar archivo : { fileName ? fileName : 'Ningún archivo seleccionado' }
+            <IconUpload /> <div className='container-text'> <span>Seleccionar archivo :</span>  <span>{ fileName ? fileName : 'Ningún archivo seleccionado' }</span> </div>
           </label>
           { errors['file'] && <div> <p className='form__error'> {errors['file'].message} </p> </div> }
         </div>
