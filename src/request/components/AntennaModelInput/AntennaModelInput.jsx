@@ -4,9 +4,12 @@ import Select, { components } from 'react-select';
 
 
 const AntennaModelInput = ( { errors, control, antennas } ) => {
+  // TODO : Revisar espacio en blancos
   const options = antennas.map( antenna => ({
-    value: `${antenna.name.replace(/ /g, "\u00a0")}`,
-    label: `${antenna.name.replace(/ /g, "\u00a0")}`,
+    // value: `${antenna.name.replace(/ /g, "\u00a0")}`,
+    // label: `${antenna.name.replace(/ /g, "\u00a0")}`,
+    value: `${antenna.name}`,
+    label: `${antenna.name}`,
   }) );
 
   const NoOptionsMessage = props => {

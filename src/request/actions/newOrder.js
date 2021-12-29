@@ -118,12 +118,14 @@ export const startSendNewOrder = ( data, opcionales ) => {
         // console.log( 'Antennas: ',antennas );
 
         // Proceso de normalizacion de opciones seleccionadas del HTML select
-        const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.value.replace(/ /g, "\u00a0") );
-        // console.log( 'Antenna a enviar: ',antenna );
+        // const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.value.replace(/ /g, "\u00a0") );
+        const antenna = antennas.find( antenna => antenna.name === data.antennaModel.value );
+        console.log( 'Antenna a enviar: ',antenna );
 
         console.log( 'Tipo altura Antenna a enviar: ',data.antennaTypeHeight );
         console.log( 'Lista Tipo altura Antenna: ',antenna.height_types );
-        const height_type = antenna.height_types.find( height_type => height_type.name.replace(/ /g, "\u00a0")  === data.antennaTypeHeight.value);
+        // const height_type = antenna.height_types.find( height_type => height_type.name.replace(/ /g, "\u00a0")  === data.antennaTypeHeight.value);
+        const height_type = antenna.height_types.find( height_type => height_type.name  === data.antennaTypeHeight.value);
         console.log( 'Tipo altura Antenna(id) a enviar: ',height_type.id );
         
         const order = {

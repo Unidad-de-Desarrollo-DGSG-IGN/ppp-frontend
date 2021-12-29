@@ -6,9 +6,14 @@ import Select, { components } from 'react-select';
 const AntennaTypeHeightInput = ( { errors, control, antennas, watch } ) => {
   console.log('antenna model: ', watch('antennaModel') === '');
 
-  const options = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel").value )?.height_types.map( height_type => ({
-    value: `${height_type.name.replace(/ /g, "\u00a0")}`,
-    label: `${height_type.name.replace(/ /g, "\u00a0")}`,
+  // const options = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel").value )?.height_types.map( height_type => ({
+  //   value: `${height_type.name.replace(/ /g, "\u00a0")}`,
+  //   label: `${height_type.name.replace(/ /g, "\u00a0")}`,
+  // }) ) || null;
+
+  const options = antennas.find( antenna => antenna.name === watch("antennaModel").value )?.height_types.map( height_type => ({
+    value: `${height_type.name}`,
+    label: `${height_type.name}`,
   }) ) || null;
 
   const NoOptionsMessage = props => {

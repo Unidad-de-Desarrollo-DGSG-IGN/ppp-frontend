@@ -61,3 +61,12 @@ table th, tfoot td {
 .table-container{
   padding: 0rem 1.5rem;
 }
+
+
+@media ( max-width: 700px ) {
+
+  .page-options{
+    display: none;
+  }
+
+}

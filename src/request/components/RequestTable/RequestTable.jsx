@@ -99,7 +99,7 @@ const RequestTable = ( { data } ) => {
           </tfoot> */}
         </table>
         <div className='table__footer' >
-          <span>
+          <span className='page-options'>
             <span>
               Pagina { ' ' }
               <strong>
