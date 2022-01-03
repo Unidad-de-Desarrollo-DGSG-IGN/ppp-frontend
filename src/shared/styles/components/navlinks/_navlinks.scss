@@ -23,6 +23,11 @@
       color: $color-white;
       text-decoration: none;
     }
+
+    &--dark-bg{
+      background-color: $color-primary;
+      color: white;
+    }
   }
 
   &--blue{
@@ -41,6 +46,10 @@
     &:hover {
       color: $color-terciary;
       text-decoration: none;
+    }
+
+    &--dark-bg {
+      background-color: white;
     }
   }
 }

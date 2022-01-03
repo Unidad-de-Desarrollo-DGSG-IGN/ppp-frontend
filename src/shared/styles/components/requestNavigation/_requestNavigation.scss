@@ -58,6 +58,10 @@
     align-items: center;
     height: auto;
     border: none;
+    
+    &--responsive{
+      display: none;
+    }
   }
 
 }

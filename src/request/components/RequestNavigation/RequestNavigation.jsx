@@ -14,7 +14,7 @@ const RequestNavigation = ( ) => {
         <h4>PPP-Ar</h4>
       </div>
 
-      <div className='nav__options' >
+      <div className='nav__options nav__options--responsive' >
           <NavLink className='navlink navlink--white' activeClassName='navlink navlink--active' to='/requests/requests'>
             <FontAwesomeIcon icon={ faTable } className='icon' /> Solicitudes
           </NavLink>
