@@ -54,11 +54,12 @@
 
   .nav__options{
     flex-direction: row;
+    gap: 1rem;
     justify-content: space-around;
     align-items: center;
     height: auto;
     border: none;
-    
+
     &--responsive{
       display: none;
     }
