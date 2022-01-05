@@ -17,12 +17,13 @@ import MeasurementSurfacesInput from '../MeasurementSurfacesInput/MeasurementSur
 import { startLoadMeasurementSurface } from '../../actions/MeasurementSurfacesFetch';
 import AntennaTypeHeightInput from '../AntennaTypeHeightInput/AntennaTypeHeightInput';
 import IconUpload from '../../../shared/components/IconUpload/IconUpload';
+import { isValidFile } from '../../../shared/helpers/formValidator';
 
 const parameters = ''; // Parametros que pueden servir para la composicion de componentes
 
 
 const RequestNewForm = ( { forms } ) => {
-  const { handleSubmit, register, errors, watch, setError, control } = useForm({
+  const { handleSubmit, register, errors, watch, setError, clearErrors , control } = useForm({
     defaultValues: {antennaModel: ''}
   });
   // const [ hide, setHide ] = useState( true );
@@ -37,6 +38,7 @@ const RequestNewForm = ( { forms } ) => {
   const { data: measurementSurfaces } = useSelector( state => state.measurementSurfaces );
   const { loading, error, data } = useSelector( state => state.newOrder );
   const [ fileName, setFileName ] = useState( '' );
+  const [ fileSize, setFileSize ] = useState( 0 );
   
   useEffect( ( ) => {
     dispatch( startFormDataLoadingAntenna( ) );
@@ -71,17 +73,32 @@ const RequestNewForm = ( { forms } ) => {
               {
                 required: {
                   value : true,
-                  message : "El archivo del punto BASE de la antena es requisito"
+                  message : "El archivo del punto BASE de la antena es requisito",
                 },
+                validate: (  ) => {
+                   console.log( 'fileSize: ',fileSize ); 
+                   console.log( 'fileName: ',fileName ); 
+
+                  // let validInput = false;
+                  let validInput = 'Error al seleccionar el archivo';
+                  let archivo_limite_mb = 20;
+                  if( !( fileSize >= 1048576 * archivo_limite_mb ) && isValidFile( fileName ) ){
+                    validInput = true;
+                  }
+                  console.log(validInput)
+                  return validInput;
+                }, // TODO : Validar tamaño y extension 
               }
             )}
             errors={ errors }
             onChange={ e => {
               // console.log(e.target.files[0].size);
-              console.log(e.target.files[0].name);
-              setFileName( e.target.files[0].name )
+              // console.log( "nombre archivo: ", e.target.files[0].name);
+              // console.log( "nombre archivo valido: ", isValidFile( e.target.files[0].name ));
+              setFileName( e.target.files[0]?.name )
+              setFileSize( e.target.files[0]?.size )
               // TODO : Controlar la extension de los archivos a subir
-              let archivo_limite_mb = 20 // TODO : Consultar a una API el valor limite del archivo
+              let archivo_limite_mb = 20; // TODO : Consultar a una API el valor limite del archivo
               if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){ 
                 // console.log('Te pasaste!');
                 setError(
@@ -91,7 +108,22 @@ const RequestNewForm = ( { forms } ) => {
                     message: `Tamaño de archivo excedido. Limite ${archivo_limite_mb} mb.`
                   }
                 )
+              }else{
+                clearErrors( 'file' )
               }
+
+              if( !isValidFile( e.target.files[0]?.name ) ){
+                setError(
+                  'file',
+                  {
+                    type: 'manual',
+                    message: `Extension de archivo no valido.`
+                  },
+                )
+              }else{
+                clearErrors( 'file' )
+              }
+              
             }}
           />
           <label htmlFor="file-upload" className="custom-file-upload">
@@ -131,7 +163,7 @@ const RequestNewForm = ( { forms } ) => {
               {
                 required: {
                   value : true,
-                  message : "La altura de la antena es requisito"
+                  message : "La altura de la antena es requisito",
                 }
               }
             )}

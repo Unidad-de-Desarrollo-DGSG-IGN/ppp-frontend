@@ -40,7 +40,7 @@ export const startSendNewOrder = ( data, opcionales ) => {
 
     // TODO : Contemplar que si hay algun error, manejarlo
     try{
-      console.log( '<RequestNewForm.jsx>/<handleForm> : Datos del formulario', data );
+      // console.log( '<RequestNewForm.jsx>/<handleForm> : Datos del formulario', data );
       const { username }  = getState( ).auth.data;
       // const { data: antennas }  = getState( ).formsData; // TODO : Guardar antennas en data, y no en antennas.
       const { antennas }  = getState( ).formsData;
@@ -120,13 +120,13 @@ export const startSendNewOrder = ( data, opcionales ) => {
         // Proceso de normalizacion de opciones seleccionadas del HTML select
         // const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.value.replace(/ /g, "\u00a0") );
         const antenna = antennas.find( antenna => antenna.name === data.antennaModel.value );
-        console.log( 'Antenna a enviar: ',antenna );
+        // console.log( 'Antenna a enviar: ',antenna );
 
-        console.log( 'Tipo altura Antenna a enviar: ',data.antennaTypeHeight );
-        console.log( 'Lista Tipo altura Antenna: ',antenna.height_types );
+        // console.log( 'Tipo altura Antenna a enviar: ',data.antennaTypeHeight );
+        // console.log( 'Lista Tipo altura Antenna: ',antenna.height_types );
         // const height_type = antenna.height_types.find( height_type => height_type.name.replace(/ /g, "\u00a0")  === data.antennaTypeHeight.value);
         const height_type = antenna.height_types.find( height_type => height_type.name  === data.antennaTypeHeight.value);
-        console.log( 'Tipo altura Antenna(id) a enviar: ',height_type.id );
+        // console.log( 'Tipo altura Antenna(id) a enviar: ',height_type.id );
         
         const order = {
           id,
@@ -148,13 +148,13 @@ export const startSendNewOrder = ( data, opcionales ) => {
           // })),
         }
 
-        console.log( 'Order a enviar: ', order );
+        // console.log( 'Order a enviar: ', order );
   
         // console.log( '<RequestNewForm.jsx>/<handleForm> : Orden a  enviar: ', order );
         const resOrder = await fetchConToken( 'orders', username, order, 'POST' ); // TODO : Falta enviar username
         const resOrderJson = await resOrder.json( );
-        console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrder );
-        console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrderJson );
+        // console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrder );
+        // console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrderJson );
         // TODO: manejar la respuesta de las ordenes
         // Verificar respuesta
         if( resOrder.status === 201 || resOrderJson?.status === 'success' ){
@@ -171,7 +171,7 @@ export const startSendNewOrder = ( data, opcionales ) => {
       }
       
     } catch( err ){
-      console.log( '<newOrder.js>/<startSendNewOrder> : Error al enviar ordenes: ', err );
+      // console.log( '<newOrder.js>/<startSendNewOrder> : Error al enviar ordenes: ', err );
       // TODO : Manejar errores con Redux
       let msgError = 'Error al crear una nueva orden';
       dispatch( sendNewOrderError( msgError ) );
@@ -194,19 +194,19 @@ export const startSendNewOrder = ( data, opcionales ) => {
 // TODO : Hacer test de las funciones
 
 const measurementSurface_id = ( measurementSurfaceOption, measurementSurfaceList ) => {
-  console.log(measurementSurfaceOption)
-  console.log(measurementSurfaceList)
+  // console.log(measurementSurfaceOption)
+  // console.log(measurementSurfaceList)
   // return measurementSurfaceList.find( measurementSurfaceElement => measurementSurfaceElement.name === measurementSurfaceOption )?.id;
   let envio =  measurementSurfaceList.find( measurementSurfaceElement => {
     let result = measurementSurfaceElement.name.replace(/ /g, "\u00a0") === measurementSurfaceOption.replace(/ /g, "\u00a0");
-    console.log('Comparando:');
-    console.log( measurementSurfaceElement.name )
-    console.log( measurementSurfaceOption )
+    // console.log('Comparando:');
+    // console.log( measurementSurfaceElement.name )
+    // console.log( measurementSurfaceOption )
 
     return result
   } );
 
-  console.log(envio);
+  // console.log(envio);
   return envio?.id;
 };
 
