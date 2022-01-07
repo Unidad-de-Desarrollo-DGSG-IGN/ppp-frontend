@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchSinToken } from '../../../shared/helpers/fetch';
 import { loadOrderDetailClean, startLoadOrderDetail } from '../../actions/orderDetail';
 
 import AntennaDetail from '../AntennaDetail/AntennaDetail';
@@ -8,6 +10,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
   // const MOVING_POINTS_CANTIDAD_NULA = 0 ;
   const dispatch = useDispatch( );
   const orderDetail = useSelector( state => state.orderDetail );
+  const [error, setError] = useState( '' );
   // console.log( 'Order detail: ', orderDetail );
 
   // console.log( 'popup moving points', data.moving_points );
@@ -22,11 +25,26 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
     }
   }, [ dispatch, data ] );
 
-  const ErrorSection = ( data ) => {
+  useEffect( ( ) => {
+    if( isNaN( data?.processingError ) ){
+      setError( data?.processingError );
+    }else{
+      fetchSinToken( 'error-codes' )
+      .then( errorRaw => errorRaw.json( ) )
+      .then( errors =>  {
+        console.log(data?.processingError)
+        console.log(errors.data.errors.find( errorCode => errorCode.code === data?.processingError )?.description)
+        setError( errors.data.errors.find( errorCode => errorCode.code === data?.processingError )?.description );
+      } );
+    }
+    
+  }, [ data?.processingError ] );
+
+  const ErrorSection = ( error ) => {
     return(
       <>
         <h4>Motivo de cancelación de la solicitud</h4>
-        <p>{ data?.processingError }</p>
+        <p>{ error }</p>
       </>
     );
   };
@@ -48,7 +66,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
 
         {
           data.processingError 
-            ? ErrorSection( data )
+            ? ErrorSection( error )
             : null
         }
 
