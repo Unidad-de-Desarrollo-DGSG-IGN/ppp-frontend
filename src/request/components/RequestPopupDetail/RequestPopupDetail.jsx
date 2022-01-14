@@ -54,7 +54,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
       <div className="box">
         <span className="close-icon" onClick={ handleClose }>x</span>
         <div>
-          <h4>Punto Base</h4>
+          <h4>Punto BASE</h4>
           {
             orderDetail.loading 
               ? 'Cargando detalles de la solicitud...' 

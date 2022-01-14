@@ -37,7 +37,8 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
       <div className='form__row'>
          <label htmlFor='antennaModel'>Modelo de Antena</label>
 
-          <Controller 
+          <Controller
+            menuPlacement="auto"
             name="antennaModel"
             as={ Select }
             components={ { NoOptionsMessage } }

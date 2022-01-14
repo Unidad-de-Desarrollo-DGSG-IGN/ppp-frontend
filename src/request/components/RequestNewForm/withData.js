@@ -4,20 +4,20 @@ const withData = ( parameters ) => ( Component ) => {
     {
       label: "Nombre del punto BASE (entre cuatro y nueve caracteres alfanuméricos)",
       type: "text",
-      placeholder: 'Nombre del punto Base',
+      placeholder: 'Nombre del punto BASE',
       name: "name_base",
       validation: {
         required: {
           value: true,
-          message: "Nombre del punto Base es requisito"
+          message: "Nombre del punto BASE es requisito"
         },
         minLength: {
           value: 4,
-          message: "Nombre del punto Base es corta"
+          message: "Nombre del punto BASE es corta"
         },
         maxLength:{
           value: 9,
-          message: "Nombre del punto Base largo"
+          message: "Nombre del punto BASE largo"
         },
         pattern: {
           value: /^[a-z0-9]+$/i,
