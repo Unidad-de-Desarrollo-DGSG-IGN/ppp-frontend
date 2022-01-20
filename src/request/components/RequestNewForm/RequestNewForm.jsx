@@ -18,6 +18,7 @@ import { startLoadMeasurementSurface } from '../../actions/MeasurementSurfacesFe
 import AntennaTypeHeightInput from '../AntennaTypeHeightInput/AntennaTypeHeightInput';
 import IconUpload from '../../../shared/components/IconUpload/IconUpload';
 import { isValidFile } from '../../../shared/helpers/formValidator';
+import AntennaHeight from '../AntennaHeight/AntennaHeight';
 
 const parameters = ''; // Parametros que pueden servir para la composicion de componentes
 
@@ -75,7 +76,7 @@ const RequestNewForm = ( { forms } ) => {
                   value : true,
                   message : "El archivo del punto BASE de la antena es requisito",
                 },
-                validate: (  ) => {
+                validate: ( ) => {
                    console.log( 'fileSize: ',fileSize ); 
                    console.log( 'fileName: ',fileName ); 
 
@@ -153,7 +154,9 @@ const RequestNewForm = ( { forms } ) => {
 
         <AntennaTypeHeightInput errors={ errors } antennas={ antennas } control={ control } watch={ watch } />
 
-        <div className='form__row'>
+        <AntennaHeight errors={ errors } antennas={ antennas } register={ register } control={ control } watch={ watch } />
+
+        {/* <div className='form__row'>
           <label htmlFor='antennaHeight'>Altura de antena [m]</label>
           <input 
             type='number'
@@ -170,7 +173,7 @@ const RequestNewForm = ( { forms } ) => {
             errors={ errors }
           />
           { errors['antennaHeight'] && <div> <p className='form__error'> {errors['antennaHeight'].message} </p> </div> }
-        </div>
+        </div> */}
 
         {/* <br/> */}
 
