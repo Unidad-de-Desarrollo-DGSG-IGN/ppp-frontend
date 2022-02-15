@@ -5,6 +5,12 @@
   font-size: 1.4rem;
   padding: .5rem;
 
+  &--border {
+    border: solid 0.1rem;
+    border-radius: 0.4rem;
+    // background-color: red;
+  }
+
   &:hover {
     color: $color-terciary;
     text-decoration: none;
@@ -16,6 +22,11 @@
     &:hover {
       color: $color-white;
       text-decoration: none;
+    }
+
+    &--dark-bg{
+      background-color: $color-primary;
+      color: white;
     }
   }
 
@@ -35,6 +46,10 @@
     &:hover {
       color: $color-terciary;
       text-decoration: none;
+    }
+
+    &--dark-bg {
+      background-color: white;
     }
   }
 }

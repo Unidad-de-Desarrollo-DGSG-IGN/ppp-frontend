@@ -28,7 +28,8 @@ const MeasurementSurfacesInput = ( { errors, control, measurementSurfaces } ) =>
       <div className='form__row'>
          <label htmlFor='measurementSurfaces'>El punto BASE ha sido medido sobre:</label>
 
-          <Controller 
+          <Controller
+            menuPlacement="auto"
             name="measurementSurfaces"
             as={ Select }
             placeholder={'Buscar opciones de donde se ha medido'}

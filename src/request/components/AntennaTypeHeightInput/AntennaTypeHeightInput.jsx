@@ -1,13 +1,22 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 
 
-const AntennaModelInput = ( { errors, control, antennas } ) => {
-  const options = antennas.map( antenna => ({
-    value: `${antenna.name.replace(/ /g, "\u00a0")}`,
-    label: `${antenna.name.replace(/ /g, "\u00a0")}`,
-  }) );
+const AntennaTypeHeightInput = ( { errors, control, antennas, watch } ) => {
+
+  const options = antennas.find( antenna => antenna.name === watch("antennaModel").value )?.height_types.map( height_type => ({
+    value: `${height_type.name}`,
+    label: `${height_type.name}`,
+  }) ) || null;
+
+  const NoOptionsMessage = props => {
+    return (
+      <components.NoOptionsMessage {...props}>
+        <span className="custom-css-class">No se encontro tipo de altura de antena</span> 
+      </components.NoOptionsMessage>
+    );
+  };
 
   const coulourStyles = {
     control: styles => ({ ...styles, color: 'black', fontFamily: 'Nunito', fontSize: '1.2rem', }),
@@ -22,14 +31,15 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
   }
 
   return (
-    <div>
       <div className='form__row'>
-         <label htmlFor='antennaTypeHeight'>Modelo de Antena</label>
+         <label htmlFor='antennaTypeHeight'>Tipo de altura de antena</label>
 
           <Controller 
             name="antennaTypeHeight"
+            isDisabled={ watch('antennaModel') === '' }
             as={ Select }
-            placeholder={'Buscar modelo de antena'}
+            components={ {NoOptionsMessage} }
+            placeholder={'Buscar altura de antena'}
             defaultValue=""
             styles={ coulourStyles }
             control={ control }
@@ -44,8 +54,7 @@ const AntennaModelInput = ( { errors, control, antennas } ) => {
 
           { errors[ 'antennaTypeHeight' ] && <div> <p className='form__error'> { errors['antennaTypeHeight'].message } </p> </div> }
         </div>
-    </div>
   );
 };
 
-export default AntennaModelInput;
+export default AntennaTypeHeightInput;

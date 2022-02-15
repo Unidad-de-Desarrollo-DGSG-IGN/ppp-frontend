@@ -1,5 +1,4 @@
 import React from 'react';
-import IconStop from '../../../shared/components/IconStop/IconStop';
 
 const RequestFooter = ( ) => {
   return (

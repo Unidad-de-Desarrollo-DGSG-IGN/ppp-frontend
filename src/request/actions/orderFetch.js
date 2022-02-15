@@ -9,45 +9,60 @@ import { startLogout } from '../../users/actions/auth';
 // TODO : Revisar y decidir que pasa cuando una propiedad no existe
 // TODO : Documentar las funciones
 
+
 const antenna_model = ( antennas, antennaId ) => {
   return antennas.find( antenna => antenna.id === antennaId ).name ;
 };
 
+
+// const typeError = ( processingError ) => {
+//   if( processingError !== null ){
+//     const numberError = processingError[ 1 ];
+//     switch ( numberError ){
+//       case '1':
+//         return 'No se puede generar el archivo de resumen';
+  
+//       case '2':
+//         return 'No se puede procesar un RINEX de simple frecuencia';
+  
+//       case '3':
+//         return 'Coordenadas fuera de los límites';
+  
+//       case '4':
+//         return 'La fecha de medición debe ser superarior a 2006.362';
+  
+//       case '5':
+//         return 'La fecha de medición debe ser de, al menos, dos días atrás de la fecha actual';
+  
+//       case '6':
+//         return 'No se pudo procesar porque no se encontraron archivos de efemérides para descargar';
+  
+//       case '7':
+//         return 'Error al generar el archivo resumen del RINEX';
+  
+//       case null:
+//         return null;
+      
+//       default:
+//         return 'Error del proceso de la orden';
+//     }  
+//   }else{
+//     return null;
+//   }
+// };
+
+
 const typeError = ( processingError ) => {
   if( processingError !== null ){
     const numberError = processingError[ 1 ];
-    switch ( numberError ){
-      case '1':
-        return 'No se puede generar el archivo de resumen';
-  
-      case '2':
-        return 'No se puede procesar un RINEX de simple frecuencia';
-  
-      case '3':
-        return 'Coordenadas fuera de los límites';
-  
-      case '4':
-        return 'La fecha de medición debe ser superarior a 2006.362';
-  
-      case '5':
-        return 'La fecha de medición debe ser de, al menos, dos días atrás de la fecha actual';
-  
-      case '6':
-        return 'No se pudo procesar porque no se encontraron archivos de efemérides para descargar';
-  
-      case '7':
-        return 'Error al generar el archivo resumen del RINEX';
-  
-      case null:
-        return null;
-      
-      default:
-        return 'Error del proceso de la orden';
-    }  
+
+    if( isNaN( Number( numberError ) ) ) return 'Error del proceso de la orden';
+    return Number( numberError ); 
   }else{
     return null;
   }
 };
+
 
 const stateOrder = ( status ) => {
   switch ( status ) {
@@ -73,7 +88,7 @@ const typeHeight = ( antennas, antennaId, antennaHeightTypeId ) => {
 // TODO : Revisar el fetchConToken, pasar el username, o levantarlo desde el LocalStorage. O hacer una accion cargar orders: LoadOrders
 const movingPoints = async( orderId, antennas, username ) => {
   const res = await fetchConToken( `orders/${ orderId }`, username );
-  const resOrders = await res.json ();
+  const resOrders = await res.json();
   // console.log( '<orderFetch.js>/<movingPoints>: Moving Point: ', resOrders.data.order.movingPoints );
 
   return resOrders.data.order.movingPoints.map( movingPoint => ({

@@ -86,3 +86,21 @@
     font-weight: 700;
   }
 }
+
+@media ( max-width: 700px ) {
+  .form {
+    border: none;
+    grid-column: 1 / -1;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.3fr 2fr;
+
+    border-radius: 0rem;
+    
+    .logo-login {
+      grid-column: 1 / -1;
+      grid-row: 1 / 2;
+      border-radius: 0rem;
+    }
+  }
+}

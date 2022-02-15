@@ -6,11 +6,25 @@
   align-items: center;
   border-top: 0.1rem solid $color-lightblue--light;
 
+  height: 3rem;
+  padding: 2rem 0rem;
+  grid-row: 3 / -1;
+  grid-column: 2 / -1;
+
   margin-top: 2.5rem;
-  padding-bottom: 1rem;
+  // padding-bottom: 1rem;
 
   h4 {
-    margin-top: 1.6rem;
+    // margin-top: 1.6rem;
+    margin: 0rem;
     font-size: 1.2rem;
+  }
+}
+
+@media ( max-width: 700px ) {
+  .request-footer{
+  
+    grid-row: -2 / -1;
+    grid-column: 1 / -1;
   }
 }

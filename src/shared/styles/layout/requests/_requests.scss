@@ -3,6 +3,16 @@
   height: 100vh;
 
   display: grid;
-  grid-template-rows: 10vh minmax( min-content, 82vh ) 8vh;
+  grid-template-rows: 10vh minmax( min-content, 82vh ) auto;
   grid-template-columns: [nav-start] 12vw  [nav-end requests-start] 1fr [requests-end];
+}
+
+
+@media ( max-width: 700px ) {
+
+  .layout--requests {
+    grid-template-rows: min-content min-content minmax( min-content, 82vh ) auto;
+    grid-template-columns: [nav-start] 0vw  [nav-end requests-start] 1fr [requests-end];
+  }
+
 }

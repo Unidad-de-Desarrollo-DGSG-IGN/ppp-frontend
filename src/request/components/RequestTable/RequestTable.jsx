@@ -38,7 +38,8 @@ const RequestTable = ( { data } ) => {
         <div className='table__header' >
           <span>
             <span>Mostar </span>
-            <select 
+            <select
+            className='select-page-size'
                 value={ pageSize } 
                 onChange={ e => setPageSize( Number( e.target.value ) ) } 
               >
@@ -98,7 +99,7 @@ const RequestTable = ( { data } ) => {
           </tfoot> */}
         </table>
         <div className='table__footer' >
-          <span>
+          <span className='page-options'>
             <span>
               Pagina { ' ' }
               <strong>

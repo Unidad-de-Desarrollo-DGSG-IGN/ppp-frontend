@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,12 +15,16 @@ import AntennaModelInput from '../AntennaModelInput/AntennaModelInput';
 import { Redirect } from 'react-router';
 import MeasurementSurfacesInput from '../MeasurementSurfacesInput/MeasurementSurfacesInput';
 import { startLoadMeasurementSurface } from '../../actions/MeasurementSurfacesFetch';
+import AntennaTypeHeightInput from '../AntennaTypeHeightInput/AntennaTypeHeightInput';
+import IconUpload from '../../../shared/components/IconUpload/IconUpload';
+import { isValidFile } from '../../../shared/helpers/formValidator';
+import AntennaHeight from '../AntennaHeight/AntennaHeight';
 
 const parameters = ''; // Parametros que pueden servir para la composicion de componentes
 
 
 const RequestNewForm = ( { forms } ) => {
-  const { handleSubmit, register, errors, watch, setError, control } = useForm({
+  const { handleSubmit, register, errors, watch, setError, clearErrors , control } = useForm({
     defaultValues: {antennaModel: ''}
   });
   // const [ hide, setHide ] = useState( true );
@@ -34,6 +38,8 @@ const RequestNewForm = ( { forms } ) => {
   const { antennas } = useSelector( state => state.formsData );
   const { data: measurementSurfaces } = useSelector( state => state.measurementSurfaces );
   const { loading, error, data } = useSelector( state => state.newOrder );
+  const [ fileName, setFileName ] = useState( '' );
+  const [ fileSize, setFileSize ] = useState( 0 );
   
   useEffect( ( ) => {
     dispatch( startFormDataLoadingAntenna( ) );
@@ -56,25 +62,46 @@ const RequestNewForm = ( { forms } ) => {
       <h2>Datos de la BASE para el procesamiento PPP</h2>
 
       <form onSubmit={ handleSubmit( handleForm ) }>
-      <div className='form__row'>
+
+      <div className='form__row form__row--file'>
           <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o). Tamaño máximo permitido 20MB.</label>
-          <input 
+          <input
+            className='uploadFile'
             type='file'
             name='file'
+            id="file-upload"
             ref={ register(
               {
                 required: {
                   value : true,
-                  message : "El archivo del punto BASE de la antena es requisito"
+                  message : "El archivo del punto BASE de la antena es requisito",
                 },
+                validate: ( ) => {
+                   console.log( 'fileSize: ',fileSize ); 
+                   console.log( 'fileName: ',fileName ); 
+
+                  // let validInput = false;
+                  let validInput = 'Error al seleccionar el archivo';
+                  let archivo_limite_mb = 20;
+                  if( !( fileSize >= 1048576 * archivo_limite_mb ) && isValidFile( fileName ) ){
+                    validInput = true;
+                  }
+                  console.log(validInput)
+                  return validInput;
+                }, // TODO : Validar tamaño y extension 
               }
             )}
             errors={ errors }
             onChange={ e => {
               // console.log(e.target.files[0].size);
-              let archivo_limite_mb = 20 // TODO : Consultar a una api el valor limite del archivo
+              // console.log( "nombre archivo: ", e.target.files[0].name);
+              // console.log( "nombre archivo valido: ", isValidFile( e.target.files[0].name ));
+              setFileName( e.target.files[0]?.name )
+              setFileSize( e.target.files[0]?.size )
+              // TODO : Controlar la extension de los archivos a subir
+              let archivo_limite_mb = 20; // TODO : Consultar a una API el valor limite del archivo
               if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){ 
-                console.log('Te pasaste!');
+                // console.log('Te pasaste!');
                 setError(
                   'file',
                   {
@@ -82,9 +109,27 @@ const RequestNewForm = ( { forms } ) => {
                     message: `Tamaño de archivo excedido. Limite ${archivo_limite_mb} mb.`
                   }
                 )
+              }else{
+                clearErrors( 'file' )
               }
+
+              if( !isValidFile( e.target.files[0]?.name ) ){
+                setError(
+                  'file',
+                  {
+                    type: 'manual',
+                    message: `Extension de archivo no valido.`
+                  },
+                )
+              }else{
+                clearErrors( 'file' )
+              }
+              
             }}
           />
+          <label htmlFor="file-upload" className="custom-file-upload">
+            <IconUpload /> <div className='container-text'> <span>Seleccionar archivo :</span>  <span>{ fileName ? fileName : 'Ningún archivo seleccionado' }</span> </div>
+          </label>
           { errors['file'] && <div> <p className='form__error'> {errors['file'].message} </p> </div> }
         </div>
 
@@ -105,32 +150,13 @@ const RequestNewForm = ( { forms } ) => {
           ) 
         }
 
-        <AntennaModelInput errors={ errors } antennas={ antennas } control={ control }  />
+        <AntennaModelInput errors={ errors } antennas={ antennas } control={ control } />
 
-        <div className='form__row'>
-          <label htmlFor='antennaTypeHeight'>Tipo de altura de antena</label>
-          <select 
-            name='antennaTypeHeight'
-            ref={ register(
-              {
-                required: {
-                  value : true,
-                  message : "El tipo de altura de antena es requisito"
-                }
-              }
-            )}
-            errors={ errors }
-          >
-            {
-              antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === watch("antennaModel").value )?.height_types.map( height => 
-                 <option key={ height.id }>{ height.name }</option>
-              )
-            }
-          </select>
-          { errors['antennaTypeHeight'] && <div> <p className='form__error'> { errors['antennaTypeHeight'].message } </p> </div> }
-        </div>
+        <AntennaTypeHeightInput errors={ errors } antennas={ antennas } control={ control } watch={ watch } />
 
-        <div className='form__row'>
+        <AntennaHeight errors={ errors } antennas={ antennas } register={ register } control={ control } watch={ watch } />
+
+        {/* <div className='form__row'>
           <label htmlFor='antennaHeight'>Altura de antena [m]</label>
           <input 
             type='number'
@@ -140,14 +166,14 @@ const RequestNewForm = ( { forms } ) => {
               {
                 required: {
                   value : true,
-                  message : "La altura de la antena es requisito"
+                  message : "La altura de la antena es requisito",
                 }
               }
             )}
             errors={ errors }
           />
           { errors['antennaHeight'] && <div> <p className='form__error'> {errors['antennaHeight'].message} </p> </div> }
-        </div>
+        </div> */}
 
         {/* <br/> */}
 
