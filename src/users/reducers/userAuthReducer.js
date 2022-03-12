@@ -35,7 +35,7 @@ export const userAuthReducer = ( state = initialState, action ) => {
       case types.auth_login_error:
         return{
           loading: false,
-          error: 'Error al acceder',
+          error: 'Correo electrónico o contraseña incorrectos',
           data: {},
           checking: false,
       }
