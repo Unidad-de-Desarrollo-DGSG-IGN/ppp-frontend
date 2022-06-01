@@ -40,7 +40,7 @@ export const startSendRecoverPassword = ( email ) => {
       const body = await resp.json( );
       
       if( body?.status === 'success' ){
-        let msg = 'Se ha enviado un correo electrónico para restablecer su contraseña.';
+        let msg = 'Se ha enviado un correo electrónico para restablecer su contraseña. Si no recibe el correo, revise la casilla de spam.';
         dispatch( sendRecoverPassword_success( msg ) );
       }else{
         let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su contraseña.';
