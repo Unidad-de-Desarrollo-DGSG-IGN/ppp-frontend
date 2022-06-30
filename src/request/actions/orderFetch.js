@@ -181,17 +181,13 @@ export const startOrdersLoading = ( ) => {
         // mobile_points: await movingPoints( order.id ) || [], // TODO devolver la lista de mobile points ya procesados
       }) );
 
-      // console.log( 'res Orders!!!',orders);
-
       dispatch( LoadOrdersSuccess( orders ) );
 
     }catch( err ){
       // TODO : UX Manejar el error cambiando el estado de ERRORES de forma sincronica
-      // console.log( '<orderFetch.js>/<startOrdersLoading>: No se pudo cargar la orden correctamente', err );
       if( err.message === 'renew invalid' ){
         dispatch( startLogout( ) );
       }
-      // console.log( err )
       dispatch( LoadOrdersError( 'Error en la carga de las ordenes' ) ); // TODO : Hacer un archivo separado con objeto de mensajes de errores. Y no hardcodear dichos mensajes
     }
   }

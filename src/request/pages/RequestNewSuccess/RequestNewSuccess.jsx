@@ -20,7 +20,6 @@ const RequestNewSuccess = ( ) => {
       <div className='request-header' >
         <h3>Solicitud</h3>
 
-        {/* <p>Solitud realizada</p> */}
         <hr/>
       </div>        
 

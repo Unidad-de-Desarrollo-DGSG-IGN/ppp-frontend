@@ -26,7 +26,7 @@ export const sendRecoverPassword_clean = ( ) => ({
 // Async Actions
 
 export const startSendRecoverPassword = ( email ) => {
-  console.log( 'email: ', email )
+
   return async( dispatch ) => {
     dispatch( sendRecoverPassword( ) );
     try{
@@ -50,8 +50,6 @@ export const startSendRecoverPassword = ( email ) => {
     }catch( err ){
       let errorMsg = 'Ha ocurrido un error en el proceso para recuperar su contraseña.';
       dispatch( sendRecoverPassword_error( errorMsg ) );
-      
-    
     };
   };
 };

@@ -1,5 +1,5 @@
 const withData = ( parameters ) => ( Component ) => {
-  // data
+
   const forms = [
     {
       label: "Correo electrónico",
@@ -29,14 +29,6 @@ const withData = ( parameters ) => ( Component ) => {
         }
       }
     },
-    // {
-    //   label: "Recordame",
-    //   type: "checkbox",
-    //   placeholder: "Recordame",
-    //   name: "recordar",
-    //   validation: { 
-    //   }
-    // },
   ]
 
   return( ( ) => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IconCancel from '../../../shared/components/IconCancel/IconCancel';
-// import IconDownload from '../../../shared/components/IconDownload/IconDownload';
 import IconStop from '../../../shared/components/IconStop/IconStop';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
@@ -20,7 +19,6 @@ const reportStatusIcon = ( status, pdfFileId, errorMsg ) => {
       return <IconStop title='Orden en proceso' />
 
     case 'Cancelado':
-      // return <IconCancel />
       return <RequestErrorDetail errorMsg={ errorMsg } icon={ <IconCancel /> } /> 
 
     case 'Terminado':
@@ -62,15 +60,10 @@ const tableData = ( ordersClient = [ ] ) => {
         )),
     },
     order_download: reportStatusIcon( orderClient.state_order, orderClient.pdfFileId, orderClient.processingError ), // TODO : cambiar el componente a columns.js. Que reciba solamente el state_order
-    // order_download: {
-    //   icon : reportStatusIcon( orderClient.state_order, orderClient.pdfFileId )
-    //   processingError: orderClient.processingError,
-    // },
   }));
 };
 
 const Requests = ( ) => {
-  // console.log( '<Requests.js>/<Requests>: Requests' );
 
   const dispatch = useDispatch( );
   // TODO : Poner esta informacion de la tabla como props o como estado de Redux
@@ -81,7 +74,6 @@ const Requests = ( ) => {
     dispatch( sendNewOrderClean( ) )
   }, [ dispatch ] )
 
-  // console.log( '<RequestNew.js>/<RequestNew>: RequestNew' );
   useEffect( ( ) => {
     dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
     // dispatch( startOrdersLoading( ) );
@@ -99,10 +91,7 @@ const Requests = ( ) => {
   
   useEffect( ( ) => {
     // TODO : Hacer funciones que digan si esta o no la condicion de antennas y username
-    // console.log( '<Requests.page.jsx>/<Request>: Evolucion de antennas con useEffect: ', antennas );
-
       dispatch( startOrdersLoading( ) );
-
   } , [ dispatch ] );
 
 
@@ -121,7 +110,6 @@ const Requests = ( ) => {
 
       <div className='request-container' >
         <h3>Solicitudes</h3>
-        {/* TODO : Revisar el tema del error */}
         { loading ? <Spinner /> : <RequestTable data={ table } /> }
         { error &&  'Error al cargar las ordenes.' } 
       </div>
@@ -129,4 +117,4 @@ const Requests = ( ) => {
   )
 }
 
-export default Requests
+export default Requests;

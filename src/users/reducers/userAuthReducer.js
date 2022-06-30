@@ -2,7 +2,7 @@ import { types } from "../../shared/types/types";
 
 const initialState = {
   checking: true,
-  loading: false, // Analizar si conviene
+  loading: false, // TODO: Analizar si conviene
   error: null,
   data: {},
 }
@@ -13,12 +13,12 @@ export const userAuthReducer = ( state = initialState, action ) => {
     // Nuevos Casos para Login ----------------------
     case types.auth_login:
       return{
-        // ...state,
+        // ...state, // TODO: Revisar
         loading: true,
         error: null,
         data: {},
 
-        checking: false, // Borrar en algun momento
+        checking: false, // TODO: Borrar en algun momento
       }
 
     case types.auth_login_success:
@@ -71,7 +71,6 @@ export const userAuthReducer = ( state = initialState, action ) => {
       }
 
     case types.authUserLoadingInfo:
-      // console.log( '<userAuthReducer>/<case authUserLoadingInfo> : payload: ', action.payload );
       return {
         ...state,
         // data: { ...action.payload } // Revisar que no sobreescriba todo DATA

@@ -7,10 +7,8 @@ import RequestNewForm from '../../components/RequestNewForm/RequestNewForm';
 const RequestNew = ( ) => {
   const dispatch = useDispatch( );
 
-  // console.log( '<RequestNew.js>/<RequestNew>: RequestNew' );
   useEffect( ( ) => {
     dispatch( startFormDataLoadingAntenna( ) ); // TODO : Mover unos componentes mas arriba
-    // dispatch( startOrdersLoading( ) );
   }, [ dispatch ] );
   return (
     <div className='request-new' >

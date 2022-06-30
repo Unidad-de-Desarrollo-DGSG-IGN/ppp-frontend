@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useTable, useSortBy, useGlobalFilter, useFilters, usePagination } from 'react-table';
 
 import { COLUMNS } from './columns';
-import GlobalFilter from './GlobalFilter';
+// import GlobalFilter from './GlobalFilter';
 
 const RequestTable = ( { data } ) => {
 
@@ -24,14 +24,18 @@ const RequestTable = ( { data } ) => {
     prepareRow,
     setPageSize,
     state,
-    setGlobalFilter,
+    // setGlobalFilter,
   } = useTable({
     columns: columns,
     data: tableData,
     // initialState: { pageIndex: 0 },
   }, useFilters, useGlobalFilter, useSortBy, usePagination );
 
-  const { globalFilter, pageIndex, pageSize } = state;
+  const { 
+    // globalFilter, 
+    pageIndex, 
+    pageSize,
+  } = state;
 
   return (
       <div className='table-container' >

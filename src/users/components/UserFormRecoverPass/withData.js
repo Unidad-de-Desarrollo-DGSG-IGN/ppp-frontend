@@ -1,5 +1,5 @@
 const withData = ( parameters ) => ( Component ) => {
-  // data
+
   const forms = [
     {
       label: "Correo electrónico",

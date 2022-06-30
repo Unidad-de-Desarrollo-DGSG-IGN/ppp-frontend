@@ -11,7 +11,6 @@ const sendRegister = ( ) => ({
 
 const sendRegisterSuccess = ( msg ) => ({
   type: types.sendRegister_success,
-  // 'Su registro ha sido exitoso. Le estara llegando un email para la verificacion de la cuenta.'
   payload: msg,
 });
 
@@ -31,13 +30,13 @@ export const startSendRegister = ( dataForm ) => {
   return async( dispatch ) => {
     dispatch( sendRegister( ) );
     try{
-      // Armando los datos a enviar con uuid
+      // TODO : Refactorizar
       const data = {
         ...dataForm,
         uuid : uuidv4( ),
       };
 
-      // Envio de informacion al servidor
+      // TODO : Refactorizar envio de informacion al servidor
       const resp = await fetchSinToken( 
         'users', 
         { 

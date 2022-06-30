@@ -13,8 +13,6 @@ const RequestPopupErrorDetail = ( { handleClose, errorMsg } ) => {
       fetchSinToken( 'error-codes' )
       .then( errorRaw => errorRaw.json( ) )
       .then( errors =>  {
-        console.log(errorMsg)
-        console.log(errors.data.errors.find( errorCode => errorCode.code === errorMsg )?.description)
         setError( errors.data.errors.find( errorCode => errorCode.code === errorMsg )?.description );
       } );
     }

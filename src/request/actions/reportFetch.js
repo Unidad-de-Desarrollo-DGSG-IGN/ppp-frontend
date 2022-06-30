@@ -27,12 +27,8 @@ export const startDownloadReport = ( reportId ) => {
     try {
       await downloadHandler( 'report', reportId );
       dispatch( downloadReportSuccess( 'Se ha descargado el informe.' ) );
-
-      console.log('ok');
     } catch (error) {
       dispatch( downloadReportError( 'Se ha producido un error en la descarga del Informe.' ) );
-      
-      console.log('error');
     }
   }
 }

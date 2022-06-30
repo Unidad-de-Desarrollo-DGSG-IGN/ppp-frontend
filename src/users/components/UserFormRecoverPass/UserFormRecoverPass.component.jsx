@@ -13,8 +13,6 @@ const UserFormRecoverPass = ( { forms } ) => {
   const { register, handleSubmit, errors } = useForm( );
 
   const handleForm = async ( data ) => {
-    console.log(data)
-    // dispatch( sendRecoverPassword_clean( ) ); // TODO : Donde limpiar?
     dispatch( startSendRecoverPassword( data.email ) );
   };
 
@@ -25,7 +23,6 @@ const UserFormRecoverPass = ( { forms } ) => {
         onSubmit={ handleSubmit( handleForm ) }
       >
         { forms.map( form => 
-            
             <UserFormInput 
               label={ form.label }
               type={ form.type }
@@ -36,14 +33,12 @@ const UserFormRecoverPass = ( { forms } ) => {
               validation={ form.validation }
               key={ form.name }
             />
-        
           ) 
         }
 
         <button className={ loading ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ loading }>Cambiar contraseña</button>
       </form>
 
-      {/* { loading && <p>Servidor procesando</p> } */}
       { loading && <Spinner /> }
       { error && <p className='message__error'>{ error }</p> }
       { data && <p className='message__success'>{ data }</p> }

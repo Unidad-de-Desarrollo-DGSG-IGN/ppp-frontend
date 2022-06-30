@@ -7,13 +7,9 @@ import { loadOrderDetailClean, startLoadOrderDetail } from '../../actions/orderD
 import AntennaDetail from '../AntennaDetail/AntennaDetail';
 
 const RequestPopupDetail = ( { handleClose, data } ) => {
-  // const MOVING_POINTS_CANTIDAD_NULA = 0 ;
   const dispatch = useDispatch( );
   const orderDetail = useSelector( state => state.orderDetail );
   const [error, setError] = useState( '' );
-  // console.log( 'Order detail: ', orderDetail );
-
-  // console.log( 'popup moving points', data.moving_points );
   // TODO : Crear un CustomHook que mapee "data" con datos matcheables procesados
   //        * En particular que matchee modelo de antena y tipo de altura de antena
 
@@ -32,8 +28,6 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
       fetchSinToken( 'error-codes' )
       .then( errorRaw => errorRaw.json( ) )
       .then( errors =>  {
-        console.log(data?.processingError)
-        console.log(errors.data.errors.find( errorCode => errorCode.code === data?.processingError )?.description)
         setError( errors.data.errors.find( errorCode => errorCode.code === data?.processingError )?.description );
       } );
     }

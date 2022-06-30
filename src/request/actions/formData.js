@@ -36,7 +36,6 @@ export const startFormDataLoadingAntenna = ( ) => {
     }
     catch( err ){
       // TODO : UX Manejar el error cambiando el estado de ERRORES de forma sincronica
-      console.log( '<formData.js>/<startFormDataLoadingAntenna>: Error al cargar antennas para el formulario', err );
     }
   }
 };

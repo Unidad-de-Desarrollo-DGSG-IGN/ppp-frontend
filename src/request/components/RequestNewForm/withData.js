@@ -21,7 +21,7 @@ const withData = ( parameters ) => ( Component ) => {
         },
         pattern: {
           value: /^[a-z0-9]+$/i,
-          message: "No es alfa"
+          message: "No es alfanúmerico"
         }
       }
     },

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
-import { authLoginClean } from '../../actions/auth';
 import { startSendRegister } from '../../actions/register';
 import UserFormInput from '../UserFormInput/UserFormInput.component';
 
@@ -47,10 +46,9 @@ const UserFormRegister = ( ) => {
       validation: { 
         required: {
           value : true,
-          message : "El Correo electrónico es requisito"
+          message : "El correo electrónico es requisito"
         },
         pattern: {
-          // value: /S+@S+.S+/,
           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
           message: "El correo electrónico debe ser valido"
         }
@@ -116,9 +114,6 @@ const UserFormRegister = ( ) => {
         </button>
       </form>
       
-      
-      {/* { ( !serverResponse && buttonSumitDisable ) && <p>Servidor procesando</p> } */}
-      {/* { loading && <p>Servidor procesando</p> } */}
       { loading && <Spinner /> }
       { error && <p className='message__error'>{ error }</p> }
       { data && <p className='message__success'>{ data }</p> }

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPlus } from '@fortawesome/free-solid-svg-icons'; // faUpload
-
 import UserFormInput from '../../../users/components/UserFormInput/UserFormInput.component';
-// import RequestNewFormOptionalFiles from '../RequestNewFormOptionalFiles/RequestNewFormOptionalFiles';
-
 import withData from './withData';
 import { startSendNewOrder } from '../../actions/newOrder';
 import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
@@ -20,19 +15,13 @@ import IconUpload from '../../../shared/components/IconUpload/IconUpload';
 import { isValidFile } from '../../../shared/helpers/formValidator';
 import AntennaHeight from '../AntennaHeight/AntennaHeight';
 
-const parameters = ''; // Parametros que pueden servir para la composicion de componentes
+const parameters = '';
 
 
 const RequestNewForm = ( { forms } ) => {
   const { handleSubmit, register, errors, watch, setError, clearErrors , control } = useForm({
     defaultValues: {antennaModel: ''}
   });
-  // const [ hide, setHide ] = useState( true );
-  // let contadorValorInicial = 1;
-  // const [contador, setContador] = useState( contadorValorInicial );
-  // const [opcionales, setOpcionales] = useState( [ ] );
-  
-  // const [ opcionales ] = useState( [ ] );
   
   const dispatch = useDispatch( );
   const { antennas } = useSelector( state => state.formsData );
@@ -50,10 +39,7 @@ const RequestNewForm = ( { forms } ) => {
   }, [ dispatch ] );
   
   const handleForm = async ( data ) => {
-    // dispatch( startSendNewOrder( data, opcionales ) );
     dispatch( startSendNewOrder( data ) );
-    // console.log( 'Datos del formulario: ', data );
-    // console.log( 'Datos del formulario: ', data.measurementSurfaces.value );
   }
   
 
@@ -80,7 +66,6 @@ const RequestNewForm = ( { forms } ) => {
                   console.log( 'fileSize: ',fileSize ); 
                   console.log( 'fileName: ',fileName ); 
 
-                // let validInput = false;
                 let validInput = 'Error al seleccionar el archivo';
                 let archivo_limite_mb = 20;
                 if( !( fileSize >= 1048576 * archivo_limite_mb ) && isValidFile( fileName ) ){
@@ -93,15 +78,11 @@ const RequestNewForm = ( { forms } ) => {
           )}
           errors={ errors }
           onChange={ e => {
-            // console.log(e.target.files[0].size);
-            // console.log( "nombre archivo: ", e.target.files[0].name);
-            // console.log( "nombre archivo valido: ", isValidFile( e.target.files[0].name ));
             setFileName( e.target.files[0]?.name )
             setFileSize( e.target.files[0]?.size )
             // TODO : Controlar la extension de los archivos a subir
             let archivo_limite_mb = 20; // TODO : Consultar a una API el valor limite del archivo
-            if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){ 
-              // console.log('Te pasaste!');
+            if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){
               setError(
                 'file',
                 {
@@ -110,7 +91,7 @@ const RequestNewForm = ( { forms } ) => {
                 }
               )
             }else{
-              clearErrors( 'file' )
+              clearErrors( 'file' );
             }
 
             if( !isValidFile( e.target.files[0]?.name ) ){
@@ -122,7 +103,7 @@ const RequestNewForm = ( { forms } ) => {
                 },
               )
             }else{
-              clearErrors( 'file' )
+              clearErrors( 'file' );
             }
             
           }}

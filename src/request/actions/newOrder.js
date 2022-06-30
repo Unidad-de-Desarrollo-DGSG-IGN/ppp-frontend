@@ -4,6 +4,7 @@ import { types } from "../../shared/types/types";
 import { fetchConToken, fetchFileConToken, fetchSinToken } from '../../shared/helpers/fetch';
 import { startLogout } from '../../users/actions/auth';
 
+// Actions
 
 const sendNewOrder = ( ) => ({
   type: types.sendOrder,
@@ -32,23 +33,18 @@ export const sendNewOrderClean = ( ) => ({
 });
 
 
+// Async Actions
+
 export const startSendNewOrder = ( data, opcionales ) => {
-  // console.log( 'Data antenna model: ', data.antennaModel.value );
 
   return async( dispatch, getState ) => {
     dispatch( sendNewOrder( ) );
 
     // TODO : Contemplar que si hay algun error, manejarlo
     try{
-      // console.log( '<RequestNewForm.jsx>/<handleForm> : Datos del formulario', data );
       const { username }  = getState( ).auth.data;
-      // const { data: antennas }  = getState( ).formsData; // TODO : Guardar antennas en data, y no en antennas.
       const { antennas }  = getState( ).formsData;
       const { data: measurementSurfacesList }  = getState( ).measurementSurfaces;
-
-      // console.log('MeasurementSurfaces: ')
-      // console.log( measurementSurfacesList );
-      // console.log( data.measurementSurfaces.value );
 
       // Archivo Principal - envio de archivo
       // TODO : Comprimir esto en una funcion para abstraer funcionalidad
@@ -58,18 +54,17 @@ export const startSendNewOrder = ( data, opcionales ) => {
       const id = uuidv4( );
       formData.append( 'id', id );
   
-      // const res = await fetchFileConToken( 'files', username, formData, 'POST' );
       const res = await fetchFileConToken( 'files', formData, 'POST' );
       const resJson = await res.json( );
-      // console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta del archivo principal enviado: ', resJson );
       const isSendFileSuccess = resJson.status;
       if( isSendFileSuccess !==  'success' ){
-        // console.log('Salir');
         // TODO : dispatch para salir o tirar error? Verificar el codigo 400
         dispatch( startLogout( ) );
       }
   
+
       // Moving Points - Armado base de movingPoints y envio de archivos
+
       // TODO : Generar el ID para el archivo MAIN y luego pasarlo a los moving points. Ver si no hay movingPoints, lista vacia.
       // TODO : Separar en una funcion.
       // const movingPoints = opcionales.map( ( opc ) => ({
@@ -114,19 +109,10 @@ export const startSendNewOrder = ( data, opcionales ) => {
   
       // Orden Completa
       if( isSendFileSuccess === 'success' ){  
-        // console.log( 'Data antenna model: ', data.antennaModel.value );
-        // console.log( 'Antennas: ',antennas );
 
-        // Proceso de normalizacion de opciones seleccionadas del HTML select
-        // const antenna = antennas.find( antenna => antenna.name.replace(/ /g, "\u00a0") === data.antennaModel.value.replace(/ /g, "\u00a0") );
+        // TODO: Refactorizar proceso de normalizacion de opciones seleccionadas del HTML select
         const antenna = antennas.find( antenna => antenna.name === data.antennaModel.value );
-        // console.log( 'Antenna a enviar: ',antenna );
-
-        // console.log( 'Tipo altura Antenna a enviar: ',data.antennaTypeHeight );
-        // console.log( 'Lista Tipo altura Antenna: ',antenna.height_types );
-        // const height_type = antenna.height_types.find( height_type => height_type.name.replace(/ /g, "\u00a0")  === data.antennaTypeHeight.value);
         const height_type = antenna.height_types.find( height_type => height_type.name  === data.antennaTypeHeight.value);
-        // console.log( 'Tipo altura Antenna(id) a enviar: ',height_type.id );
         
         const order = {
           id,
@@ -136,6 +122,7 @@ export const startSendNewOrder = ( data, opcionales ) => {
           antennaHeightTypeId: height_type?.id, // TODO : revisar
           height: data.antennaHeight,
           measurementSurfaceId: measurementSurface_id( data.measurementSurfaces.value, measurementSurfacesList ), // TODO : Procesar la opcion y poner el id correspondiente
+          
           movingPoints: [ ], // TODO : modificar luego cuando se desarrolle los puntos moviles
           // TODO : // Armar funcion que devuelva la lista de optativos listos
           // movingPoints: movingPointsIdList.map( movingPoint => ({ 
@@ -146,17 +133,12 @@ export const startSendNewOrder = ( data, opcionales ) => {
           //   antennaHeightTypeId: movingPoint.antennaHeightTypeId,
           //   height: movingPoint.height,
           // })),
-        }
-
-        // console.log( 'Order a enviar: ', order );
+        };
   
-        // console.log( '<RequestNewForm.jsx>/<handleForm> : Orden a  enviar: ', order );
         const resOrder = await fetchConToken( 'orders', username, order, 'POST' ); // TODO : Falta enviar username
         const resOrderJson = await resOrder.json( );
-        // console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrder );
-        // console.log( '<RequestNewForm.jsx>/<handleForm> : Respuesta al enviar una orden', resOrderJson );
         // TODO: manejar la respuesta de las ordenes
-        // Verificar respuesta
+        // TODO: Verificar respuesta
         if( resOrder.status === 201 || resOrderJson?.status === 'success' ){
           let msgSuccess = 'Orden enviada';
           dispatch( sendNewOrderSuccess( msgSuccess ) );
@@ -167,25 +149,15 @@ export const startSendNewOrder = ( data, opcionales ) => {
         }
 
         // TODO : Repensar que poner en payload para la orden enviada.
-        // dispatch( sendNewOrderSuccess( 'Orden enviada' ) );
       }
       
     } catch( err ){
-      // console.log( '<newOrder.js>/<startSendNewOrder> : Error al enviar ordenes: ', err );
       // TODO : Manejar errores con Redux
       let msgError = 'Error al crear una nueva orden';
       dispatch( sendNewOrderError( msgError ) );
-
-      // setTimeout( ( ) => {
-      //   dispatch( sendNewOrderClean( ) )
-      // },
-      //   3000
-      // );
     }
   }
 }
-
-
 
 
 // HELPERS
@@ -194,19 +166,11 @@ export const startSendNewOrder = ( data, opcionales ) => {
 // TODO : Hacer test de las funciones
 
 const measurementSurface_id = ( measurementSurfaceOption, measurementSurfaceList ) => {
-  // console.log(measurementSurfaceOption)
-  // console.log(measurementSurfaceList)
-  // return measurementSurfaceList.find( measurementSurfaceElement => measurementSurfaceElement.name === measurementSurfaceOption )?.id;
   let envio =  measurementSurfaceList.find( measurementSurfaceElement => {
     let result = measurementSurfaceElement.name.replace(/ /g, "\u00a0") === measurementSurfaceOption.replace(/ /g, "\u00a0");
-    // console.log('Comparando:');
-    // console.log( measurementSurfaceElement.name )
-    // console.log( measurementSurfaceOption )
-
     return result
   } );
 
-  // console.log(envio);
   return envio?.id;
 };
 
