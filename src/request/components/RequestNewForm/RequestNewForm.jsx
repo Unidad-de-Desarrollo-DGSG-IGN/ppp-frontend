@@ -87,7 +87,7 @@ const RequestNewForm = ( { forms } ) => {
                 'file',
                 {
                   type: 'manual',
-                  message: `Tamaño de archivo excedido. Limite ${archivo_limite_mb} mb.`
+                  message: `Tamaño de archivo excedido. Límite ${archivo_limite_mb} mb.`
                 }
               )
             }else{
@@ -99,7 +99,7 @@ const RequestNewForm = ( { forms } ) => {
                 'file',
                 {
                   type: 'manual',
-                  message: `Extension de archivo no valido.`
+                  message: `Extensión de archivo no válido.`
                 },
               )
             }else{

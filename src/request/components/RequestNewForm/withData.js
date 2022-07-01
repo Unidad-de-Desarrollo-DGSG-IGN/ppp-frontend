@@ -13,7 +13,7 @@ const withData = ( parameters ) => ( Component ) => {
         },
         minLength: {
           value: 4,
-          message: "Nombre del punto BASE es corta"
+          message: "Nombre del punto BASE es corto"
         },
         maxLength:{
           value: 9,
