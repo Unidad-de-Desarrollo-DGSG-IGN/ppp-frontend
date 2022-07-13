@@ -67,6 +67,7 @@ export const startSendNewOrder = ( data, opcionales ) => {
 
       // TODO : Generar el ID para el archivo MAIN y luego pasarlo a los moving points. Ver si no hay movingPoints, lista vacia.
       // TODO : Separar en una funcion.
+      // Opcionales es una lista de numeros que identifica cada seccion opcional
       // const movingPoints = opcionales.map( ( opc ) => ({
       //   name : data[`name-moving-${ opc }`],
       //   antennaModel : data[`antennaModel-opt-${ opc }`], // TODO : .value
