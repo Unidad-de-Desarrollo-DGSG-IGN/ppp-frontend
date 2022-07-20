@@ -54,7 +54,12 @@ const antenna_model = ( antennas, antennaId ) => {
 
 const typeError = ( processingError ) => {
   if( processingError !== null ){
-    const numberError = processingError[ 1 ];
+    // const numberError = processingError[ 1 ];
+
+    // const processingError = `[13][Order <29dbf10b-c3cd-488e-bf74-308460d17d16>] - Could not process RINEX files version 3 or superior`;
+    const regex = /^\[(\d*)\]/;
+    const matches = processingError.match(regex);
+    const numberError = matches[1];
 
     if( isNaN( Number( numberError ) ) ) return 'Error del proceso de la orden';
     return Number( numberError ); 
