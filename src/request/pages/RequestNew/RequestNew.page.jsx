@@ -1,5 +1,8 @@
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { config } from '../../../config';
 import { startFormDataLoadingAntenna } from '../../actions/formData';
 
 import RequestNewForm from '../../components/RequestNewForm/RequestNewForm';
@@ -16,6 +19,7 @@ const RequestNew = ( ) => {
         <h3>Nueva solicitud de procesamiento</h3>
 
         <p>El procesamiento comenzará luego de que sean transferidos todos los archivos de observación RINEX. Este proceso puede demorar algunos minutos.</p>
+
         <hr/>
       </div>
 

@@ -14,6 +14,9 @@ import AntennaTypeHeightInput from '../AntennaTypeHeightInput/AntennaTypeHeightI
 import IconUpload from '../../../shared/components/IconUpload/IconUpload';
 import { isValidFile } from '../../../shared/helpers/formValidator';
 import AntennaHeight from '../AntennaHeight/AntennaHeight';
+import { config } from '../../../config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
 
 const parameters = '';
 
@@ -51,6 +54,24 @@ const RequestNewForm = ( { forms } ) => {
 
       <div className='form__row form__row--file'>
         <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o). Tamaño máximo permitido 20MB.</label>
+        <div
+          style={{
+            marginTop: "0rem",
+            marginBottom: "1.3rem",
+          }}
+        >
+          <a 
+            href={config.instructivoLink}
+            target="_blank"
+          > 
+            <div className='icon-container icon-container--small'
+            >
+              <FontAwesomeIcon icon={ faInfo } className='icon icon--small' />
+            </div>
+            <span> </span>Instructivo de compresion y descompresion de archivos Rinex
+          </a>
+        </div>
+
         <input
           className='uploadFile'
           type='file'
@@ -108,9 +129,11 @@ const RequestNewForm = ( { forms } ) => {
             
           }}
         />
+
         <label htmlFor="file-upload" className="custom-file-upload">
           <IconUpload /> <div className='container-text'> <span>Seleccionar archivo :</span>  <span>{ fileName ? fileName : 'Ningún archivo seleccionado' }</span> </div>
         </label>
+
         { errors['file'] && <div> <p className='form__error'> {errors['file'].message} </p> </div> }
       </div>
 
