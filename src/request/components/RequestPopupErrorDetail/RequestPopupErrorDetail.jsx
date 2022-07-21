@@ -5,6 +5,7 @@ import { fetchSinToken } from '../../../shared/helpers/fetch';
 const RequestPopupErrorDetail = ( { handleClose, errorMsg } ) => {
 
   const [ error, setError ] = useState( '' );
+  const [urlError, setUrlError] = useState( null );
 
   useEffect( ( ) => {
     if( isNaN( errorMsg ) ){
@@ -14,6 +15,7 @@ const RequestPopupErrorDetail = ( { handleClose, errorMsg } ) => {
       .then( errorRaw => errorRaw.json( ) )
       .then( errors =>  {
         setError( errors.data.errors.find( errorCode => errorCode.code === errorMsg )?.description );
+        setUrlError( errors.data.errors.find( errorCode => errorCode.code === errorMsg )?.url );
       } );
     }
     
@@ -23,7 +25,7 @@ const RequestPopupErrorDetail = ( { handleClose, errorMsg } ) => {
     return(
       <>
         <h4>Motivo de cancelación de la solicitud</h4>
-        <p>{ errorMsg }</p>
+        <p>{ errorMsg } {urlError && <a href={ urlError } target="_blank" >(Más información)</a>} </p>
       </>
     );
   };

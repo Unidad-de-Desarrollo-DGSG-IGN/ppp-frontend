@@ -175,6 +175,7 @@ export const startOrdersLoading = ( ) => {
         state_order: stateOrder( order.status ),
         pdfFileId: order.pdfFileId,
         processingError: typeError( order.processingError ), // TODO : revisar bug
+        // urlError: order.url,
         base_point :{
           url_rinex: order.fileId,
           base_name: order.name,

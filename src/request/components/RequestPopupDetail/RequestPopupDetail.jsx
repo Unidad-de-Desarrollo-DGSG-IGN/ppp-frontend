@@ -10,6 +10,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
   const dispatch = useDispatch( );
   const orderDetail = useSelector( state => state.orderDetail );
   const [error, setError] = useState( '' );
+  const [urlError, setUrlError] = useState( null );
   // TODO : Crear un CustomHook que mapee "data" con datos matcheables procesados
   //        * En particular que matchee modelo de antena y tipo de altura de antena
 
@@ -29,16 +30,17 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
       .then( errorRaw => errorRaw.json( ) )
       .then( errors =>  {
         setError( errors.data.errors.find( errorCode => errorCode.code === data?.processingError )?.description );
+        setUrlError( errors.data.errors.find( errorCode => errorCode.code === data?.processingError )?.url );
       } );
     }
     
   }, [ data?.processingError ] );
 
-  const ErrorSection = ( error ) => {
+  const ErrorSection = ( error, urlError ) => {
     return(
       <>
         <h4>Motivo de cancelación de la solicitud</h4>
-        <p>{ error }</p>
+        <p>{ error } {urlError && <a href={ urlError } target="_blank" >(Más información)</a>} </p> 
       </>
     );
   };
@@ -60,7 +62,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
 
         {
           data.processingError 
-            ? ErrorSection( error )
+            ? ErrorSection( error, urlError )
             : null
         }
 
