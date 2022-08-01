@@ -8,7 +8,9 @@ const RequestPopupErrorDetail = ( { handleClose, errorMsg } ) => {
   const [urlError, setUrlError] = useState( null );
 
   useEffect( ( ) => {
-    if( isNaN( errorMsg ) ){
+    if(errorMsg === null){
+      setError("Error de procesamiento. Por favor, ponerse en contacto con ppp@ign.gob.ar");
+    }else if( isNaN( errorMsg ) ){
       setError( errorMsg );
     }else{
       fetchSinToken( 'error-codes' )

@@ -14,51 +14,14 @@ const antenna_model = ( antennas, antennaId ) => {
   return antennas.find( antenna => antenna.id === antennaId ).name ;
 };
 
-
-// const typeError = ( processingError ) => {
-//   if( processingError !== null ){
-//     const numberError = processingError[ 1 ];
-//     switch ( numberError ){
-//       case '1':
-//         return 'No se puede generar el archivo de resumen';
-  
-//       case '2':
-//         return 'No se puede procesar un RINEX de simple frecuencia';
-  
-//       case '3':
-//         return 'Coordenadas fuera de los límites';
-  
-//       case '4':
-//         return 'La fecha de medición debe ser superarior a 2006.362';
-  
-//       case '5':
-//         return 'La fecha de medición debe ser de, al menos, dos días atrás de la fecha actual';
-  
-//       case '6':
-//         return 'No se pudo procesar porque no se encontraron archivos de efemérides para descargar';
-  
-//       case '7':
-//         return 'Error al generar el archivo resumen del RINEX';
-  
-//       case null:
-//         return null;
-      
-//       default:
-//         return 'Error del proceso de la orden';
-//     }  
-//   }else{
-//     return null;
-//   }
-// };
-
-
 const typeError = ( processingError ) => {
   if( processingError !== null ){
-    // const numberError = processingError[ 1 ];
 
-    // const processingError = `[13][Order <29dbf10b-c3cd-488e-bf74-308460d17d16>] - Could not process RINEX files version 3 or superior`;
     const regex = /^\[(\d*)\]/;
     const matches = processingError.match(regex);
+    
+    if(!matches) return null;
+
     const numberError = matches[1];
 
     if( isNaN( Number( numberError ) ) ) return 'Error del proceso de la orden';
@@ -191,6 +154,7 @@ export const startOrdersLoading = ( ) => {
 
     }catch( err ){
       // TODO : UX Manejar el error cambiando el estado de ERRORES de forma sincronica
+      console.log(err)
       if( err.message === 'renew invalid' ){
         dispatch( startLogout( ) );
       }

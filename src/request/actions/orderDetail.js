@@ -37,8 +37,6 @@ export const startLoadOrderDetail = ( order ) => {
       // dispatch( startLoadMeasurementSurface( ) );
       // TODO : Ver como cargar aca de forma sincronica la lista de measure
       const { data : measurementSurfaceList } = getState( ).measurementSurfaces;
-      // console.log( 'measure list: ', measurementSurfaceList)
-      // console.log( 'Cruce de measure surface: ' , measurementSurfaceModel( measurementSurfaceList, order.base.measurementSurfaceId ))
 
       const orderDetail =  {
         url_rinex: order.base.url_rinex,
@@ -51,11 +49,9 @@ export const startLoadOrderDetail = ( order ) => {
       };
 
       dispatch( loadOrderDetailSuccess( orderDetail ) );
-      // console.log( orderDetail )
 
     }catch( error ){
       dispatch( loadOrderDetailError( 'No se pudo cargar los detalles de la solicitud.' ) );
-      // console.log( error );
     }
   }
 }

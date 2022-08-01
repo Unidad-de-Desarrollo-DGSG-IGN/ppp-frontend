@@ -10,6 +10,7 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
   const dispatch = useDispatch( );
   const orderDetail = useSelector( state => state.orderDetail );
   const [error, setError] = useState( '' );
+  // const [error, setError] = useState( 'Error de procesamiento. Por favor, ponerse en contacto con ppp@ign.gob.ar' );
   const [urlError, setUrlError] = useState( null );
   // TODO : Crear un CustomHook que mapee "data" con datos matcheables procesados
   //        * En particular que matchee modelo de antena y tipo de altura de antena
@@ -23,7 +24,9 @@ const RequestPopupDetail = ( { handleClose, data } ) => {
   }, [ dispatch, data ] );
 
   useEffect( ( ) => {
-    if( isNaN( data?.processingError ) ){
+    if(data?.processingError === null){
+      setError("Error de procesamiento. Por favor, ponerse en contacto con ppp@ign.gob.ar");
+    }else if( isNaN( data?.processingError ) ){
       setError( data?.processingError );
     }else{
       fetchSinToken( 'error-codes' )
