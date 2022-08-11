@@ -1,166 +1,211 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import UserFormInput from '../../../users/components/UserFormInput/UserFormInput.component';
-import withData from './withData';
-import { startSendNewOrder } from '../../actions/newOrder';
-import Spinner from '../../../shared/components/loadings/Spinner/Spinner';
-import { startFormDataLoadingAntenna } from '../../actions/formData';
-import AntennaModelInput from '../AntennaModelInput/AntennaModelInput';
-import { Redirect } from 'react-router';
-import MeasurementSurfacesInput from '../MeasurementSurfacesInput/MeasurementSurfacesInput';
-import { startLoadMeasurementSurface } from '../../actions/MeasurementSurfacesFetch';
-import AntennaTypeHeightInput from '../AntennaTypeHeightInput/AntennaTypeHeightInput';
-import IconUpload from '../../../shared/components/IconUpload/IconUpload';
-import { isValidFile } from '../../../shared/helpers/formValidator';
-import AntennaHeight from '../AntennaHeight/AntennaHeight';
-import { config } from '../../../config';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import UserFormInput from "../../../users/components/UserFormInput/UserFormInput.component";
+import withData from "./withData";
+import { startSendNewOrder } from "../../actions/newOrder";
+import Spinner from "../../../shared/components/loadings/Spinner/Spinner";
+import { startFormDataLoadingAntenna } from "../../actions/formData";
+import AntennaModelInput from "../AntennaModelInput/AntennaModelInput";
+import { Redirect } from "react-router";
+import MeasurementSurfacesInput from "../MeasurementSurfacesInput/MeasurementSurfacesInput";
+import { startLoadMeasurementSurface } from "../../actions/MeasurementSurfacesFetch";
+import AntennaTypeHeightInput from "../AntennaTypeHeightInput/AntennaTypeHeightInput";
+import IconUpload from "../../../shared/components/IconUpload/IconUpload";
+import { isValidFile } from "../../../shared/helpers/formValidator";
+import AntennaHeight from "../AntennaHeight/AntennaHeight";
+import { config } from "../../../config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
 
-const parameters = '';
+const parameters = "";
 
+const RequestNewForm = ({ forms }) => {
+    const {
+        handleSubmit,
+        register,
+        errors,
+        watch,
+        setError,
+        clearErrors,
+        control,
+    } = useForm({
+        defaultValues: { antennaModel: "" },
+    });
 
-const RequestNewForm = ( { forms } ) => {
-  const { handleSubmit, register, errors, watch, setError, clearErrors , control } = useForm({
-    defaultValues: {antennaModel: ''}
-  });
-  
-  const dispatch = useDispatch( );
-  const { antennas } = useSelector( state => state.formsData );
-  const { data: measurementSurfaces } = useSelector( state => state.measurementSurfaces );
-  const { loading, error, data } = useSelector( state => state.newOrder );
-  const [ fileName, setFileName ] = useState( '' );
-  const [ fileSize, setFileSize ] = useState( 0 );
-  
-  useEffect( ( ) => {
-    dispatch( startFormDataLoadingAntenna( ) );
-  }, [ dispatch ] );
-  
-  useEffect( ( ) => {
-    dispatch( startLoadMeasurementSurface( ) );
-  }, [ dispatch ] );
-  
-  const handleForm = async ( data ) => {
-    dispatch( startSendNewOrder( data ) );
-  }
-  
+    const dispatch = useDispatch();
+    const { antennas } = useSelector((state) => state.formsData);
+    const { data: measurementSurfaces } = useSelector(
+        (state) => state.measurementSurfaces
+    );
+    const { loading, error, data } = useSelector((state) => state.newOrder);
+    const [fileName, setFileName] = useState("");
+    const [fileSize, setFileSize] = useState(0);
 
-  return (
-    <div className='request-new__form' >
-      <h2>Datos de la BASE para el procesamiento PPP</h2>
+    useEffect(() => {
+        dispatch(startFormDataLoadingAntenna());
+    }, [dispatch]);
 
-      <form onSubmit={ handleSubmit( handleForm ) }>
+    useEffect(() => {
+        dispatch(startLoadMeasurementSurface());
+    }, [dispatch]);
 
-      <div className='form__row form__row--file'>
-        <label htmlFor='file'>Archivo de observación RINEX del punto BASE (los formatos aceptados son: .Z, .??d, .??o). Tamaño máximo permitido 20MB.</label>
-        <div
-          style={{
-            marginTop: "0rem",
-            marginBottom: "1.3rem",
-          }}
-        >
-          <a 
-            href={config.instructivoLink}
-            target="_blank"
-          > 
-            <div className='icon-container icon-container--small'
-            >
-              <FontAwesomeIcon icon={ faInfo } className='icon icon--small' />
-            </div>
-            <span> </span>Instructivo de compresion y descompresion de archivos Rinex
-          </a>
-        </div>
+    const handleForm = async (data) => {
+        dispatch(startSendNewOrder(data));
+    };
 
-        <input
-          className='uploadFile'
-          type='file'
-          name='file'
-          id="file-upload"
-          ref={ register(
-            {
-              required: {
-                value : true,
-                message : "El archivo del punto BASE de la antena es requisito",
-              },
-              validate: ( ) => {
-                  console.log( 'fileSize: ',fileSize ); 
-                  console.log( 'fileName: ',fileName ); 
+    return (
+        <div className="request-new__form">
+            <h2>Datos de la BASE para el procesamiento PPP</h2>
 
-                let validInput = 'Error al seleccionar el archivo';
-                let archivo_limite_mb = 20;
-                if( !( fileSize >= 1048576 * archivo_limite_mb ) && isValidFile( fileName ) ){
-                  validInput = true;
-                }
-                console.log(validInput)
-                return validInput;
-              }, // TODO : Validar tamaño y extension 
-            }
-          )}
-          errors={ errors }
-          onChange={ e => {
-            setFileName( e.target.files[0]?.name )
-            setFileSize( e.target.files[0]?.size )
-            // TODO : Controlar la extension de los archivos a subir
-            let archivo_limite_mb = 20; // TODO : Consultar a una API el valor limite del archivo
-            if( e.target.files[0].size >= 1048576 * archivo_limite_mb ){
-              setError(
-                'file',
-                {
-                  type: 'manual',
-                  message: `Tamaño de archivo excedido. Límite ${archivo_limite_mb} mb.`
-                }
-              )
-            }else{
-              clearErrors( 'file' );
-            }
+            <form onSubmit={handleSubmit(handleForm)}>
+                <div className="form__row form__row--file">
+                    <label htmlFor="file">
+                        Archivo de observación RINEX del punto BASE (los
+                        formatos aceptados son: .Z, .??d, .??o). Tamaño máximo
+                        permitido 20MB.
+                    </label>
+                    <div
+                        style={{
+                            marginTop: "0rem",
+                            marginBottom: "1.3rem",
+                        }}
+                    >
+                        <a
+                            href={config.instructivoLink}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <div className="icon-container icon-container--small">
+                                <FontAwesomeIcon
+                                    icon={faInfo}
+                                    className="icon icon--small"
+                                />
+                            </div>
+                            <span> </span>Instructivo de compresión y
+                            descompresión de archivos RINEX
+                        </a>
+                    </div>
 
-            if( !isValidFile( e.target.files[0]?.name ) ){
-              setError(
-                'file',
-                {
-                  type: 'manual',
-                  message: `Extensión de archivo no válido.`
-                },
-              )
-            }else{
-              clearErrors( 'file' );
-            }
-            
-          }}
-        />
+                    <input
+                        className="uploadFile"
+                        type="file"
+                        name="file"
+                        id="file-upload"
+                        ref={register({
+                            required: {
+                                value: true,
+                                message:
+                                    "El archivo del punto BASE de la antena es requisito",
+                            },
+                            validate: () => {
+                                console.log("fileSize: ", fileSize);
+                                console.log("fileName: ", fileName);
 
-        <label htmlFor="file-upload" className="custom-file-upload">
-          <IconUpload /> <div className='container-text'> <span>Seleccionar archivo :</span>  <span>{ fileName ? fileName : 'Ningún archivo seleccionado' }</span> </div>
-        </label>
+                                let validInput =
+                                    "Error al seleccionar el archivo";
+                                let archivo_limite_mb = 20;
+                                if (
+                                    !(
+                                        fileSize >=
+                                        1048576 * archivo_limite_mb
+                                    ) &&
+                                    isValidFile(fileName)
+                                ) {
+                                    validInput = true;
+                                }
+                                console.log(validInput);
+                                return validInput;
+                            }, // TODO : Validar tamaño y extension
+                        })}
+                        errors={errors}
+                        onChange={(e) => {
+                            setFileName(e.target.files[0]?.name);
+                            setFileSize(e.target.files[0]?.size);
+                            // TODO : Controlar la extension de los archivos a subir
+                            let archivo_limite_mb = 20; // TODO : Consultar a una API el valor limite del archivo
+                            if (
+                                e.target.files[0].size >=
+                                1048576 * archivo_limite_mb
+                            ) {
+                                setError("file", {
+                                    type: "manual",
+                                    message: `Tamaño de archivo excedido. Límite ${archivo_limite_mb} mb.`,
+                                });
+                            } else {
+                                clearErrors("file");
+                            }
 
-        { errors['file'] && <div> <p className='form__error'> {errors['file'].message} </p> </div> }
-      </div>
+                            if (!isValidFile(e.target.files[0]?.name)) {
+                                setError("file", {
+                                    type: "manual",
+                                    message: `Extensión de archivo no válido.`,
+                                });
+                            } else {
+                                clearErrors("file");
+                            }
+                        }}
+                    />
 
+                    <label htmlFor="file-upload" className="custom-file-upload">
+                        <IconUpload />{" "}
+                        <div className="container-text">
+                            {" "}
+                            <span>Seleccionar archivo :</span>{" "}
+                            <span>
+                                {fileName
+                                    ? fileName
+                                    : "Ningún archivo seleccionado"}
+                            </span>{" "}
+                        </div>
+                    </label>
 
-        { forms.map( form => 
-            
-            <UserFormInput 
-              label={ form.label }
-              type={ form.type }
-              placeholder={ form.placeholder }
-              name={ form.name }
-              register={ register }
-              errors={ errors }
-              validation={ form.validation }
-              key={ form.name }
-            />
-        
-          ) 
-        }
+                    {errors["file"] && (
+                        <div>
+                            {" "}
+                            <p className="form__error">
+                                {" "}
+                                {errors["file"].message}{" "}
+                            </p>{" "}
+                        </div>
+                    )}
+                </div>
 
-        <AntennaModelInput errors={ errors } antennas={ antennas } control={ control } />
+                {forms.map((form) => (
+                    <UserFormInput
+                        label={form.label}
+                        type={form.type}
+                        placeholder={form.placeholder}
+                        name={form.name}
+                        register={register}
+                        errors={errors}
+                        validation={form.validation}
+                        key={form.name}
+                    />
+                ))}
 
-        <AntennaTypeHeightInput errors={ errors } antennas={ antennas } control={ control } watch={ watch } />
+                <AntennaModelInput
+                    errors={errors}
+                    antennas={antennas}
+                    control={control}
+                />
 
-        <AntennaHeight errors={ errors } antennas={ antennas } register={ register } control={ control } watch={ watch } />
+                <AntennaTypeHeightInput
+                    errors={errors}
+                    antennas={antennas}
+                    control={control}
+                    watch={watch}
+                />
 
-        {/* <div className='form__row'>
+                <AntennaHeight
+                    errors={errors}
+                    antennas={antennas}
+                    register={register}
+                    control={control}
+                    watch={watch}
+                />
+
+                {/* <div className='form__row'>
           <label htmlFor='antennaHeight'>Altura de antena [m]</label>
           <input 
             type='number'
@@ -179,11 +224,15 @@ const RequestNewForm = ( { forms } ) => {
           { errors['antennaHeight'] && <div> <p className='form__error'> {errors['antennaHeight'].message} </p> </div> }
         </div> */}
 
-        {/* <br/> */}
+                {/* <br/> */}
 
-        <MeasurementSurfacesInput errors={ errors } measurementSurfaces={ measurementSurfaces } control={ control } />
+                <MeasurementSurfacesInput
+                    errors={errors}
+                    measurementSurfaces={measurementSurfaces}
+                    control={control}
+                />
 
-        {/* <div 
+                {/* <div 
           className='optional-form'
         >
           <h3
@@ -230,9 +279,9 @@ const RequestNewForm = ( { forms } ) => {
 
         </div> */}
 
-        {/* <hr /> */}
+                {/* <hr /> */}
 
-        {/* <div className='form__row form__row--agree'>
+                {/* <div className='form__row form__row--agree'>
           <label htmlFor='antennaHeight'>Acepto que los resultados del procesamiento puedan ser utilizados por el IGN para la evaluación de productos y servicios cartográficos y/o geodésicos.</label>
           <input 
             type='checkbox'
@@ -248,18 +297,24 @@ const RequestNewForm = ( { forms } ) => {
           { errors['agree'] && <div> <p className='form__error'> {errors['agree'].message} </p> </div> }
         </div> */}
 
-        <button className={ loading ? 'btn btn--disabled' : 'btn' } type="submit" disabled={ loading } > Registrar Solicitud </button>
-        
-        <br/>
-      </form>
+                <button
+                    className={loading ? "btn btn--disabled" : "btn"}
+                    type="submit"
+                    disabled={loading}
+                >
+                    {" "}
+                    Registrar Solicitud{" "}
+                </button>
 
-      { loading && <Spinner /> }
-      { error && <p className='message__error'>{ error }</p> }
-      { data && <Redirect to='/requests/request-new/success' /> }
-      { data && <p className='message__success'>{ data }</p> }
+                <br />
+            </form>
 
-    </div>
-  )
-}
+            {loading && <Spinner />}
+            {error && <p className="message__error">{error}</p>}
+            {data && <Redirect to="/requests/request-new/success" />}
+            {data && <p className="message__success">{data}</p>}
+        </div>
+    );
+};
 
-export default withData( parameters )( RequestNewForm );
+export default withData(parameters)(RequestNewForm);
