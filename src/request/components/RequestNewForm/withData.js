@@ -1,36 +1,50 @@
-const withData = ( parameters ) => ( Component ) => {
-  
-  const forms = [
-    {
-      label: "Nombre del punto BASE (entre cuatro y nueve caracteres alfanuméricos)",
-      type: "text",
-      placeholder: 'Nombre del punto BASE',
-      name: "name_base",
-      validation: {
-        required: {
-          value: true,
-          message: "Nombre del punto BASE es requisito"
+const withData = (parameters) => (Component) => {
+    const forms = [
+        {
+            label: "Nombre del punto BASE (entre cuatro y nueve caracteres alfanuméricos)",
+            type: "text",
+            placeholder: "Nombre del punto BASE",
+            name: "name_base",
+            validation: {
+                required: {
+                    value: true,
+                    message: "Nombre del punto BASE es requisito",
+                },
+                minLength: {
+                    value: 4,
+                    message: "Nombre del punto BASE es corto",
+                },
+                maxLength: {
+                    value: 9,
+                    message: "Nombre del punto BASE largo",
+                },
+                pattern: {
+                    value: /^[a-z0-9]+$/i,
+                    message: "No es alfanúmerico",
+                },
+            },
         },
-        minLength: {
-          value: 4,
-          message: "Nombre del punto BASE es corto"
+        {
+            label: "Descripción del proyecto (opcional)",
+            type: "text",
+            placeholder: "Descripción del proyecto",
+            name: "project",
+            validation: {
+                maxLength: {
+                    value: 100,
+                    message: "Descripción del proyecto largo",
+                },
+                // pattern: {
+                //   value: /^[a-z0-9]+$/i,
+                //   message: "No es alfanúmerico"
+                // }
+            },
         },
-        maxLength:{
-          value: 9,
-          message: "Nombre del punto BASE largo"
-        },
-        pattern: {
-          value: /^[a-z0-9]+$/i,
-          message: "No es alfanúmerico"
-        }
-      }
-    },
-  ]
+    ];
 
-  return( ( ) => {
-      return <Component forms={ forms }></Component>
-    }
-  );
-}
+    return () => {
+        return <Component forms={forms}></Component>;
+    };
+};
 
 export default withData;
