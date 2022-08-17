@@ -38,6 +38,7 @@ const tableData = (ordersClient = []) => {
     return ordersClient.map((orderClient) => ({
         order_date: orderClient.date_order,
         base_name: orderClient.base_point.base_name,
+        project: orderClient.base_point.project,
         order_state: orderClient.state_order,
         order_detail: {
             processingError: orderClient.processingError,
@@ -47,6 +48,7 @@ const tableData = (ordersClient = []) => {
                 antenna_model: orderClient.base_point.antenna_model,
                 antenna_type_height: orderClient.base_point.antenna_type_height,
                 base_name: orderClient.base_point.base_name,
+                project: orderClient.base_point.project,
                 measurementSurfaceId:
                     orderClient.base_point.measurementSurfaceId,
             },
