@@ -39,6 +39,7 @@ const withData = (parameters) => (Component) => {
                 //   message: "No es alfanúmerico"
                 // }
             },
+            maxlength: 100,
         },
     ];
 

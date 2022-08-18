@@ -181,6 +181,7 @@ const RequestNewForm = ({ forms }) => {
                         errors={errors}
                         validation={form.validation}
                         key={form.name}
+                        maxlength={form.maxlength}
                     />
                 ))}
 
