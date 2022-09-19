@@ -56,14 +56,14 @@ const RequestNewForm = ({ forms }) => {
 
     return (
         <div className="request-new__form">
-            <h2>Datos de la BASE para el procesamiento PPP</h2>
+            <h2>Datos del punto para el procesamiento PPP</h2>
 
             <form onSubmit={handleSubmit(handleForm)}>
                 <div className="form__row form__row--file">
                     <label htmlFor="file">
-                        Archivo de observación RINEX del punto BASE (los
-                        formatos aceptados son: .Z, .??d, .??o). Tamaño máximo
-                        permitido 20MB.
+                        Archivo de observación RINEX del punto (los formatos
+                        aceptados son: .Z, .??d, .??o). Tamaño máximo permitido
+                        20MB.
                     </label>
                     <div
                         style={{
@@ -96,7 +96,7 @@ const RequestNewForm = ({ forms }) => {
                             required: {
                                 value: true,
                                 message:
-                                    "El archivo del punto BASE de la antena es requisito",
+                                    "El archivo del punto de la antena es requisito",
                             },
                             validate: () => {
                                 console.log("fileSize: ", fileSize);

@@ -17,7 +17,7 @@ export const COLUMNS = [
         Filter: ColumnFilter,
     },
     {
-        // Header: "Nombre del punto BASE",
+        // Header: "Nombre del punto",
         Header: "Nombre del punto",
         accessor: "base_name",
         disableFilters: true,
