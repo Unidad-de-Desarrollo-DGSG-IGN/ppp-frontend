@@ -3,15 +3,14 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTable, faList } from '@fortawesome/free-solid-svg-icons';
 
-import image_logo from './../../../shared/images/logo_ign.png';
+import ppp_logo from './../../../shared/images/logo_ppp-ar_request.png';
 
 const RequestNavigation = ( ) => {
   return (
     <div className='nav--request'>
 
       <div className='logo-header' >
-        <img src={ image_logo } alt='Logo IGN PPP-Ar' className='logo' />
-        <h4>PPP-Ar</h4>
+        <img src={ ppp_logo } alt='Logo IGN PPP-Ar' className='logo' style={{height: "15rem"}} />
       </div>
 
       <div className='nav__options nav__options--responsive' >

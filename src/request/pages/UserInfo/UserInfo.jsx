@@ -18,8 +18,6 @@ const UserInfo = ( ) => {
     <div className='requests' >
       <div className='request-header' >
         <h3>Perfil del Usuario</h3>
-
-        {/* <p>Información del usuario en detalle</p> */}
         <hr/>
       </div>        
 
@@ -37,6 +35,8 @@ const UserInfo = ( ) => {
           </div>
         </div>
       </div>
+
+      {/* TODO: contemplar errores al cargar informacion del usuario */}
     </div>
   )
 }

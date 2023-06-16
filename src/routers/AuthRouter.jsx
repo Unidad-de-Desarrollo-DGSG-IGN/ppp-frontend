@@ -8,7 +8,6 @@ import UserRegister from '../users/pages/UserRegister/UserRegister.page';
 import UserVerification from '../users/pages/UserVerification/UserVerification';
 
 const AuthRouter = ( ) => {
-  // console.log( '<AuthRouter.js>/<AuthRouter>: AuthRouter' );
 
   return (
     <div className='auth' >

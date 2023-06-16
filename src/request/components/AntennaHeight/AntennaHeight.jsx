@@ -18,6 +18,7 @@ const AntennaHeight = ( { register, errors, watch, antennas } ) => {
           <label htmlFor='antennaHeight'>Altura de antena [m]</label>
           <input 
             type='number'
+            min={0}
             disabled={ !antennaTypeHeight }
             step='.001'
             name='antennaHeight'

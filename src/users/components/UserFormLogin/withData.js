@@ -1,5 +1,5 @@
 const withData = ( parameters ) => ( Component ) => {
-  // data
+
   const forms = [
     {
       label: "Correo electrónico",
@@ -13,7 +13,7 @@ const withData = ( parameters ) => ( Component ) => {
         },
         pattern: {
           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-          message: "El correo electrónico debe ser valido"
+          message: "El correo electrónico debe ser válido"
         }
       }
     },
@@ -29,14 +29,6 @@ const withData = ( parameters ) => ( Component ) => {
         }
       }
     },
-    // {
-    //   label: "Recordame",
-    //   type: "checkbox",
-    //   placeholder: "Recordame",
-    //   name: "recordar",
-    //   validation: { 
-    //   }
-    // },
   ]
 
   return( ( ) => {

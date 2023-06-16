@@ -15,14 +15,10 @@ const SetNewPassword = ( ) => {
   
   // TODO : usar el estado propio de reseteo de contraseña
   const { data, loading, error } = useSelector( state => state.resetPassword );
-
-  // console.log( '<UserVerification.js>/<UserVerification>: UserVerification' );
   const { code } = useParams( );
   
   // TODO : Preparar el submit para enviar el codigo: code
   const onSubmit = ( dataForm ) => {
-    console.log( 'Token: ', code );
-    console.log( 'email: ', dataForm.password );
     dispatch( startSendResetPassword( code, dataForm.password ) );
   }
 
@@ -63,7 +59,6 @@ const SetNewPassword = ( ) => {
         <h1>Recuperación de contraseña</h1>
         <hr />
 
-        {/* <p style={ { fontWeight: 'bold' } }>{ code }</p> */}
         <form 
           className='form--login'
           onSubmit={ handleSubmit( onSubmit ) }

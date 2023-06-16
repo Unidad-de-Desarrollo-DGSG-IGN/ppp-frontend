@@ -10,27 +10,23 @@ import PublicRoute from './PublicRoute';
 import WorkRouter from './WorkRouter';
 
 const AppRouter = ( ) => {
-  // console.log( '<AppRouter.js>/<AppRouter>: AppRouter' );
   const dispatch = useDispatch( );
 
   const { checking } = useSelector( state => state.auth );
   const { uid } = useSelector( state => state.auth.data );
-  // TODO : Revisar cuando se refresca la pagina, y se tiene los datos guardados.
-  // const uid = localStorage.getItem('uid');
   
   useEffect( ( ) => {
     dispatch( startChecking( ) );
   }, [ dispatch ]);
 
   if ( checking ) {
-    return ( <h5>Espere...</h5> ); // TODO : Realizar un componente de espera mejor diseñado
+    return ( <h5>Cargando...</h5> );
   }
 
   return (
     <Router basename={ `${process.env.PUBLIC_URL}` } >
       <div>
         <Switch>
-          {/* TODO : realizar una Ruta generica */}
           <Route path='/report/:code/:base' component={ ( ) => <div className='auth' > <ReportQR /> </div> } />
 
           <PublicRoute path='/auth' isAuthenticated={ !!uid  } component={ AuthRouter } />

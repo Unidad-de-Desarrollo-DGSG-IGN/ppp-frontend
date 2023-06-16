@@ -29,7 +29,6 @@ export const startLoadMeasurementSurface = ( ) => {
     dispatch( LoadMeasurementSurfaces( ) );
     try{
       const res = await fetchSinToken( 'measurement-surfaces' );
-      // console.log( 'Estado de medidas superficiales: ', res.status ); // TODO : Manejar si no viene status 200
 
       const dataJson = await res.json( );
       let measurementSurfaces = dataJson.data.measurementSurfaces;
@@ -37,7 +36,6 @@ export const startLoadMeasurementSurface = ( ) => {
     }
     catch( err ){
       let errorMsg = 'Error al cargar medidas superficiales para el formulario';
-      // console.log( errorMsg, err );
       dispatch( LoadMeasurementSurfaceError( errorMsg ) );
     }
   }
